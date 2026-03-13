@@ -19,6 +19,7 @@
  * Add Tailwind’s default theme and your custom theme.
  */
 @import "tailwindcss/theme";
+@import "./tailwind/custom/tokens.css";
 @import "./tailwind/tailwind-theme.css";
 
 /**

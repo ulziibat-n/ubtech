@@ -266,11 +266,11 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = 'text-sm font-semibold leading-none text-zinc-200 duration-300 ease-primary hover:text-zinc-100 transition-colors focus:text-zinc-100 py-2 px-4 bg-transparent hover:bg-zinc-900 focus:bg-zinc-900 rounded-full group-[.current-menu-item]:bg-zinc-900 group-[.current-menu-item]:hover:bg-zinc-900 group-[.current-menu-item]:text-lime-500 group-[.current-menu-item]:hover:text-lime-500 focus:outline-none focus:ring-0 focus:bg-zinc-900';
+		$atts['class'] = 'text-sm font-semibold leading-none text-fg-default duration-300 ease-primary hover:text-fg-default transition-colors focus:text-fg-inverse py-2 px-4 bg-transparent hover:bg-surface-raised focus:bg-surface-raised rounded-full group-[.current-menu-item]:bg-surface-raised group-[.current-menu-item]:hover:bg-surface-raised group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0 focus:bg-surface-inverse';
 	}
 
 	if ( 'menu-2' === $args->theme_location ) {
-		$atts['class'] = 'text-xs font-semibold leading-none text-zinc-400 duration-300 ease-primary hover:text-zinc-100 transition-colors focus:text-zinc-100 group-[.current-menu-item]:bg-zinc-900 group-[.current-menu-item]:text-lime-500 group-[.current-menu-item]:hover:text-lime-500 focus:outline-none focus:ring-0';
+		$atts['class'] = 'text-xs font-semibold leading-none text-fg-subtle duration-300 ease-primary hover:text-fg-default transition-colors focus:text-fg-inverse group-[.current-menu-item]:bg-surface-raised group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0';
 	}
 	return $atts;
 }

@@ -1,0 +1,123 @@
+/**
+ * Design Token System — 2-давхаргат загвар
+ *
+ * Primitive tokens: raw утгууд, шууд HTML-д ашиглахгүй
+ * Semantic tokens:  хаана хэрэглэхийг тодорхойлсон утгууд
+ *
+ * Toggle: <html data-theme="light"> эсвэл <html data-theme="dark">
+ *
+ * Нэршлийн загвар:
+ *   fg-*       → текст, icon (foreground)
+ *   surface-*  → арын фон (background)
+ *   stroke-*   → хүрээ, зураас (border)
+ *   brand-*    → брэнд өнгө (accent)
+ *   status-*   → мэдэгдлийн өнгө (feedback)
+ */
+
+/* ─── Primitive tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --primitive-lime-500:   oklch(76.8% 0.233 130.85);
+  --primitive-lime-600:   oklch(64.8% 0.200 131.68);
+  --primitive-lime-900:   oklch(35.0% 0.120 130.00);
+
+  /* Neutral */
+  --primitive-slate-50:   oklch(98.4% 0.003 247.86);
+  --primitive-slate-100:  oklch(96.8% 0.007 247.90);
+  --primitive-slate-200:  oklch(93.0% 0.013 255.51);
+  --primitive-slate-400:  oklch(70.4% 0.028 261.33);
+  --primitive-slate-600:  oklch(44.6% 0.030 256.80);
+  --primitive-slate-700:  oklch(37.2% 0.028 259.73);
+  --primitive-slate-800:  oklch(27.9% 0.029 256.85);
+  --primitive-slate-900:  oklch(20.8% 0.042 265.76);
+
+  /* White / Black */
+  --primitive-white:      oklch(100% 0 0);
+  --primitive-black:      oklch(0%   0 0);
+
+  /* Typography */
+  --primitive-font-sans:  "TT Hoves", ui-sans-serif, system-ui, sans-serif;
+  --primitive-font-mono:  "TT Hoves Pro Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ─── Light theme (default) ─────────────────────────────────────────────────── */
+[data-theme="light"], :root:not([data-theme="dark"]) {
+  /* Surface — Арын фон */
+  --color-surface-base:         var(--primitive-slate-50);
+  --color-surface-card:         var(--primitive-white);
+  --color-surface-raised:       var(--primitive-slate-100);
+  --color-surface-overlay:      oklch(98.4% 0.003 247.86 / 85%);
+  --color-surface-inverse:      var(--primitive-slate-900);
+  --color-surface-inverse-hover: var(--primitive-slate-800);
+
+  /* Foreground — Текст, icon */
+  --color-fg-default:    var(--primitive-slate-900);
+  --color-fg-subtle:     var(--primitive-slate-600);
+  --color-fg-muted:      var(--primitive-slate-400);
+  --color-fg-disabled:   oklch(75% 0.01 260);
+  --color-fg-inverse:    var(--primitive-slate-50);
+  --color-fg-link:       var(--primitive-lime-600);
+
+  /* Stroke — Хүрээ, хуваагч */
+  --color-stroke-default: var(--primitive-slate-200);
+  --color-stroke-strong:  oklch(80% 0.015 260);
+  --color-stroke-focus:   var(--primitive-lime-500);
+
+  /* Brand / Action */
+  --color-brand-primary:  var(--primitive-lime-500);
+  --color-brand-hover:    var(--primitive-lime-600);
+  --color-brand-subtle:   oklch(95% 0.06 130);
+  --color-brand-fg:       var(--primitive-lime-900);
+
+  /* Status — Мэдэгдлийн өнгө */
+  --color-status-success: oklch(60% 0.17 145);
+  --color-status-error:   oklch(58% 0.22 29);
+  --color-status-warning: oklch(72% 0.17 75);
+  --color-status-info:    oklch(62% 0.17 230);
+
+  /* Shadow */
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 8%);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 10%);
+  --shadow-lg: 0 8px 24px oklch(0 0 0 / 12%);
+}
+
+/* ─── Dark theme ─────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  /* Surface — Арын фон */
+  --color-surface-base:          oklch(15% 0.01 260);
+  --color-surface-card:          oklch(20% 0.01 260);
+  --color-surface-raised:        oklch(24% 0.01 260);
+  --color-surface-overlay:       oklch(15% 0.01 260 / 88%);
+  --color-surface-inverse:       var(--primitive-slate-50);
+  --color-surface-inverse-hover: oklch(93% 0.003 247.86);
+
+  /* Foreground — Текст, icon */
+  --color-fg-default:    oklch(95% 0.005 260);
+  --color-fg-subtle:     oklch(70% 0.008 260);
+  --color-fg-muted:      oklch(50% 0.008 260);
+  --color-fg-disabled:   oklch(38% 0.008 260);
+  --color-fg-inverse:    var(--primitive-slate-900);
+  --color-fg-link:       var(--primitive-lime-500);
+
+  /* Stroke — Хүрээ, хуваагч */
+  --color-stroke-default: oklch(28% 0.01 260);
+  --color-stroke-strong:  oklch(38% 0.01 260);
+  --color-stroke-focus:   var(--primitive-lime-500);
+
+  /* Brand / Action */
+  --color-brand-primary:  var(--primitive-lime-500);
+  --color-brand-hover:    oklch(82% 0.22 131);
+  --color-brand-subtle:   oklch(22% 0.06 130);
+  --color-brand-fg:       var(--primitive-lime-500);
+
+  /* Status — Мэдэгдлийн өнгө */
+  --color-status-success: oklch(72% 0.15 145);
+  --color-status-error:   oklch(70% 0.20 29);
+  --color-status-warning: oklch(80% 0.15 75);
+  --color-status-info:    oklch(72% 0.15 230);
+
+  /* Shadow */
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 30%);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 40%);
+  --shadow-lg: 0 8px 24px oklch(0 0 0 / 50%);
+}
