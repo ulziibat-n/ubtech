@@ -17,45 +17,56 @@
  * replace `-neutral` with `-ulziibat-tech`.
  */
 @utility prose {
-	--tw-prose-body: --theme(--color-gray-300, initial);
-	--tw-prose-headings: --theme(--color-white, initial);
-	--tw-prose-lead: --theme(--color-gray-100, initial);
-	--tw-prose-links: --theme(--color-lime-500, initial);
-	--tw-prose-bold: --theme(--color-gray-100, initial);
-	--tw-prose-counters: --theme(--color-gray-400, initial);
-	--tw-prose-bullets: --theme(--color-lime-500, initial);
-	--tw-prose-hr: --theme(--color-zinc-800, initial);
-	--tw-prose-quotes: --theme(--color-gray-100, initial);
-	--tw-prose-quote-borders: --theme(--color-lime-500, initial);
-	--tw-prose-captions: --theme(--color-zinc-500, initial);
-	--tw-prose-kbd: --theme(--color-zinc-400, initial);
-	--tw-prose-kbd-shadows: --theme(--color-zinc-400, initial);
-	--tw-prose-code: --theme(--color-zinc-800, initial);
-	--tw-prose-pre-code: --theme(--color-gray-100, initial);
-	--tw-prose-pre-bg: --theme(--color-zinc-800, initial);
-	--tw-prose-th-borders: --theme(--color-zinc-700, initial);
-	--tw-prose-td-borders: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-body: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-headings: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-lead: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-links: --theme(--color-lime-500, initial);
-	--tw-prose-invert-bold: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-counters: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-bullets: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-hr: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-quotes: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-quote-borders: --theme(--color-lime-500, initial);
-	--tw-prose-invert-captions: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-kbd: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-kbd-shadows: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-code: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-pre-code: --theme(--color-gray-400, initial);
-	--tw-prose-invert-pre-bg: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-th-borders: --theme(--color-zinc-800, initial);
-	--tw-prose-invert-td-borders: --theme(--color-zinc-800, initial);
+	/* ── Prose body text ── */
+	--tw-prose-body:     --theme(--color-fg-subtle, initial);
+	--tw-prose-headings: --theme(--color-fg-default, initial);
+	--tw-prose-lead:     --theme(--color-fg-default, initial);
+	--tw-prose-bold:     --theme(--color-fg-default, initial);
+	--tw-prose-captions: --theme(--color-fg-muted, initial);
+	--tw-prose-counters: --theme(--color-fg-muted, initial);
+
+	/* ── Prose links & brand ── */
+	--tw-prose-links:         --theme(--color-fg-link, initial);
+	--tw-prose-bullets:       --theme(--color-brand-primary, initial);
+	--tw-prose-quote-borders: --theme(--color-brand-primary, initial);
+	--tw-prose-quotes:        --theme(--color-fg-default, initial);
+
+	/* ── Prose borders & dividers ── */
+	--tw-prose-hr:        --theme(--color-stroke-default, initial);
+	--tw-prose-th-borders: --theme(--color-stroke-strong, initial);
+	--tw-prose-td-borders: --theme(--color-stroke-default, initial);
+
+	/* ── Prose keyboard ── */
+	--tw-prose-kbd:         --theme(--color-fg-subtle, initial);
+	--tw-prose-kbd-shadows: --theme(--color-stroke-strong, initial);
+
+	/* ── Prose code ── */
+	--tw-prose-code:     --theme(--color-fg-default, initial);
+	--tw-prose-pre-code: --theme(--color-fg-inverse, initial);
+	--tw-prose-pre-bg:   --theme(--color-surface-inverse, initial);
+
+	/* ── Prose invert (.prose-invert) ── */
+	--tw-prose-invert-body:         --theme(--color-fg-subtle, initial);
+	--tw-prose-invert-headings:     --theme(--color-fg-default, initial);
+	--tw-prose-invert-lead:         --theme(--color-fg-default, initial);
+	--tw-prose-invert-bold:         --theme(--color-fg-default, initial);
+	--tw-prose-invert-captions:     --theme(--color-fg-muted, initial);
+	--tw-prose-invert-counters:     --theme(--color-fg-muted, initial);
+	--tw-prose-invert-links:        --theme(--color-fg-link, initial);
+	--tw-prose-invert-bullets:      --theme(--color-brand-primary, initial);
+	--tw-prose-invert-quote-borders: --theme(--color-brand-primary, initial);
+	--tw-prose-invert-quotes:       --theme(--color-fg-default, initial);
+	--tw-prose-invert-hr:           --theme(--color-stroke-default, initial);
+	--tw-prose-invert-kbd:          --theme(--color-fg-subtle, initial);
+	--tw-prose-invert-kbd-shadows:  --theme(--color-stroke-strong, initial);
+	--tw-prose-invert-code:         --theme(--color-fg-default, initial);
+	--tw-prose-invert-pre-code:     --theme(--color-fg-inverse, initial);
+	--tw-prose-invert-pre-bg:       --theme(--color-surface-inverse, initial);
+	--tw-prose-invert-th-borders:   --theme(--color-stroke-strong, initial);
+	--tw-prose-invert-td-borders:   --theme(--color-stroke-default, initial);
 
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))) {
-        @apply leading-snug selection:bg-lime-600 selection:text-white;
+        @apply leading-snug selection:bg-brand-hover selection:text-fg-inverse;
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(h1, h2, h3, h4, h5, h6) {
         @apply font-bold leading-none;
@@ -71,7 +82,7 @@
         @apply text-2xl not-italic font-black leading-tight;
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(code) {
-        @apply px-0.5 font-sans bg-zinc-50 rounded-xs selection:text-white;
+        @apply px-0.5 font-sans bg-surface-raised rounded-xs selection:text-fg-inverse;
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(pre code) {
         @apply bg-transparent;
@@ -81,13 +92,12 @@
         @apply content-[''];
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(pre) {
-        @apply p-6 font-mono text-xs bg-zinc-800;
+        @apply p-6 font-mono text-xs bg-surface-inverse;
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(kbd) {
-        @apply px-1 py-0 font-sans font-semibold text-white bg-lime-500 rounded-xs;
+        @apply px-1 py-0 font-sans font-semibold text-fg-inverse bg-brand-primary rounded-xs;
     }
-
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(sup) {
-        @apply px-0.5 text-white font-bold;
+        @apply px-0.5 text-fg-inverse font-bold;
     }
 }

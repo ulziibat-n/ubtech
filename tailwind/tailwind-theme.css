@@ -5,6 +5,11 @@
  */
 
 /**
+ * Dark mode variant: <html data-theme="dark"> attribute-г toggle хийнэ.
+ */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/**
  * Your theme variables are merged with Tailwind’s defaults, either extending
  * the default theme with new variables or overriding the values of existing
  * variables.
@@ -42,5 +47,62 @@
 	 * Add your theme below:
 	 */
 
-	 --ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
+	--ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/**
+ * Semantic design tokens — CSS variable-уудыг Tailwind utility class болгон гаргана.
+ *
+ * Нэршлийн загвар: [property]-[category]-[variant]
+ *   bg-surface-base       → арын фон
+ *   text-fg-default       → үндсэн текст
+ *   border-stroke-default → хүрээ
+ *   bg-brand-primary      → брэнд өнгө
+ *
+ * tokens.css файлд тодорхойлсон CSS variable-уудыг @theme inline-д тусгана.
+ */
+@theme inline {
+	/* ── Surface (background) ── */
+	--color-surface-base:          var(--color-surface-base);
+	--color-surface-card:          var(--color-surface-card);
+	--color-surface-raised:        var(--color-surface-raised);
+	--color-surface-overlay:       var(--color-surface-overlay);
+	--color-surface-inverse:       var(--color-surface-inverse);
+	--color-surface-inverse-hover: var(--color-surface-inverse-hover);
+
+	/* ── Foreground (text, icon) ── */
+	--color-fg-default:  var(--color-fg-default);
+	--color-fg-subtle:   var(--color-fg-subtle);
+	--color-fg-muted:    var(--color-fg-muted);
+	--color-fg-disabled: var(--color-fg-disabled);
+	--color-fg-inverse:  var(--color-fg-inverse);
+	--color-fg-link:     var(--color-fg-link);
+
+	/* ── Stroke (border, divider) ── */
+	--color-stroke-default: var(--color-stroke-default);
+	--color-stroke-strong:  var(--color-stroke-strong);
+	--color-stroke-focus:   var(--color-stroke-focus);
+
+	/* ── Brand / Action ── */
+	--color-brand-primary: var(--color-brand-primary);
+	--color-brand-hover:   var(--color-brand-hover);
+	--color-brand-subtle:  var(--color-brand-subtle);
+	--color-brand-fg:      var(--color-brand-fg);
+
+	/* ── Status (feedback) ── */
+	--color-status-success: var(--color-status-success);
+	--color-status-error:   var(--color-status-error);
+	--color-status-warning: var(--color-status-warning);
+	--color-status-info:    var(--color-status-info);
+
+	/* ── Shadow ── */
+	--shadow-sm: var(--shadow-sm);
+	--shadow-md: var(--shadow-md);
+	--shadow-lg: var(--shadow-lg);
+
+	/* ── Border radius ── */
+	--radius-sm:   0.25rem;
+	--radius-md:   0.5rem;
+	--radius-lg:   1rem;
+	--radius-full: 9999px;
 }
