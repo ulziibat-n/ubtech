@@ -1,0 +1,11 @@
+@layer components {
+	/* ─── Code Blocks Wrapper ───────────────────────────────────────────────── */
+	.wp-block-code {
+		@apply relative my-8 overflow-hidden rounded-xl border border-stroke-default bg-surface-card selection:bg-brand-primary/30;
+	}
+
+	.wp-block-code pre {
+		@apply !m-0 !p-6 overflow-x-auto text-sm leading-relaxed;
+		font-family: var(--primitive-font-mono), monospace;
+	}
+}

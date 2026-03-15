@@ -266,7 +266,7 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = 'text-sm font-semibold leading-none text-fg-default duration-300 ease-primary hover:text-fg-default transition-colors focus:text-fg-inverse py-2 px-4 bg-transparent hover:bg-surface-raised focus:bg-surface-raised rounded-full group-[.current-menu-item]:bg-surface-raised group-[.current-menu-item]:hover:bg-surface-raised group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0 focus:bg-surface-inverse';
+		$atts['class'] = 'text-sm font-semibold leading-none text-fg-default duration-300 ease-primary hover:text-fg-link transition-colors focus:text-fg-inverse py-2 px-4 group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0 ';
 	}
 
 	if ( 'menu-2' === $args->theme_location ) {
@@ -284,6 +284,10 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
+		$classes[] = ' scroll-smooth';
+
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );
+
+
