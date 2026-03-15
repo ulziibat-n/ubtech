@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.0] — 2026-03-15
+
+### Added
+- **Table of Contents (TOC)** — Automatically generated based on post headings (H2, H3)
+  - Nested structure for H3 headings
+  - ScrollSpy integration with dynamic active state highlighting
+  - Sticky positioning for better readability on long articles
+- **Code Block Enhancements** — Premium custom styling for WordPress code blocks
+  - Clean white background in light mode and inverse surface in dark mode
+  - Applied `--primitive-font-mono` for better code readability
+  - Added custom selection color to match brand identity
+
+### Changed
+- Refined typography for single post content, adjusting font sizes and max-widths for optimal readability
+- Optimized script loading strategy for Table of Contents and code blocks
+
+### Removed
+- PrismJS external library to maintain site speed and avoid TrustedHTML security conflicts
+
+---
+
 ## [0.1.0] — 2026-03-13
 
 ### Added
