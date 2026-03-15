@@ -38,7 +38,7 @@ if ( ! defined( 'UB_TYPOGRAPHY_CLASSES' ) ) {
 	 */
 	define(
 		'UB_TYPOGRAPHY_CLASSES',
-		'prose'
+		''
 	);
 }
 
@@ -145,14 +145,15 @@ add_action( 'widgets_init', 'ub_widgets_init' );
  */
 function ub_scripts() {
 	wp_enqueue_style( 'ulziibat-tech-style', get_stylesheet_uri(), array(), UB_VERSION );
+
 	wp_enqueue_script(
 		'ulziibat-tech-script',
 		get_template_directory_uri() . '/js/script.min.js',
 		array(),
 		UB_VERSION,
 		array(
-			'in_footer' => true, // Load in the footer
-			'strategy'  => 'defer', // Defer the script
+			'in_footer' => true, // Load in the footer.
+			'strategy'  => 'defer', // Defer the script.
 		)
 	);
 
@@ -182,8 +183,8 @@ function ub_enqueue_block_editor_script() {
 			),
 			UB_VERSION,
 			array(
-				'in_footer' => true, // Load in the footer
-				'strategy'  => 'defer', // Defer the script
+				'in_footer' => true, // Load in the footer.
+				'strategy'  => 'defer', // Defer the script.
 			)
 		);
 		wp_add_inline_script( 'ulziibat-tech-editor', "tailwindTypographyClasses = '" . esc_attr( UB_TYPOGRAPHY_CLASSES ) . "'.split(' ');", 'before' );
@@ -231,3 +232,8 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Disable WordPress comments.
+ */
+require get_template_directory() . '/inc/disable-comments.php';

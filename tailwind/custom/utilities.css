@@ -71,11 +71,17 @@
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(h1, h2, h3, h4, h5, h6) {
         @apply font-bold leading-none;
     }
-    :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(strong, b) {
-        @apply font-bold;
+    :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(strong, b),
+	:is(.prose :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(strong) {
+        @apply font-semibold;
+    }
+	:is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote) {
+        @apply relative;
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote p):before,
-    :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote p):after {
+    :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote p):after,
+	:is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote):before,
+    :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote):after {
         @apply content-[''];
     }
     :is(& :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote p) {
