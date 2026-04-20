@@ -7,39 +7,46 @@
  * @package ulziibat-tech
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_header();
 ?>
 
-	<section id="primary">
-		<main id="main">
+	<div id="content">
+		<section id="primary">
+			<main id="main">
 
-		<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-			</header><!-- .page-header -->
+				<header class="container pt-16 pb-8">
+					<?php the_archive_title( '<h1 class="text-4xl font-black text-fg-default sm:text-5xl">', '</h1>' ); ?>
+					<?php the_archive_description( '<div class="mt-4 max-w-2xl text-fg-subtle">', '</div>' ); ?>
+				</header>
 
-			<?php
-			// Start the Loop.
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
+				<div class="container pb-16">
+					<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+						<?php
+						while ( have_posts() ) :
+							the_post();
+							get_template_part( 'template-parts/content/content', 'card' );
+						endwhile;
+						?>
+					</div>
 
-				// End the loop.
-			endwhile;
+					<?php ub_the_posts_navigation(); ?>
+				</div>
 
-			// Previous/next page navigation.
-			ub_the_posts_navigation();
+			<?php else : ?>
 
-		else :
+				<?php get_template_part( 'template-parts/content/content', 'none' ); ?>
 
-			// If no content, include the "No posts found" template.
-			get_template_part( 'template-parts/content/content', 'none' );
+			<?php endif; ?>
 
-		endif;
-		?>
-		</main><!-- #main -->
-	</section><!-- #primary -->
+			</main><!-- #main -->
+		</section><!-- #primary -->
+	</div><!-- #content -->
 
 <?php
 get_footer();

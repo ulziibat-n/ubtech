@@ -268,6 +268,20 @@ if ( ! function_exists( 'ub_the_posts_navigation' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'ub_read_time' ) ) :
+	/**
+	 * Returns estimated read time in minutes for the current post.
+	 *
+	 * @return int Minutes to read, minimum 1.
+	 */
+	function ub_read_time() {
+		$content    = get_post_field( 'post_content', get_the_ID() );
+		$word_count = str_word_count( wp_strip_all_tags( $content ) );
+		$minutes    = max( 1, (int) ceil( $word_count / 200 ) );
+		return $minutes;
+	}
+endif;
+
 if ( ! function_exists( 'ub_content_class' ) ) :
 	/**
 	 * Displays the class names for the post content wrapper.
