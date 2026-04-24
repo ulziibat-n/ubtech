@@ -272,13 +272,67 @@ if ( ! function_exists( 'ub_read_time' ) ) :
 	/**
 	 * Returns estimated read time in minutes for the current post.
 	 *
+	 * Result is cached per-request via the object cache to avoid
+	 * repeated string processing when the same post renders multiple times.
+	 *
 	 * @return int Minutes to read, minimum 1.
 	 */
 	function ub_read_time() {
-		$content    = get_post_field( 'post_content', get_the_ID() );
-		$word_count = str_word_count( wp_strip_all_tags( $content ) );
-		$minutes    = max( 1, (int) ceil( $word_count / 200 ) );
+		$post_id   = get_the_ID();
+		$cache_key = 'ub_rt_' . $post_id;
+		$cached    = wp_cache_get( $cache_key, 'ub' );
+
+		if ( false !== $cached ) {
+			return (int) $cached;
+		}
+
+		$content = get_post_field( 'post_content', $post_id );
+		$minutes = max( 1, (int) ceil( str_word_count( wp_strip_all_tags( $content ) ) / 200 ) );
+
+		wp_cache_set( $cache_key, $minutes, 'ub' );
 		return $minutes;
+	}
+endif;
+
+if ( ! function_exists( 'ub_icon_arrow' ) ) :
+	/**
+	 * Outputs the arrow-right SVG icon (Material Symbols Rounded).
+	 *
+	 * @param string $css_class CSS classes applied to the <svg> element.
+	 */
+	function ub_icon_arrow( $css_class = '' ) {
+		echo '<svg class="' . esc_attr( $css_class ) . '" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>';
+	}
+endif;
+
+if ( ! function_exists( 'ub_icon_logo' ) ) :
+	/**
+	 * Outputs the brand logo SVG: black circle + lime lightning bolt.
+	 *
+	 * @param int $size Width and height in pixels.
+	 */
+	function ub_icon_logo( $size = 32 ) {
+		$s = absint( $size );
+		echo '<svg width="' . absint( $s ) . '" height="' . absint( $s ) . '" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+			. '<path d="M128 256C57.3075 256 0 198.693 0 128C0 57.3075 57.3075 0 128 0C198.693 0 256 57.3075 256 128C256 198.693 198.693 256 128 256Z" fill="#0C0D0B"/>'
+			. '<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>'
+			. '</svg>';
+	}
+endif;
+
+if ( ! function_exists( 'ub_icon_lightning' ) ) :
+	/**
+	 * Outputs the lightning bolt SVG path (no circle background).
+	 *
+	 * Intended for use inside a separately styled container,
+	 * e.g. the featured card badge in the post grid.
+	 *
+	 * @param string $css_class CSS classes applied to the <svg> element.
+	 */
+	function ub_icon_lightning( $css_class = 'w-7 h-auto' ) {
+		echo '<svg viewBox="0 0 256 256" class="' . esc_attr( $css_class ) . '" aria-hidden="true">'
+			. '<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>'
+			. '</svg>';
 	}
 endif;
 

@@ -27,13 +27,8 @@
 		<div class="flex items-center gap-12 select-none">
 			<div class="flex gap-8">
 				<a class="flex items-center gap-2 focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<!-- DS logomark: design-system/assets/logo-color-black.svg (circle + lightning M) -->
-					<svg width="32" height="32" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-						<path d="M128 256C57.3075 256 0 198.693 0 128C0 57.3075 57.3075 0 128 0C198.693 0 256 57.3075 256 128C256 198.693 198.693 256 128 256Z" fill="#0C0D0B"/>
-						<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>
-					</svg>
-					<!-- DS wordmark: font-weight 900, 12px, 0.04em tracking, uppercase, two-line stack -->
-					<span class="text-[12px] font-black leading-[1] tracking-[0.04em] uppercase" aria-label="ulziibat.tech">
+					<?php ub_icon_logo( 32 ); ?>
+					<span class="text-[12px] font-black leading-none tracking-[0.04em] uppercase" aria-label="ulziibat.tech">
 						<span class="block text-fg-default">ulziibat</span>
 						<span class="block text-brand-primary">tech</span>
 					</span>
@@ -77,7 +72,7 @@
 			</button>
 			<a class="flex py-2 pl-4 pr-2.5 rounded-full ml-auto items-center gap-1 transition-colors ease-primary duration-300 bg-surface-inverse hover:bg-surface-inverse-hover focus:ring-0 focus:bg-surface-inverse-hover focus:outline-0 text-fg-inverse" href="mailto:ulziibat.n@gmail.com">
 				<span class="text-sm font-medium leading-none">Надтай холбогдох</span>
-				<svg class="w-6 h-auto fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
+				<?php ub_icon_arrow( 'w-6 h-auto fill-current' ); ?>
 			</a>
 		</div>
 	</div>
