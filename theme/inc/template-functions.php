@@ -287,8 +287,7 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
-	$classes[] = ' scroll-smooth';
-
+	$classes[] = ' scroll-smooth bg-surface-base text-fg-default';
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );

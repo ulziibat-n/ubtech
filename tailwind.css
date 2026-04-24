@@ -14,6 +14,7 @@
  * Add the WordPress file header.
  */
 @import "./tailwind/custom/file-header.css";
+@import "./tailwind/custom/tokens.css";
 
 /**
  * Add Tailwind’s default theme and your custom theme.

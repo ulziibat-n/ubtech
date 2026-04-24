@@ -22,6 +22,85 @@ _tw is based on Underscores https://underscores.me/ and Varia https://github.com
 Underscores and Varia are distributed under the terms of the GNU GPL v2 or later.
 */
 @layer properties;
+:root {
+  --primitive-lime-500: oklch(76.8% 0.233 130.85);
+  --primitive-lime-600: oklch(64.8% 0.200 131.68);
+  --primitive-lime-900: oklch(35.0% 0.120 130.00);
+  --primitive-slate-50: oklch(98.4% 0.003 247.86);
+  --primitive-slate-100: oklch(96.8% 0.007 247.90);
+  --primitive-slate-200: oklch(93.0% 0.013 255.51);
+  --primitive-slate-400: oklch(70.4% 0.028 261.33);
+  --primitive-slate-600: oklch(44.6% 0.030 256.80);
+  --primitive-slate-700: oklch(37.2% 0.028 259.73);
+  --primitive-slate-800: oklch(27.9% 0.029 256.85);
+  --primitive-slate-900: oklch(20.8% 0.042 265.76);
+  --primitive-white: oklch(100% 0 0);
+  --primitive-black: oklch(0%   0 0);
+}
+:root {
+  --ds-color-surface-base: var(--primitive-slate-50);
+  --ds-color-surface-card: var(--primitive-white);
+  --ds-color-surface-raised: var(--primitive-slate-100);
+  --ds-color-surface-overlay: oklch(98.4% 0.003 247.86 / 85%);
+  --ds-color-surface-inverse: var(--primitive-slate-900);
+  --ds-color-surface-inverse-hover: var(--primitive-slate-800);
+  --ds-color-fg-default: var(--primitive-slate-900);
+  --ds-color-fg-subtle: var(--primitive-slate-600);
+  --ds-color-fg-muted: var(--primitive-slate-400);
+  --ds-color-fg-disabled: oklch(75% 0.01 260);
+  --ds-color-fg-inverse: var(--primitive-slate-50);
+  --ds-color-fg-link: var(--primitive-lime-600);
+  --ds-color-stroke-default: var(--primitive-slate-200);
+  --ds-color-stroke-strong: oklch(80% 0.015 260);
+  --ds-color-stroke-focus: var(--primitive-lime-500);
+  --ds-color-brand-primary: var(--primitive-lime-500);
+  --ds-color-brand-hover: var(--primitive-lime-600);
+  --ds-color-brand-subtle: oklch(95% 0.06 130);
+  --ds-color-brand-fg: var(--primitive-lime-900);
+  --ds-color-status-success: oklch(60% 0.17 145);
+  --ds-color-status-error: oklch(58% 0.22 29);
+  --ds-color-status-warning: oklch(72% 0.17 75);
+  --ds-color-status-info: oklch(62% 0.17 230);
+  --ds-shadow-sm: 0 1px 3px oklch(0 0 0 / 8%);
+  --ds-shadow-md: 0 4px 12px oklch(0 0 0 / 10%);
+  --ds-shadow-lg: 0 8px 24px oklch(0 0 0 / 12%);
+  --ds-radius-sm: 0.25rem;
+  --ds-radius-md: 0.5rem;
+  --ds-radius-lg: 1rem;
+  --ds-radius-full: 9999px;
+}
+[data-theme="dark"] {
+  --ds-color-surface-base: oklch(15% 0.01 260);
+  --ds-color-surface-card: oklch(20% 0.01 260);
+  --ds-color-surface-raised: oklch(24% 0.01 260);
+  --ds-color-surface-overlay: oklch(15% 0.01 260 / 88%);
+  --ds-color-surface-inverse: var(--primitive-slate-50);
+  --ds-color-surface-inverse-hover: oklch(93% 0.003 247.86);
+  --ds-color-fg-default: oklch(95% 0.005 260);
+  --ds-color-fg-subtle: oklch(70% 0.008 260);
+  --ds-color-fg-muted: oklch(50% 0.008 260);
+  --ds-color-fg-disabled: oklch(38% 0.008 260);
+  --ds-color-fg-inverse: var(--primitive-slate-900);
+  --ds-color-fg-link: var(--primitive-lime-500);
+  --ds-color-stroke-default: oklch(28% 0.01 260);
+  --ds-color-stroke-strong: oklch(38% 0.01 260);
+  --ds-color-stroke-focus: var(--primitive-lime-500);
+  --ds-color-brand-primary: var(--primitive-lime-500);
+  --ds-color-brand-hover: oklch(82% 0.22 131);
+  --ds-color-brand-subtle: oklch(22% 0.06 130);
+  --ds-color-brand-fg: var(--primitive-lime-500);
+  --ds-color-status-success: oklch(72% 0.15 145);
+  --ds-color-status-error: oklch(70% 0.20 29);
+  --ds-color-status-warning: oklch(80% 0.15 75);
+  --ds-color-status-info: oklch(72% 0.15 230);
+  --ds-shadow-sm: 0 1px 3px oklch(0 0 0 / 30%);
+  --ds-shadow-md: 0 4px 12px oklch(0 0 0 / 40%);
+  --ds-shadow-lg: 0 8px 24px oklch(0 0 0 / 50%);
+  --ds-radius-sm: 0.25rem;
+  --ds-radius-md: 0.5rem;
+  --ds-radius-lg: 1rem;
+  --ds-radius-full: 9999px;
+}
 :root, :host {
   --font-sans: "TT Hoves", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -29,7 +108,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
 		"Liberation Mono", "Courier New", monospace;
   --color-lime-500: oklch(76.8% 0.233 130.85);
   --color-lime-600: oklch(64.8% 0.2 131.684);
-  --color-indigo-400: oklch(67.3% 0.182 276.935);
   --color-slate-50: oklch(98.4% 0.003 247.858);
   --color-slate-100: oklch(96.8% 0.007 247.896);
   --color-slate-400: oklch(70.4% 0.04 256.788);
@@ -82,40 +160,44 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --leading-tight: 1.25;
   --leading-relaxed: 1.625;
   --radius-xs: 0.125rem;
+  --radius-sm: var(--ds-radius-sm);
+  --radius-md: var(--ds-radius-md);
+  --radius-lg: var(--ds-radius-lg);
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
-  --shadow-sm: var(--shadow-sm);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
   --default-transition-duration: 150ms;
   --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --default-font-family: var(--font-sans);
   --default-mono-font-family: var(--font-mono);
   --container-wide: var(--wp--style--global--wide-size);
   --ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
-  --color-surface-base: var(--color-surface-base);
-  --color-surface-card: var(--color-surface-card);
-  --color-surface-raised: var(--color-surface-raised);
-  --color-surface-overlay: var(--color-surface-overlay);
-  --color-surface-inverse: var(--color-surface-inverse);
-  --color-surface-inverse-hover: var(--color-surface-inverse-hover);
-  --color-fg-default: var(--color-fg-default);
-  --color-fg-subtle: var(--color-fg-subtle);
-  --color-fg-muted: var(--color-fg-muted);
-  --color-fg-disabled: var(--color-fg-disabled);
-  --color-fg-inverse: var(--color-fg-inverse);
-  --color-fg-link: var(--color-fg-link);
-  --color-stroke-default: var(--color-stroke-default);
-  --color-stroke-strong: var(--color-stroke-strong);
-  --color-stroke-focus: var(--color-stroke-focus);
-  --color-brand-primary: var(--color-brand-primary);
-  --color-brand-hover: var(--color-brand-hover);
-  --color-brand-subtle: var(--color-brand-subtle);
-  --color-brand-fg: var(--color-brand-fg);
-  --color-status-success: var(--color-status-success);
-  --color-status-error: var(--color-status-error);
-  --color-status-warning: var(--color-status-warning);
-  --color-status-info: var(--color-status-info);
+  --color-surface-base: var(--ds-color-surface-base);
+  --color-surface-card: var(--ds-color-surface-card);
+  --color-surface-raised: var(--ds-color-surface-raised);
+  --color-surface-overlay: var(--ds-color-surface-overlay);
+  --color-surface-inverse: var(--ds-color-surface-inverse);
+  --color-surface-inverse-hover: var(--ds-color-surface-inverse-hover);
+  --color-fg-default: var(--ds-color-fg-default);
+  --color-fg-subtle: var(--ds-color-fg-subtle);
+  --color-fg-muted: var(--ds-color-fg-muted);
+  --color-fg-disabled: var(--ds-color-fg-disabled);
+  --color-fg-inverse: var(--ds-color-fg-inverse);
+  --color-fg-link: var(--ds-color-fg-link);
+  --color-stroke-default: var(--ds-color-stroke-default);
+  --color-stroke-strong: var(--ds-color-stroke-strong);
+  --color-stroke-focus: var(--ds-color-stroke-focus);
+  --color-brand-primary: var(--ds-color-brand-primary);
+  --color-brand-hover: var(--ds-color-brand-hover);
+  --color-brand-subtle: var(--ds-color-brand-subtle);
+  --color-brand-fg: var(--ds-color-brand-fg);
+  --color-status-success: var(--ds-color-status-success);
+  --color-status-error: var(--ds-color-status-error);
+  --color-status-warning: var(--ds-color-status-warning);
+  --color-status-info: var(--ds-color-status-info);
+  --radius-full: var(--ds-radius-full);
 }
 :where(.not-prose) *,:where(.not-prose) ::after,:where(.not-prose) ::before,:where(.not-prose) ::backdrop,:where(.not-prose) ::file-selector-button {
   box-sizing: border-box;
@@ -430,6 +512,7 @@ body {
 }
 .container {
   margin-inline: auto;
+  max-width: calc(var(--spacing) * 330);
   padding-inline: calc(var(--spacing) * 8);
 }
 .my-2 {
@@ -670,10 +753,10 @@ body {
   border-radius: var(--radius-2xl);
 }
 .rounded-full {
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
 }
 .rounded-md {
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
 }
 .border {
   border-style: var(--tw-border-style);
@@ -1021,7 +1104,7 @@ body {
   text-decoration-line: none;
 }
 .shadow-sm {
-  --tw-shadow: var(--shadow-sm);
+  --tw-shadow: var(--ds-shadow-sm);
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 }
 .outline-stroke-strong {
@@ -1179,7 +1262,7 @@ body {
 }
 @media (hover: hover) {
   .hover\:shadow-md:hover {
-    --tw-shadow: var(--shadow-md);
+    --tw-shadow: var(--ds-shadow-md);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 }

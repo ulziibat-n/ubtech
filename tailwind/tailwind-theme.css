@@ -16,24 +16,12 @@
  */
 @theme {
 	/**
-	 * These theme variables use CSS variables set by WordPress using values
-	 * from your `theme.json` file.
-	 *
-	 * If you are using the classic editor, you should use hardcoded color
-	 * values instead of the `var()` functions below.
+	 * WordPress context variables
      */
 	--container-wide: var(--wp--style--global--wide-size);
 
 	/**
-	 * These are the default `font-family` theme variables included with
-     * Tailwind. You can update them below by adding custom fonts at the
-	 * beginning of each value.
-	 *
-	 * Default theme variables can be found in their entirety at the links
-	 * below, on GitHub or in Tailwind’s documentation, respectively:
-	 *
-	 * https://github.com/tailwindlabs/tailwindcss/blob/main/packages/tailwindcss/theme.css
-	 * https://tailwindcss.com/docs/theme#default-theme-variable-reference
+	 * Typography fonts
 	 */
 	--font-sans:
 		"TT Hoves", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
@@ -44,65 +32,53 @@
 		"Liberation Mono", "Courier New", monospace;
 
 	/**
-	 * Add your theme below:
+	 * Animation & Effects
+	 */
+	--ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+	/**
+	 * Mapping Semantic Design Tokens (from tokens.css) to Tailwind Utilities
+	 *
+	 * Note: We use var(--ds-*) to avoid circular references in Tailwind 4.
 	 */
 
-	--ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
+	/* ── Colors (Surface, FG, Stroke, Brand) ── */
+	--color-surface-base:          var(--ds-color-surface-base);
+	--color-surface-card:          var(--ds-color-surface-card);
+	--color-surface-raised:        var(--ds-color-surface-raised);
+	--color-surface-overlay:       var(--ds-color-surface-overlay);
+	--color-surface-inverse:       var(--ds-color-surface-inverse);
+	--color-surface-inverse-hover: var(--ds-color-surface-inverse-hover);
 
-/**
- * Semantic design tokens — CSS variable-уудыг Tailwind utility class болгон гаргана.
- *
- * Нэршлийн загвар: [property]-[category]-[variant]
- *   bg-surface-base       → арын фон
- *   text-fg-default       → үндсэн текст
- *   border-stroke-default → хүрээ
- *   bg-brand-primary      → брэнд өнгө
- *
- * tokens.css файлд тодорхойлсон CSS variable-уудыг @theme inline-д тусгана.
- */
-@theme inline {
-	/* ── Surface (background) ── */
-	--color-surface-base:          var(--color-surface-base);
-	--color-surface-card:          var(--color-surface-card);
-	--color-surface-raised:        var(--color-surface-raised);
-	--color-surface-overlay:       var(--color-surface-overlay);
-	--color-surface-inverse:       var(--color-surface-inverse);
-	--color-surface-inverse-hover: var(--color-surface-inverse-hover);
+	--color-fg-default:  var(--ds-color-fg-default);
+	--color-fg-subtle:   var(--ds-color-fg-subtle);
+	--color-fg-muted:    var(--ds-color-fg-muted);
+	--color-fg-disabled: var(--ds-color-fg-disabled);
+	--color-fg-inverse:  var(--ds-color-fg-inverse);
+	--color-fg-link:     var(--ds-color-fg-link);
 
-	/* ── Foreground (text, icon) ── */
-	--color-fg-default:  var(--color-fg-default);
-	--color-fg-subtle:   var(--color-fg-subtle);
-	--color-fg-muted:    var(--color-fg-muted);
-	--color-fg-disabled: var(--color-fg-disabled);
-	--color-fg-inverse:  var(--color-fg-inverse);
-	--color-fg-link:     var(--color-fg-link);
+	--color-stroke-default: var(--ds-color-stroke-default);
+	--color-stroke-strong:  var(--ds-color-stroke-strong);
+	--color-stroke-focus:   var(--ds-color-stroke-focus);
 
-	/* ── Stroke (border, divider) ── */
-	--color-stroke-default: var(--color-stroke-default);
-	--color-stroke-strong:  var(--color-stroke-strong);
-	--color-stroke-focus:   var(--color-stroke-focus);
+	--color-brand-primary: var(--ds-color-brand-primary);
+	--color-brand-hover:   var(--ds-color-brand-hover);
+	--color-brand-subtle:  var(--ds-color-brand-subtle);
+	--color-brand-fg:      var(--ds-color-brand-fg);
 
-	/* ── Brand / Action ── */
-	--color-brand-primary: var(--color-brand-primary);
-	--color-brand-hover:   var(--color-brand-hover);
-	--color-brand-subtle:  var(--color-brand-subtle);
-	--color-brand-fg:      var(--color-brand-fg);
+	--color-status-success: var(--ds-color-status-success);
+	--color-status-error:   var(--ds-color-status-error);
+	--color-status-warning: var(--ds-color-status-warning);
+	--color-status-info:    var(--ds-color-status-info);
 
-	/* ── Status (feedback) ── */
-	--color-status-success: var(--color-status-success);
-	--color-status-error:   var(--color-status-error);
-	--color-status-warning: var(--color-status-warning);
-	--color-status-info:    var(--color-status-info);
-
-	/* ── Shadow ── */
-	--shadow-sm: var(--shadow-sm);
-	--shadow-md: var(--shadow-md);
-	--shadow-lg: var(--shadow-lg);
+	/* ── Shadows ── */
+	--shadow-sm: var(--ds-shadow-sm);
+	--shadow-md: var(--ds-shadow-md);
+	--shadow-lg: var(--ds-shadow-lg);
 
 	/* ── Border radius ── */
-	--radius-sm:   0.25rem;
-	--radius-md:   0.5rem;
-	--radius-lg:   1rem;
-	--radius-full: 9999px;
+	--radius-sm:   var(--ds-radius-sm);
+	--radius-md:   var(--ds-radius-md);
+	--radius-lg:   var(--ds-radius-lg);
+	--radius-full: var(--ds-radius-full);
 }
