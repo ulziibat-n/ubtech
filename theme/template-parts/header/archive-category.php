@@ -7,18 +7,18 @@
  * @package ulziibat-tech
  */
 
-$text_color    = 'text-slate-900';
+$text_color    = ' text-slate-900';
 $padding_class = 'pt-20';
 $term_id       = get_queried_object_id();
 $term_img      = get_field( 'archive_image', 'category_' . $term_id );
 
 if ( $term_img ) {
-	$text_color    = 'text-white';
-	$padding_class = 'z-30 relative pt-64 pb-32';
+	$text_color    = ' text-white';
+	$padding_class = 'z-30 relative pt-64 pb-12';
 }
 ?>
 
-<header class="w-full relative overflow-hidden">
+<header class="overflow-hidden relative w-full">
 	<?php
 
 	if ( $term_img ) :
@@ -29,14 +29,7 @@ if ( $term_img ) {
 	endif;
 	?>
 	<div class="container <?php echo esc_attr( $padding_class ); ?>">
-		<?php
-		if ( $term_img ) :
-			?>
-			<div class="pt-(--header-height)">
-			<?php
-		endif;
-		?>
-		<?php the_archive_title( '<h1 class="text-3xl font-black tracking-tight lg:h1 ' . $text_color . '">', '</h1>' ); ?>
+		<?php the_archive_title( '<h1 class="text-3xl font-black tracking-tight lg:h1' . $text_color . '">', '</h1>' ); ?>
 		<?php if ( term_description() ) : ?>
 			<div class="mt-4 max-w-3xl leading-tight text-lg py-2 <?php echo esc_attr( $text_color ); ?>">
 				<?php echo wp_kses_post( term_description() ); ?>

@@ -878,8 +878,14 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .pr-24 {
     padding-right: calc(var(--spacing) * 24);
   }
+  .pb-12 {
+    padding-bottom: calc(var(--spacing) * 12);
+  }
   .pb-14 {
     padding-bottom: calc(var(--spacing) * 14);
+  }
+  .pb-16 {
+    padding-bottom: calc(var(--spacing) * 16);
   }
   .pb-32 {
     padding-bottom: calc(var(--spacing) * 32);
@@ -1406,6 +1412,14 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
     }
   }
   @media (width >= 40rem) {
+    .sm\:h1 {
+      font-weight: 900;
+      font-size: clamp(40px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -0.015em;
+    }
+  }
+  @media (width >= 40rem) {
     .min-sm\:text-2xl {
       font-size: var(--text-2xl);
       line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -1469,6 +1483,14 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   @media (width >= 48rem) {
     .md\:p-8 {
       padding: calc(var(--spacing) * 8);
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:h1 {
+      font-weight: 900;
+      font-size: clamp(40px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -0.015em;
     }
   }
   @media (width >= 48rem) {
