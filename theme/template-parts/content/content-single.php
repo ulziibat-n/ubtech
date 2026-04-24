@@ -16,13 +16,13 @@
 			the_post_thumbnail( 'full', array( 'class' => 'absolute w-full h-full inset-0 object-cover z-0' ) );
 		}
 		?>
-		<div class=" absolute w-full h-full inset-0 z-10 bg-gradient-to-b from-transparent to-black/50"></div>
+		<div class=" absolute w-full h-full inset-0 z-10 bg-linear-to-b from-transparent to-black/50"></div>
 		<div class="container relative z-20 pt-64 pb-32">
-			<h1 class="t-display text-fg-inverse max-w-4xl"><?php the_title(); ?></h1>
+			<h1 class="t-h1 text-fg-inverse max-w-7xl"><?php the_title(); ?></h1>
 			<?php
 			if ( has_excerpt() ) :
 				?>
-				<div class="max-w-3xl prose text-fg-inverse t-lead mt-10">
+				<div class="max-w-3xl text-fg-inverse t-lead mt-10">
 					<?php the_excerpt(); ?>
 				</div>
 				<?php
@@ -38,11 +38,11 @@
 		
 	</header><!-- .entry-header -->
 
-	<div <?php ub_content_class( 'py-24 ' ); ?>>
+	<div class="py-24">
 		<div class="container">
 			<div class="flex">
 				<div class="w-2/3 pr-24">
-					<div data-post-content class="prose max-w-3xl">
+					<div data-post-content class="max-w-3xl">
 						<?php
 						the_content();
 						?>
@@ -102,7 +102,7 @@
 				<h3 class="text-lg md:text-xl font-bold mb-3 text-fg-default"><?php the_author(); ?></h3>
 				
 				<?php if ( $author_bio ) : ?>
-					<div class="author-bio prose prose-sm max-w-none text-fg-subtle mb-6 leading-relaxed">
+					<div class="author-bio max-w-none text-fg-subtle mb-6 leading-relaxed">
 						<?php echo wp_kses_post( $author_bio ); ?>
 					</div>
 				<?php endif; ?>

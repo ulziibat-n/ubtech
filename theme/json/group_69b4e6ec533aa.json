@@ -167,9 +167,19 @@
                 "param": "user_form",
                 "operator": "==",
                 "value": "edit"
+            },
+            {
+                "param": "current_user_role",
+                "operator": "==",
+                "value": "editor"
             }
         ],
         [
+            {
+                "param": "user_form",
+                "operator": "==",
+                "value": "edit"
+            },
             {
                 "param": "current_user_role",
                 "operator": "==",
@@ -178,16 +188,14 @@
         ],
         [
             {
-                "param": "current_user_role",
+                "param": "user_form",
                 "operator": "==",
-                "value": "author"
-            }
-        ],
-        [
+                "value": "edit"
+            },
             {
                 "param": "current_user_role",
                 "operator": "==",
-                "value": "editor"
+                "value": "author"
             }
         ]
     ],
@@ -201,5 +209,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773464558
+    "modified": 1777014681
 }

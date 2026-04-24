@@ -20,7 +20,7 @@
 			}
 			?>
 		</header>
-		<div <?php ub_content_class( 'mt-20 max-w-2xl' ); ?>>
+		<div class="mt-20 max-w-2xl">
 			<?php
 			the_content();
 			?>

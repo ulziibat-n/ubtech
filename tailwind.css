@@ -19,13 +19,7 @@
  * Add Tailwind’s default theme and your custom theme.
  */
 @import "tailwindcss/theme";
-@import "./tailwind/custom/tokens.css";
 @import "./tailwind/tailwind-theme.css";
-
-/**
- * Add custom `@font-face` rules.
- */
-@import "./tailwind/custom/fonts.css";
 
 /**
  * Add Tailwind’s Preflight styles.
@@ -63,11 +57,6 @@
  * included in any order because they also use library-specific class names.
  */
 @import-glob "./tailwind/custom/components/**/*.css";
-
-/**
- * Add Tailwind Typography.
- */
-@import "./tailwind/tailwind-typography.css";
 
 /**
  * Add Tailwind’s utility classes and any utility classes registered by

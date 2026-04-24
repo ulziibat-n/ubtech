@@ -74,4 +74,3 @@ vendor/bin/phpcbf    # PHP auto-fix
 
 ## Key Constants
 - `UB_VERSION` — theme version (cache busting)
-- `UB_TYPOGRAPHY_CLASSES` — Tailwind typography classes string

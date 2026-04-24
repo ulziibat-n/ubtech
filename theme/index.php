@@ -31,7 +31,7 @@ $ub_is_home_first = is_home() && ! is_paged();
 		<p class="t-lead text-fg-subtle max-w-2xl mb-[28px]"><?php echo esc_html( $ub_hero_desc ); ?></p>
 		<?php endif; ?>
 		<div class="flex flex-wrap gap-[10px]">
-			<a class="btn btn-primary" href="#posts">
+			<a class="ds-btn ds-btn-primary" href="#posts">
 				<?php esc_html_e( 'Сүүлийн нийтлэл', 'ulziibat-tech' ); ?>
 				<?php ub_icon_arrow(); ?>
 			</a>
@@ -39,7 +39,7 @@ $ub_is_home_first = is_home() && ! is_paged();
 			$ub_about_page = get_page_by_path( 'about' );
 			if ( $ub_about_page ) :
 				?>
-			<a class="btn btn-brand" href="<?php echo esc_url( get_permalink( $ub_about_page->ID ) ); ?>">
+			<a class="ds-btn ds-btn-brand" href="<?php echo esc_url( get_permalink( $ub_about_page->ID ) ); ?>">
 				<?php esc_html_e( 'Миний тухай', 'ulziibat-tech' ); ?>
 			</a>
 			<?php endif; ?>

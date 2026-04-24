@@ -11,10 +11,6 @@
  * the block editor.
  */
 
-/**
- * Import editor styles from Tailwind Typography fork.
- */
-@import "@_tw/typography/editor";
 
 /**
  * Add horizontal padding for smaller screens.

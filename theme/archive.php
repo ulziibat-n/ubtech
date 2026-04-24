@@ -19,18 +19,22 @@ get_header();
 			<main id="main">
 
 			<?php if ( have_posts() ) : ?>
+				<?php
+				if ( is_author() ) {
+					get_template_part( 'template-parts/content/header/archive', 'author' );
+				} elseif ( is_category() ) {
+					get_template_part( 'template-parts/content/header/archive', 'category' );
+				} elseif ( is_tag() ) {
+					get_template_part( 'template-parts/content/header/archive', 'tag' );
+				}
+				?>
 
-				<header class="container pt-16 pb-8">
-					<?php the_archive_title( '<h1 class="text-4xl font-black text-fg-default sm:text-5xl">', '</h1>' ); ?>
-					<?php the_archive_description( '<div class="mt-4 max-w-2xl text-fg-subtle">', '</div>' ); ?>
-				</header>
-
-				<div class="container pb-16">
-					<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+				<div class="container">
+					<div class="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-4">
 						<?php
 						while ( have_posts() ) :
 							the_post();
-							get_template_part( 'template-parts/content/content', 'card' );
+							get_template_part( 'template-parts/content/card', 'archive' );
 						endwhile;
 						?>
 					</div>

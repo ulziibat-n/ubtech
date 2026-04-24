@@ -181,7 +181,7 @@ function ub_html5_comment( $comment, $args, $depth ) {
 				<?php endif; ?>
 			</footer><!-- .comment-meta -->
 
-			<div <?php ub_content_class( 'comment-content' ); ?>>
+			<div class="comment-content">
 				<?php comment_text(); ?>
 			</div><!-- .comment-content -->
 
@@ -216,7 +216,7 @@ function ub_html5_comment( $comment, $args, $depth ) {
  * @return string
  */
 function ub_acf_json_save_point( $path ) {
-	// Update path
+	// Update path.
 	$path = get_stylesheet_directory() . '/json';
 
 	return $path;
@@ -230,7 +230,7 @@ add_filter( 'acf/settings/save_json', 'ub_acf_json_save_point' );
  * @return array
  */
 function ub_acf_json_load_point( $paths ) {
-	// Remove original path (optional)
+	// Remove original path (optional).
 	unset( $paths[0] );
 
 	// Append path
@@ -266,7 +266,10 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = 'text-sm font-semibold leading-none text-fg-default duration-300 ease-primary hover:text-fg-link transition-colors focus:text-fg-inverse py-2 px-4 group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0 ';
+		$atts['class'] = 'ds-nav-link';
+		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
+			$atts['class'] .= ' is-active';
+		}
 	}
 
 	if ( 'menu-2' === $args->theme_location ) {
@@ -284,7 +287,7 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
-		$classes[] = ' scroll-smooth';
+	$classes[] = ' scroll-smooth';
 
 	return $classes;
 }

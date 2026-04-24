@@ -18,7 +18,7 @@ $first_cat     = ! empty( $categories ) ? $categories[0] : null;
 $read_time     = ub_read_time();
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'group flex flex-col overflow-hidden rounded-2xl border border-stroke-default bg-surface-card transition-all duration-300 ease-primary hover:shadow-md hover:-translate-y-0.5' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'group flex flex-col overflow-hidden rounded-md border border-stroke-default bg-surface-card transition-all duration-300 ease-primary hover:shadow-md hover:-translate-y-0.5' ); ?>>
 
 	<div class="relative overflow-hidden <?php echo $is_featured ? 'aspect-[1.6/1]' : 'aspect-[1.4/1]'; ?>">
 
@@ -56,9 +56,9 @@ $read_time     = ub_read_time();
 
 	</div>
 
-	<div class="flex flex-1 flex-col gap-3 <?php echo $is_featured ? 'p-[22px]' : 'p-[18px]'; ?>">
+	<div class="flex flex-1 flex-col gap-3 <?php echo $is_featured ? 'p-[22px]' : 'p-6'; ?>">
 
-		<h<?php echo absint( $heading_level ); ?> class="<?php echo $is_featured ? 't-h3' : 'text-[18px] font-bold leading-snug'; ?> text-fg-default">
+		<h<?php echo absint( $heading_level ); ?> class="<?php echo $is_featured ? 't-h3' : 't-h5'; ?> text-fg-default">
 			<a href="<?php echo esc_url( get_permalink() ); ?>"
 				class="transition-colors hover:text-fg-link"
 				rel="bookmark">

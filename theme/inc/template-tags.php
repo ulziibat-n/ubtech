@@ -307,18 +307,42 @@ endif;
 
 if ( ! function_exists( 'ub_icon_logo' ) ) :
 	/**
-	 * Outputs the brand logo SVG: black circle + lime lightning bolt.
+	 * Outputs the brand logomark SVG: circle + lime lightning bolt.
 	 *
+	 * Dark mode aware: circle fill switches via CSS custom property
+	 * scoped to [data-theme=dark]. CSS is injected once via wp_head
+	 * using the companion site_logo_mark_styles() function below.
+	 *
+	 * @since 0.3.0
 	 * @param int $size Width and height in pixels.
 	 */
-	function ub_icon_logo( $size = 32 ) {
+	function ub_icon_logo( int $size = 32 ): void {
 		$s = absint( $size );
-		echo '<svg width="' . absint( $s ) . '" height="' . absint( $s ) . '" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
-			. '<path d="M128 256C57.3075 256 0 198.693 0 128C0 57.3075 57.3075 0 128 0C198.693 0 256 57.3075 256 128C256 198.693 198.693 256 128 256Z" fill="#0C0D0B"/>'
+		echo '<svg width="' . $s . '" height="' . $s . '" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+			. '<path class="logo-circle" d="M128 256C57.3075 256 0 198.693 0 128C0 57.3075 57.3075 0 128 0C198.693 0 256 57.3075 256 128C256 198.693 198.693 256 128 256Z"/>'
 			. '<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>'
 			. '</svg>';
 	}
 endif;
+
+if ( ! function_exists( 'site_logo_mark_styles' ) ) :
+	/**
+	 * Injects the logo-mark dark-mode CSS once into <head>.
+	 *
+	 * Light → dark circle toggle via [data-theme=dark] — matches tokens.css.
+	 * Hooked at priority 1 (after charset meta, before other styles).
+	 *
+	 * @since 0.3.0
+	 */
+	function site_logo_mark_styles(): void {
+		echo '<style id="site-logo-mark-css">'
+			. '.logo-circle{fill:#0C0D0B}'
+			. '[data-theme=dark] .logo-circle{fill:oklch(98.4% 0.003 247.86)}'
+			. '</style>' . "\n";
+	}
+	add_action( 'wp_head', 'site_logo_mark_styles', 1 );
+endif;
+
 
 if ( ! function_exists( 'ub_icon_lightning' ) ) :
 	/**
@@ -333,42 +357,5 @@ if ( ! function_exists( 'ub_icon_lightning' ) ) :
 		echo '<svg viewBox="0 0 256 256" class="' . esc_attr( $css_class ) . '" aria-hidden="true">'
 			. '<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>'
 			. '</svg>';
-	}
-endif;
-
-if ( ! function_exists( 'ub_content_class' ) ) :
-	/**
-	 * Displays the class names for the post content wrapper.
-	 *
-	 * This allows us to add Tailwind Typography’s modifier classes throughout
-	 * the theme without repeating them in multiple files. (They can be edited
-	 * at the top of the `../functions.php` file via the
-	 * UB_TYPOGRAPHY_CLASSES constant.)
-	 *
-	 * Based on WordPress core’s `body_class` and `get_body_class` functions.
-	 *
-	 * @param string|string[] $classes Space-separated string or array of class
-	 *                                 names to add to the class list.
-	 */
-	function ub_content_class( $classes = '' ) {
-		$all_classes = array( $classes, UB_TYPOGRAPHY_CLASSES );
-
-		foreach ( $all_classes as &$class_groups ) {
-			if ( ! empty( $class_groups ) ) {
-				if ( ! is_array( $class_groups ) ) {
-					$class_groups = preg_split( '#\s+#', $class_groups );
-				}
-			} else {
-				// Ensure that we always coerce class to being an array.
-				$class_groups = array();
-			}
-		}
-
-		$combined_classes = array_merge( $all_classes[0], $all_classes[1] );
-		$combined_classes = array_map( 'esc_attr', $combined_classes );
-
-		// Separates class names with a single space, preparing them for the
-		// post content wrapper.
-		echo 'class="' . esc_attr( implode( ' ', $combined_classes ) ) . '"';
 	}
 endif;

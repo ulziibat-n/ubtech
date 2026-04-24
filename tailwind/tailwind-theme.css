@@ -69,7 +69,6 @@
 	--color-surface-overlay:       var(--color-surface-overlay);
 	--color-surface-inverse:       var(--color-surface-inverse);
 	--color-surface-inverse-hover: var(--color-surface-inverse-hover);
-	--color-surface-brand-soft:    var(--color-surface-brand-soft);
 
 	/* ── Foreground (text, icon) ── */
 	--color-fg-default:  var(--color-fg-default);
@@ -89,7 +88,6 @@
 	--color-brand-hover:   var(--color-brand-hover);
 	--color-brand-subtle:  var(--color-brand-subtle);
 	--color-brand-fg:      var(--color-brand-fg);
-	--color-brand-on-subtle: var(--color-brand-on-subtle);
 
 	/* ── Status (feedback) ── */
 	--color-status-success: var(--color-status-success);
@@ -103,11 +101,8 @@
 	--shadow-lg: var(--shadow-lg);
 
 	/* ── Border radius ── */
-	--radius-xs:   0.125rem;  /* 2px  */
-	--radius-sm:   0.25rem;   /* 4px  */
-	--radius-md:   0.5rem;    /* 8px  */
-	--radius-lg:   1rem;      /* 16px */
-	--radius-xl:   1.5rem;    /* 24px */
-	--radius-2xl:  2rem;      /* 32px */
+	--radius-sm:   0.25rem;
+	--radius-md:   0.5rem;
+	--radius-lg:   1rem;
 	--radius-full: 9999px;
 }

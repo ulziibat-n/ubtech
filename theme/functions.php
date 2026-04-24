@@ -18,30 +18,6 @@ if ( ! defined( 'UB_VERSION' ) ) {
 	define( 'UB_VERSION', wp_get_theme()->get( 'Version' ) );
 }
 
-if ( ! defined( 'UB_TYPOGRAPHY_CLASSES' ) ) {
-	/*
-	 * Set Tailwind Typography classes for the front end, block editor and
-	 * classic editor using the constant below.
-	 *
-	 * For the front end, these classes are added by the `ub_content_class`
-	 * function. You will see that function used everywhere an `entry-content`
-	 * or `page-content` class has been added to a wrapper element.
-	 *
-	 * For the block editor, these classes are converted to a JavaScript array
-	 * and then used by the `./javascript/block-editor.js` file, which adds
-	 * them to the appropriate elements in the block editor (and adds them
-	 * again when they’re removed.)
-	 *
-	 * For the classic editor (and anything using TinyMCE, like Advanced Custom
-	 * Fields), these classes are added to TinyMCE’s body class when it
-	 * initializes.
-	 */
-	define(
-		'UB_TYPOGRAPHY_CLASSES',
-		''
-	);
-}
-
 if ( ! function_exists( 'ub_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -214,41 +190,9 @@ function ub_enqueue_block_editor_script() {
 				'strategy'  => 'defer', // Defer the script.
 			)
 		);
-		wp_add_inline_script( 'ulziibat-tech-editor', "tailwindTypographyClasses = '" . esc_attr( UB_TYPOGRAPHY_CLASSES ) . "'.split(' ');", 'before' );
 	}
 }
 add_action( 'enqueue_block_assets', 'ub_enqueue_block_editor_script' );
-
-/**
- * Add the Tailwind Typography classes to TinyMCE.
- *
- * @param array $settings TinyMCE settings.
- * @return array
- */
-function ub_tinymce_add_class( $settings ) {
-	$settings['body_class'] = UB_TYPOGRAPHY_CLASSES;
-	return $settings;
-}
-add_filter( 'tiny_mce_before_init', 'ub_tinymce_add_class' );
-
-/**
- * Limit the block editor to heading levels supported by Tailwind Typography.
- *
- * @param array  $args Array of arguments for registering a block type.
- * @param string $block_type Block type name including namespace.
- * @return array
- */
-function ub_modify_heading_levels( $args, $block_type ) {
-	if ( 'core/heading' !== $block_type ) {
-		return $args;
-	}
-
-	// Remove <h1>, <h5> and <h6>.
-	$args['attributes']['levelOptions']['default'] = array( 2, 3, 4 );
-
-	return $args;
-}
-add_filter( 'register_block_type_args', 'ub_modify_heading_levels', 10, 2 );
 
 /**
  * Custom template tags for this theme.
