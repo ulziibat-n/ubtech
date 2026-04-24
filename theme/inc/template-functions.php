@@ -36,34 +36,20 @@ add_filter( 'comment_form_defaults', 'ub_comment_form_defaults' );
  * Filters the default archive titles.
  */
 function ub_get_the_archive_title() {
-	if ( is_category() ) {
-		$title = __( 'Category Archives: ', 'ulziibat-tech' ) . '<span>' . single_term_title( '', false ) . '</span>';
-	} elseif ( is_tag() ) {
-		$title = __( 'Tag Archives: ', 'ulziibat-tech' ) . '<span>' . single_term_title( '', false ) . '</span>';
+	if ( is_category() || is_tag() || is_tax() ) {
+		$title = single_term_title( '', false );
 	} elseif ( is_author() ) {
-		$title = __( 'Author Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_author_meta( 'display_name' ) . '</span>';
+		$title = get_the_author_meta( 'display_name' );
 	} elseif ( is_year() ) {
-		$title = __( 'Yearly Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'ulziibat-tech' ) ) . '</span>';
+		$title = get_the_date( _x( 'Y', 'yearly archives date format', 'ulziibat-tech' ) );
 	} elseif ( is_month() ) {
-		$title = __( 'Monthly Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'ulziibat-tech' ) ) . '</span>';
+		$title = get_the_date( _x( 'F Y', 'monthly archives date format', 'ulziibat-tech' ) );
 	} elseif ( is_day() ) {
-		$title = __( 'Daily Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date() . '</span>';
+		$title = get_the_date();
 	} elseif ( is_post_type_archive() ) {
-		$cpt   = get_post_type_object( get_queried_object()->name );
-		$title = sprintf(
-			/* translators: %s: Post type singular name */
-			esc_html__( '%s Archives', 'ulziibat-tech' ),
-			$cpt->labels->singular_name
-		);
-	} elseif ( is_tax() ) {
-		$tax   = get_taxonomy( get_queried_object()->taxonomy );
-		$title = sprintf(
-			/* translators: %s: Taxonomy singular name */
-			esc_html__( '%s Archives', 'ulziibat-tech' ),
-			$tax->labels->singular_name
-		);
+		$title = post_type_archive_title( '', false );
 	} else {
-		$title = __( 'Archives:', 'ulziibat-tech' );
+		$title = __( 'Archives', 'ulziibat-tech' );
 	}
 	return $title;
 }
@@ -266,7 +252,7 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = ' text-xs text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-slate-100 px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-fg-defaul focus:outline-none focus:ring-0';
+		$atts['class'] = ' text-xs text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-white px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-fg-defaul focus:outline-none focus:ring-0 group-[.is-header-transparent]/body:text-white group-[.is-header-transparent]/body:hover:text-lime-400 group-[.is-header-transparent]/body:[*.is-active]:bg-white/20';
 		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
 			$atts['class'] .= ' is-active';
 		}
@@ -287,7 +273,24 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
-	$classes[] = ' scroll-smooth bg-white text-slate-900';
+	// ✅ Add 'no-js' by default for CSS reliance.
+	$classes[] = 'no-js';
+
+	// ✅ Add body classes for Tailwind Typography.
+	$classes[] = 'antialiased';
+	$classes[] = 'bg-white';
+	$classes[] = 'text-slate-900';
+	$classes[] = 'group/body';
+
+	// ✅ Transparent header for category archives with images.
+	if ( is_category() ) {
+		$term_id  = get_queried_object_id();
+		$term_img = get_field( 'archive_image', 'category_' . $term_id );
+		if ( $term_img ) {
+			$classes[] = 'is-header-transparent';
+		}
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );

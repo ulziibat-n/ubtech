@@ -30,6 +30,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
     --font-mono: "TT Hoves Pro Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
     --color-lime-100: oklch(96.7% 0.067 122.328);
+    --color-lime-400: oklch(84.1% 0.238 128.85);
     --color-lime-500: oklch(76.8% 0.233 130.85);
     --color-lime-600: oklch(64.8% 0.2 131.684);
     --color-slate-50: oklch(98.4% 0.003 247.858);
@@ -897,6 +898,10 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .no-underline {
     text-decoration-line: none;
   }
+  .antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -959,6 +964,30 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   }
   .group-\[\.current-menu-item\]\:text-lime-600:is(:where(.group):is(.current-menu-item) *) {
     color: var(--color-lime-600);
+  }
+  .group-\[\.is-header-transparent\]\/body\:absolute:is(:where(.group\/body):is(.is-header-transparent) *) {
+    position: absolute;
+  }
+  .group-\[\.is-header-transparent\]\/body\:top-0:is(:where(.group\/body):is(.is-header-transparent) *) {
+    top: calc(var(--spacing) * 0);
+  }
+  .group-\[\.is-header-transparent\]\/body\:left-0:is(:where(.group\/body):is(.is-header-transparent) *) {
+    left: calc(var(--spacing) * 0);
+  }
+  .group-\[\.is-header-transparent\]\/body\:z-50:is(:where(.group\/body):is(.is-header-transparent) *) {
+    z-index: 50;
+  }
+  .group-\[\.is-header-transparent\]\/body\:block:is(:where(.group\/body):is(.is-header-transparent) *) {
+    display: block;
+  }
+  .group-\[\.is-header-transparent\]\/body\:hidden:is(:where(.group\/body):is(.is-header-transparent) *) {
+    display: none;
+  }
+  .group-\[\.is-header-transparent\]\/body\:w-full:is(:where(.group\/body):is(.is-header-transparent) *) {
+    width: 100%;
+  }
+  .group-\[\.is-header-transparent\]\/body\:text-white:is(:where(.group\/body):is(.is-header-transparent) *) {
+    color: var(--color-white);
   }
   .selection\:bg-lime-500 *::selection {
     background-color: var(--color-lime-500);
@@ -1038,6 +1067,11 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   @media (hover: hover) {
     .group-\[\.current-menu-item\]\:hover\:text-lime-600:is(:where(.group):is(.current-menu-item) *):hover {
       color: var(--color-lime-600);
+    }
+  }
+  @media (hover: hover) {
+    .group-\[\.is-header-transparent\]\/body\:hover\:text-lime-400:is(:where(.group\/body):is(.is-header-transparent) *):hover {
+      color: var(--color-lime-400);
     }
   }
   .focus\:rounded-xs:focus {
@@ -1181,6 +1215,17 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   }
   .\[\*\.is-active\]\:bg-slate-100:is(*.is-active) {
     background-color: var(--color-slate-100);
+  }
+  .\[\*\.is-active\]\:bg-white:is(*.is-active) {
+    background-color: var(--color-white);
+  }
+  .group-\[\.is-header-transparent\]\/body\:\[\*\.is-active\]\:bg-white\/20:is(:where(.group\/body):is(.is-header-transparent) *):is(*.is-active) {
+    background-color: color-mix(in srgb, #fff 20%, transparent);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .group-\[\.is-header-transparent\]\/body\:\[\*\.is-active\]\:bg-white\/20:is(:where(.group\/body):is(.is-header-transparent) *):is(*.is-active) {
+      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
   }
 }
 body {
