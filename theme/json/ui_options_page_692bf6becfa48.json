@@ -1,9 +1,9 @@
 {
     "key": "ui_options_page_692bf6becfa48",
-    "title": "Site",
+    "title": "Сайтын тохиргоо",
     "active": true,
     "menu_order": 0,
-    "page_title": "Site",
+    "page_title": "Сайтын тохиргоо",
     "menu_slug": "site",
     "parent_slug": "options-general.php",
     "advanced_configuration": 0,
@@ -19,5 +19,5 @@
     "data_storage": "options",
     "post_id": "",
     "autoload": 0,
-    "modified": 1764488911
+    "modified": 1777019126
 }

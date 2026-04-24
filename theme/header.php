@@ -11,7 +11,7 @@
  */
 
 ?><!doctype html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="text-13px sm:text-[14px] md:text-[15px] lg:text-[16px]">
 
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">

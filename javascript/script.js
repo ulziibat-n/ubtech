@@ -2,51 +2,6 @@
  * Front-end JavaScript
  */
 
-/* ─── Dark Mode Toggle ───────────────────────────────────────────────────── */
-/**
- * DS: <html data-theme="light"|"dark"> attribute-г toggle хийнэ.
- * functions.php-д FOUC-аас сэргийлэх inline script байгаа тул
- * энд зөвхөн toggle handler + icon state л хариуцна.
- */
-(function site_init_dark_mode() {
-	/**
-	 * Toggle buttons-ийн icon state-г шинэчлэнэ.
-	 *
-	 * @param {string} theme - 'light' | 'dark'
-	 */
-	function site_update_toggle_icons(theme) {
-		document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
-			const sunIcon  = btn.querySelector('[data-icon-light]');
-			const moonIcon = btn.querySelector('[data-icon-dark]');
-			if (sunIcon)  sunIcon.style.display  = theme === 'dark'  ? 'none'  : 'block';
-			if (moonIcon) moonIcon.style.display  = theme === 'light' ? 'none'  : 'block';
-			btn.setAttribute('aria-label', theme === 'dark' ? 'Light mode-рүү шилжих' : 'Dark mode-рүү шилжих');
-		});
-	}
-
-	/**
-	 * Toggle хийнэ: dark ↔ light.
-	 */
-	function site_toggle_theme() {
-		const html    = document.documentElement;
-		const current = html.dataset.theme === 'dark' ? 'dark' : 'light';
-		const next    = current === 'dark' ? 'light' : 'dark';
-		html.dataset.theme = next;
-		localStorage.setItem('ub_theme', next);
-		site_update_toggle_icons(next);
-	}
-
-	// Init icons on load.
-	document.addEventListener('DOMContentLoaded', () => {
-		const saved = document.documentElement.dataset.theme ?? 'light';
-		site_update_toggle_icons(saved);
-
-		document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
-			btn.addEventListener('click', site_toggle_theme);
-		});
-	});
-})();
-
 /* ─── Main DOMContentLoaded ─────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,12 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				const link = document.createElement('a');
 				link.href = `#${heading.id}`;
-				link.className = 'no-underline text-fg-subtle/70 hover:text-fg-link transition-colors duration-200 block';
+				link.className = 'no-underline text-slate-600/70 hover:text-lime-600 transition-colors duration-200 block';
 				
 				const span = document.createElement('span');
 				span.textContent = text;
 				const fontSizeClass = level === 'h2' ? 'text-sm' : 'text-xs';
-				span.className = `${fontSizeClass} data-current:text-fg-default transition-colors duration-200 data-current:font-medium leading-none block py-1`;
+				span.className = `${fontSizeClass} data-current:text-slate-900 transition-colors duration-200 data-current:font-medium leading-none block py-1`;
 				
 				link.appendChild(span);
 				listItem.appendChild(link);
@@ -97,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						let nestedUl = lastH2Li.querySelector('ul');
 						if (!nestedUl) {
 							nestedUl = document.createElement('ul');
-							nestedUl.className = 'border-l border-stroke-default/50 pl-2 my-2';
+							nestedUl.className = 'border-l border-slate-200/50 pl-2 my-2';
 							lastH2Li.appendChild(nestedUl);
 						}
 						nestedUl.appendChild(listItem);

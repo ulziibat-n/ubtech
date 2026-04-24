@@ -18,11 +18,11 @@
 		?>
 		<div class=" absolute w-full h-full inset-0 z-10 bg-linear-to-b from-transparent to-black/50"></div>
 		<div class="container relative z-20 pt-64 pb-32">
-			<h1 class="t-h1 text-fg-inverse max-w-7xl"><?php the_title(); ?></h1>
+			<h1 class="h1 text-white max-w-7xl"><?php the_title(); ?></h1>
 			<?php
 			if ( has_excerpt() ) :
 				?>
-				<div class="max-w-3xl text-fg-inverse t-lead mt-10">
+				<div class="max-w-3xl text-white t-lead mt-10">
 					<?php the_excerpt(); ?>
 				</div>
 				<?php
@@ -50,7 +50,7 @@
 				</div>
 				<div class="w-1/3">
 					<div data-post-toc class="sticky top-24">
-						<h4 class="text-xs font-bold uppercase tracking-widest text-fg-muted mb-6"><?php echo esc_html__( 'Агуулга', 'ulziibat-tech' ); ?></h4>
+						<h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6"><?php echo esc_html__( 'Агуулга', 'ulziibat-tech' ); ?></h4>
 						<ul data-post-toc-list class="p-0 max-w-xs">
 						</ul>
 					</div>
@@ -88,21 +88,21 @@
 
 	if ( $author_bio || $author_avatar || ! empty( array_filter( array_column( $social_links, 'url' ) ) ) ) :
 		?>
-		<div class="author-box container bg-surface-raised rounded-2xl p-6 md:p-8 my-12 flex flex-col md:flex-row gap-6 md:gap-8 items-start border border-stroke-default">
+		<div class="author-box container bg-slate-100 rounded-2xl p-6 md:p-8 my-12 flex flex-col md:flex-row gap-6 md:gap-8 items-start border border-slate-200">
 			<div class="author-avatar shrink-0">
 				<?php if ( is_array( $author_avatar ) ) : ?>
-					<img src="<?php echo esc_url( $author_avatar['url'] ); ?>" alt="<?php echo esc_attr( $author_avatar['alt'] ); ?>" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-sm bg-surface-card">
+					<img src="<?php echo esc_url( $author_avatar['url'] ); ?>" alt="<?php echo esc_attr( $author_avatar['alt'] ); ?>" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-sm bg-white">
 				<?php elseif ( is_string( $author_avatar ) && ! empty( $author_avatar ) ) : ?>
-					<img src="<?php echo esc_url( $author_avatar ); ?>" alt="<?php the_author(); ?>" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-sm bg-surface-card">
+					<img src="<?php echo esc_url( $author_avatar ); ?>" alt="<?php the_author(); ?>" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-sm bg-white">
 				<?php else : ?>
-					<?php echo get_avatar( get_the_author_meta( 'ID' ), 96, '', '', array( 'class' => 'w-20 h-20 md:w-24 md:h-24 rounded-full shadow-sm bg-surface-card' ) ); ?>
+					<?php echo get_avatar( get_the_author_meta( 'ID' ), 96, '', '', array( 'class' => 'w-20 h-20 md:w-24 md:h-24 rounded-full shadow-sm bg-white' ) ); ?>
 				<?php endif; ?>
 			</div>
 			<div class="author-info flex-1">
-				<h3 class="text-lg md:text-xl font-bold mb-3 text-fg-default"><?php the_author(); ?></h3>
+				<h3 class="text-lg md:text-xl font-bold mb-3 text-slate-900"><?php the_author(); ?></h3>
 				
 				<?php if ( $author_bio ) : ?>
-					<div class="author-bio max-w-none text-fg-subtle mb-6 leading-relaxed">
+					<div class="author-bio max-w-none text-slate-600 mb-6 leading-relaxed">
 						<?php echo wp_kses_post( $author_bio ); ?>
 					</div>
 				<?php endif; ?>
@@ -111,7 +111,7 @@
 					<?php foreach ( $social_links as $id => $social ) : ?>
 						<?php if ( $social['url'] ) : ?>
 							<a href="<?php echo esc_url( $social['url'] ); ?>" 
-								class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-surface-card border border-stroke-default text-fg-muted hover:text-fg-link hover:border-stroke-focus hover:shadow-md transition-all duration-300" 
+								class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-lime-600 hover:border-lime-500 hover:shadow-md transition-all duration-300" 
 								target="_blank" 
 								rel="noopener noreferrer"
 								title="<?php echo esc_attr( strtoupper( $id ) ); ?>">

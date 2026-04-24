@@ -26,10 +26,10 @@
 		</div>
 
 		<div class=" py-4">
-			<div class="ds-nav-bar select-none">
-				<a class="block focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-black.svg" class="h-9 w-auto block dark:hidden" alt="<?php bloginfo( 'name' ); ?>">
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-white.svg" class="h-9 w-auto hidden dark:block" alt="<?php bloginfo( 'name' ); ?>">
+			<div class="select-none flex items-center gap-8">
+				<a class="block shrink-0 focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-black.svg" class="h-9 w-auto shrink block dark:hidden" alt="<?php bloginfo( 'name' ); ?>">
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-white.svg" class="h-9 w-auto shrink hidden dark:block" alt="<?php bloginfo( 'name' ); ?>">
 				</a>
 
 				<nav id="site-navigation" class="ds-nav-menu ml-4" aria-label="<?php esc_attr_e( 'Main Navigation', 'ulziibat-tech' ); ?>">
@@ -40,7 +40,7 @@
 								'theme_location' => 'menu-1',
 								'menu_id'        => 'primary-menu',
 								'container'      => false,
-								'items_wrap'     => '<ul id="%1$s" class="%2$s flex gap-2 list-none p-0 m-0">%3$s</ul>',
+								'items_wrap'     => '<ul id="%1$s" class="%2$s flex gap-1 list-none p-0 m-0">%3$s</ul>',
 							)
 						);
 					}
@@ -48,24 +48,13 @@
 				</nav>
 
 				<div class="flex items-center gap-4 ml-auto">
-					<!-- Dark mode toggle -->
-					<button
-						data-theme-toggle
-						aria-label="Dark mode-рүү шилжих"
-						class="flex items-center justify-center w-7 h-7 rounded-full text-fg-subtle hover:text-fg-default hover:bg-surface-raised transition-colors ease-primary duration-300 focus:outline-none"
-					>
-						<svg data-icon-light xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 fill-current" viewBox="0 -960 960 960">
-							<path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-57 96 100-52 54Zm492 496-97-101 53-53 101 97-57 57Zm-98-550 97-101 57 57-100 96-54-52ZM154-212l101-97 53 53-97 101-57-57Z"/>
-						</svg>
-						<svg data-icon-dark xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 fill-current" viewBox="0 -960 960 960" style="display:none">
-							<path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/>
-						</svg>
-					</button>
-
-					<a class="ds-nav-cta" href="mailto:ulziibat.n@gmail.com">
-						<span>Надтай холбогдох</span>
-						<svg viewBox="0 -960 960 960"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
-					</a>
+					<?php
+					$header_link      = get_field( 'header_link', 'option' );
+					$header_link_type = get_field( 'header_link_type', 'option' );
+					if ( $header_link ) :
+						ub_button( $header_link, $header_link_type, '', true );
+					endif;
+					?>
 				</div>
 			</div>
 		</div>

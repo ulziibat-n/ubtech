@@ -10,7 +10,7 @@
 
 <header class="">
 	<div class="container">
-	<?php the_archive_title( '<h1 class="text-4xl font-black text-fg-default sm:text-5xl">', '</h1>' ); ?>
+	<?php the_archive_title( '<h1 class="text-4xl font-black text-slate-900 sm:text-5xl">', '</h1>' ); ?>
 	<?php if ( term_description() ) : ?>
 		<div class="mt-4 max-w-3xl">
 			<?php echo wp_kses_post( term_description() ); ?>

@@ -122,6 +122,70 @@ if ( ! function_exists( 'ub_entry_meta' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'ub_button' ) ) :
+	/**
+	 * Handles ACF Link objects and applies design system classes.
+	 *
+	 * @param array   $link      ACF Link field.
+	 * @param string  $type      Button type.
+	 * @param string  $css_class Additional classes.
+	 * @param boolean $icon      Whether to show an icon.
+	 * @param array   $args      Optional arguments for inner elements (span_class, icon_class, icon_svg).
+	 */
+	function ub_button( $link, $type = 'primary', $css_class = '', $icon = false, $args = array() ) {
+		if ( empty( $link['url'] ) || empty( $link['title'] ) ) {
+			return;
+		}
+
+		// Default configuration for inner elements.
+		$defaults = array(
+			'span_class' => '',
+			'icon_class' => 'w-5 h-5 fill-current',
+			'icon_svg'   => '<path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"></path>',
+		);
+		$args     = wp_parse_args( $args, $defaults );
+
+		$url    = $link['url'];
+		$title  = $link['title'];
+		$target = ! empty( $link['target'] ) ? $link['target'] : '_self';
+
+		// Base classes based on your design system rules.
+		$base_class = 'inline-flex items-center justify-center gap-1.5 rounded-full text-sm leading-none transition-all duration-300 ease-primary select-none';
+
+		// Variant mappings.
+		$type_classes = array(
+			'primary' => 'bg-slate-900 text-white hover:bg-slate-800 font-medium px-4 py-2.5',
+			'brand'   => 'bg-lime-500 text-xs text-white hover:bg-lime-600 hover:text-white font-bold px-4 py-1.5',
+			'ghost'   => 'bg-transparent text-slate-900 border border-slate-200 hover:bg-slate-100 font-medium px-4 py-2.5',
+			'link'    => 'bg-transparent text-lime-600 hover:text-lime-600 font-medium px-1 py-2.5',
+		);
+
+		$variant_class = isset( $type_classes[ $type ] ) ? $type_classes[ $type ] : $type_classes['primary'];
+		$final_class   = trim( "$base_class $variant_class $css_class" );
+
+		$icon_html = '';
+		if ( $icon ) {
+			$icon_html = sprintf(
+				'<svg viewBox="0 -960 960 960" class="%s" aria-hidden="true">%s</svg>',
+				esc_attr( $args['icon_class'] ),
+				$args['icon_svg']
+			);
+		}
+
+		printf(
+			'<a href="%s" class="%s" target="%s" rel="%s" data-type="%s"><span class="%s">%s</span>%s</a>',
+			esc_url( $url ),
+			esc_attr( $final_class ),
+			esc_attr( $target ),
+			( '_blank' === $target ) ? 'noopener noreferrer' : 'bookmark',
+			esc_attr( $type ),
+			esc_attr( $args['span_class'] ),
+			esc_html( $title ),
+			$icon_html // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		);
+	}
+endif;
+
 if ( ! function_exists( 'ub_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
@@ -359,3 +423,5 @@ if ( ! function_exists( 'ub_icon_lightning' ) ) :
 			. '</svg>';
 	}
 endif;
+
+

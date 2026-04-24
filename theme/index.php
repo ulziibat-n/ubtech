@@ -17,18 +17,18 @@ $ub_is_home_first = is_home() && ! is_paged();
 ?>
 
 <?php if ( $ub_is_home_first ) : ?>
-<section class="bg-surface-base">
+<section class="bg-slate-50">
 	<div class="container pt-[88px] pb-14">
-		<p class="t-meta text-fg-muted mb-[18px]">Улаанбаатар · <?php echo esc_html( gmdate( 'Y' ) ); ?></p>
-		<h1 class="t-display text-fg-default max-w-[900px] mb-6">
+		<p class="t-meta text-slate-400 mb-[18px]">Улаанбаатар · <?php echo esc_html( gmdate( 'Y' ) ); ?></p>
+		<h1 class="t-display text-slate-900 max-w-[900px] mb-6">
 			Дизайн, код,&amp;<br>
-			хиймэл оюун<span class="text-brand-primary">.</span>
+			хиймэл оюун<span class="text-lime-500">.</span>
 		</h1>
 		<?php
 		$ub_hero_desc = get_bloginfo( 'description', 'display' );
 		if ( $ub_hero_desc ) :
 			?>
-		<p class="t-lead text-fg-subtle max-w-2xl mb-[28px]"><?php echo esc_html( $ub_hero_desc ); ?></p>
+		<p class="t-lead text-slate-600 max-w-2xl mb-[28px]"><?php echo esc_html( $ub_hero_desc ); ?></p>
 		<?php endif; ?>
 		<div class="flex flex-wrap gap-[10px]">
 			<a class="ds-btn ds-btn-primary" href="#posts">
@@ -48,18 +48,18 @@ $ub_is_home_first = is_home() && ! is_paged();
 </section>
 <?php endif; ?>
 
-<section id="posts" class="bg-surface-base">
+<section id="posts" class="bg-slate-50">
 	<div class="container pt-6 pb-[72px]">
 
 		<?php if ( have_posts() ) : ?>
 
 			<?php if ( $ub_is_home_first ) : ?>
 			<div class="flex items-baseline justify-between mb-[22px]">
-				<h2 class="t-h2 text-fg-default"><?php esc_html_e( 'Сүүлийн нийтлэл', 'ulziibat-tech' ); ?></h2>
+				<h2 class="t-h2 text-slate-900"><?php esc_html_e( 'Сүүлийн нийтлэл', 'ulziibat-tech' ); ?></h2>
 			</div>
 			<?php elseif ( is_home() && ! is_front_page() ) : ?>
 			<header class="mb-8">
-				<h1 class="t-h1 text-fg-default"><?php single_post_title(); ?></h1>
+				<h1 class="t-h1 text-slate-900"><?php single_post_title(); ?></h1>
 			</header>
 			<?php endif; ?>
 

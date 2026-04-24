@@ -5,11 +5,6 @@
  */
 
 /**
- * Dark mode variant: <html data-theme="dark"> attribute-г toggle хийнэ.
- */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
-/**
  * Your theme variables are merged with Tailwind’s defaults, either extending
  * the default theme with new variables or overriding the values of existing
  * variables.
@@ -35,50 +30,4 @@
 	 * Animation & Effects
 	 */
 	--ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
-
-	/**
-	 * Mapping Semantic Design Tokens (from tokens.css) to Tailwind Utilities
-	 *
-	 * Note: We use var(--ds-*) to avoid circular references in Tailwind 4.
-	 */
-
-	/* ── Colors (Surface, FG, Stroke, Brand) ── */
-	--color-surface-base:          var(--ds-color-surface-base);
-	--color-surface-card:          var(--ds-color-surface-card);
-	--color-surface-raised:        var(--ds-color-surface-raised);
-	--color-surface-overlay:       var(--ds-color-surface-overlay);
-	--color-surface-inverse:       var(--ds-color-surface-inverse);
-	--color-surface-inverse-hover: var(--ds-color-surface-inverse-hover);
-
-	--color-fg-default:  var(--ds-color-fg-default);
-	--color-fg-subtle:   var(--ds-color-fg-subtle);
-	--color-fg-muted:    var(--ds-color-fg-muted);
-	--color-fg-disabled: var(--ds-color-fg-disabled);
-	--color-fg-inverse:  var(--ds-color-fg-inverse);
-	--color-fg-link:     var(--ds-color-fg-link);
-
-	--color-stroke-default: var(--ds-color-stroke-default);
-	--color-stroke-strong:  var(--ds-color-stroke-strong);
-	--color-stroke-focus:   var(--ds-color-stroke-focus);
-
-	--color-brand-primary: var(--ds-color-brand-primary);
-	--color-brand-hover:   var(--ds-color-brand-hover);
-	--color-brand-subtle:  var(--ds-color-brand-subtle);
-	--color-brand-fg:      var(--ds-color-brand-fg);
-
-	--color-status-success: var(--ds-color-status-success);
-	--color-status-error:   var(--ds-color-status-error);
-	--color-status-warning: var(--ds-color-status-warning);
-	--color-status-info:    var(--ds-color-status-info);
-
-	/* ── Shadows ── */
-	--shadow-sm: var(--ds-shadow-sm);
-	--shadow-md: var(--ds-shadow-md);
-	--shadow-lg: var(--ds-shadow-lg);
-
-	/* ── Border radius ── */
-	--radius-sm:   var(--ds-radius-sm);
-	--radius-md:   var(--ds-radius-md);
-	--radius-lg:   var(--ds-radius-lg);
-	--radius-full: var(--ds-radius-full);
 }

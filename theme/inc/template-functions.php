@@ -266,14 +266,14 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = 'ds-nav-link';
+		$atts['class'] = ' text-xs text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-slate-100 px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-fg-defaul focus:outline-none focus:ring-0';
 		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
 			$atts['class'] .= ' is-active';
 		}
 	}
 
 	if ( 'menu-2' === $args->theme_location ) {
-		$atts['class'] = 'text-xs font-semibold leading-none text-fg-subtle duration-300 ease-primary hover:text-fg-default transition-colors focus:text-fg-inverse group-[.current-menu-item]:bg-surface-raised group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0';
+		$atts['class'] = 'text-xs font-semibold leading-none text-slate-600 duration-300 ease-primary hover:text-slate-900 transition-colors focus:text-white group-[.current-menu-item]:bg-slate-100 group-[.current-menu-item]:text-lime-600 group-[.current-menu-item]:hover:text-lime-600 focus:outline-none focus:ring-0';
 	}
 	return $atts;
 }
@@ -287,7 +287,7 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
-	$classes[] = ' scroll-smooth bg-surface-base text-fg-default';
+	$classes[] = ' scroll-smooth bg-white text-slate-900';
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );
