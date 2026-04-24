@@ -9,7 +9,7 @@
 
 ?>
 
-<header id="masthead" class="site-header group-[.is-header-transparent]/body:absolute group-[.is-header-transparent]/body:top-0 group-[.is-header-transparent]/body:left-0 group-[.is-header-transparent]/body:w-full group-[.is-header-transparent]/body:z-50">
+<header data-site-header id="masthead" class="site-header group-[.is-header-transparent]/body:absolute group-[.is-header-transparent]/body:top-0 group-[.is-header-transparent]/body:left-0 group-[.is-header-transparent]/body:w-full group-[.is-header-transparent]/body:z-50">
 	<div class="container">
 		<div class="hidden">
 			<?php

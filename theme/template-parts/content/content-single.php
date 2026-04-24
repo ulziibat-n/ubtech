@@ -48,8 +48,8 @@
 						?>
 					</div>
 				</div>
-				<div class="w-1/3">
-					<div data-post-toc class="sticky top-24">
+				<div class="w-1/3 flex flex-col items-end">
+					<div data-post-toc class="sticky top-24 max-w-xs">
 						<h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6"><?php echo esc_html__( 'Агуулга', 'ulziibat-tech' ); ?></h4>
 						<ul data-post-toc-list class="p-0 max-w-xs">
 						</ul>

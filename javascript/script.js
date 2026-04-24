@@ -79,4 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			headings.forEach(heading => observer.observe(heading));
 		}
 	}
+
+	/**
+	 * Calculate and set header height as CSS variable
+	 */
+	const updateHeaderHeight = () => {
+		const header = document.querySelector('[data-site-header]');
+		if (header) {
+			const height = header.offsetHeight;
+			const rem = height / 16;
+			document.documentElement.style.setProperty('--header-height', `${rem}rem`);
+		}
+	};
+
+	window.addEventListener('resize', updateHeaderHeight);
+	updateHeaderHeight();
 });

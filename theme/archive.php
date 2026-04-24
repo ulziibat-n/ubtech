@@ -11,6 +11,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$term_id      = get_queried_object_id();
+$archive_type = 'grid';
+
+if ( is_author() ) {
+	$archive_type = 'list';
+} elseif ( is_category() ) {
+	$archive_type = 'list';
+	if ( function_exists( 'get_field' ) && get_field( 'archive_image', 'category_' . $term_id ) ) {
+		$archive_type = get_field( 'archive_image', 'category_' . $term_id );
+	}
+} elseif ( is_tag() ) {
+	$archive_type = 'list';
+}
+
 get_header();
 ?>
 
@@ -21,30 +35,31 @@ get_header();
 			<?php if ( have_posts() ) : ?>
 				<?php
 				if ( is_author() ) {
-					get_template_part( 'template-parts/content/header/archive', 'author' );
+					get_template_part( 'template-parts/header/archive', 'author' );
 				} elseif ( is_category() ) {
-					get_template_part( 'template-parts/content/header/archive', 'category' );
+					get_template_part( 'template-parts/header/archive', 'category' );
 				} elseif ( is_tag() ) {
-					get_template_part( 'template-parts/content/header/archive', 'tag' );
+					get_template_part( 'template-parts/header/archive', 'tag' );
 				}
 				?>
 
-				<div class="container">
-					<div class="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-						<?php
-						while ( have_posts() ) :
-							the_post();
-							get_template_part( 'template-parts/content/card', 'archive' );
-						endwhile;
-						?>
+				<section class="w-full relative">
+					<div class="container">
+						<div class="<?php echo esc_attr( $archive_type ); ?>">
+							<?php
+							if ( 'grid' === $archive_type ) {
+								get_template_part( 'template-parts/archive/archive', 'grid' );
+							} else {
+								get_template_part( 'template-parts/archive/archive', 'list' );
+							}
+							?>
+						</div>
 					</div>
-
-					<?php ub_the_posts_navigation(); ?>
-				</div>
+				</section>
 
 			<?php else : ?>
 
-				<?php get_template_part( 'template-parts/content/content', 'none' ); ?>
+				<?php get_template_part( 'template-parts/archive/archive', 'none' ); ?>
 
 			<?php endif; ?>
 

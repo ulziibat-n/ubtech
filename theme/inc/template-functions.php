@@ -49,7 +49,7 @@ function ub_get_the_archive_title() {
 	} elseif ( is_post_type_archive() ) {
 		$title = post_type_archive_title( '', false );
 	} else {
-		$title = __( 'Archives', 'ulziibat-tech' );
+		$title = __( 'Архив', 'ulziibat-tech' );
 	}
 	return $title;
 }
@@ -252,7 +252,7 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = ' text-xs text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-white px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-fg-defaul focus:outline-none focus:ring-0 group-[.is-header-transparent]/body:text-white group-[.is-header-transparent]/body:hover:text-lime-400 group-[.is-header-transparent]/body:[*.is-active]:bg-white/20';
+		$atts['class'] = ' text-sm text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-white [*.is-active]:text-lime-600 px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-slate-500 focus:outline-none focus:ring-0 group-[.is-header-transparent]/body:text-white group-[.is-header-transparent]/body:hover:text-lime-400 group-[.is-header-transparent]/body:[*.is-active]:bg-white/20 group-[.is-header-transparent]/body:[*.is-active]:text-lime-500';
 		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
 			$atts['class'] .= ' is-active';
 		}

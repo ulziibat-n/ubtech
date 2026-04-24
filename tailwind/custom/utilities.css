@@ -3,7 +3,7 @@
  */
 
 @utility container {
-  @apply px-8 mx-auto;
+  @apply px-4 sm:px-8 mx-auto max-lg:max-w-xl;
 }
 
 @utility h1 {
@@ -48,4 +48,21 @@
 @utility p {
   font-size: 16px;
   line-height: 1.6;
+}
+
+/* Pagination Styling */
+.ub-pagination .nav-links {
+  @apply flex items-center gap-1.5;
+}
+
+.ub-pagination .page-numbers {
+  @apply flex h-9 min-w-9 px-3 items-center justify-center rounded-lg border border-transparent text-xs font-bold text-slate-500 transition-all duration-300 hover:bg-slate-50 hover:text-slate-900;
+}
+
+.ub-pagination .page-numbers.current {
+  @apply border-slate-200 bg-white text-lime-600 shadow-xs shadow-slate-100;
+}
+
+.ub-pagination .page-numbers.dots {
+  @apply border-none hover:bg-transparent text-slate-300;
 }
