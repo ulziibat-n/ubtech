@@ -18,11 +18,11 @@
 		?>
 		<div class=" absolute w-full h-full inset-0 z-10 bg-gradient-to-b from-transparent to-black/50"></div>
 		<div class="container relative z-20 pt-64 pb-32">
-			<h1 class="text-6xl font-black text-fg-inverse max-w-4xl leading-none"><?php the_title(); ?></h1>
+			<h1 class="t-display text-fg-inverse max-w-4xl"><?php the_title(); ?></h1>
 			<?php
 			if ( has_excerpt() ) :
 				?>
-				<div class="max-w-3xl prose text-fg-inverse text-2xl mt-10">
+				<div class="max-w-3xl prose text-fg-inverse t-lead mt-10">
 					<?php the_excerpt(); ?>
 				</div>
 				<?php

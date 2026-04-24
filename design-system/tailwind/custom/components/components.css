@@ -19,7 +19,7 @@
  */
 .page-title,
 .entry-title {
-	@apply mx-auto mb-6 text-3xl font-extrabold max-w-7xl text-neutral-900;
+	@apply mx-auto mb-6 text-3xl font-extrabold max-w-7xl text-fg-default;
 }
 
 /**
@@ -71,18 +71,16 @@
 
 @layer components {
   :is(.prose :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(blockquote) {
-    @apply not-italic font-black; /* optional: remove default quote marks */
+    @apply not-italic font-black;
   }
 
-  /* Optional: style the <p> inside blockquote */
+  /* blockquote-ийн <p>-ийн margin арилгана */
   .prose blockquote p {
     @apply m-0;
   }
 
-  /* Optional: add big opening quote */
+  /* DS: брэнд дизайны дагуу quote mark хэрэглэхгүй */
   .prose blockquote::before {
-    @apply absolute text-6xl text-indigo-400 -left-2 -top-4 opacity-30;
-    content: '“';
-    font-family: Georgia, serif;
+    @apply content-[''];
   }
 }

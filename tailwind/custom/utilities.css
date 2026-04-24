@@ -107,3 +107,123 @@
         @apply px-0.5 text-fg-inverse font-bold;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * DS SEMANTIC TYPESCALE
+ * Source: design-system/colors_and_type.css → lines 177-261
+ *
+ * Tailwind 4 @utility-г ашиглаж @layer utilities-д нэмнэ.
+ * clamp() нь responsive — .t-display / .t-h1 нь viewport-тэй хамт томордог.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/** Hero / landing display headline — max branding impact */
+@utility t-display {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 7vw, 6rem);  /* 56px → 96px */
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/** Page-level h1 */
+@utility t-h1 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);  /* 40px → 60px */
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+/** Section heading */
+@utility t-h2 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 800;
+  font-size: 2.25rem;  /* 36px */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/** Sub-section heading */
+@utility t-h3 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 1.5rem;  /* 24px */
+  line-height: 1.15;
+}
+
+/** Card / widget heading */
+@utility t-h4 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 1.25rem;  /* 20px */
+  line-height: 1.2;
+}
+
+/** Large lead / subtitle paragraph */
+@utility t-lead {
+  font-family: var(--primitive-font-sans);
+  font-weight: 400;
+  font-size: 1.5rem;  /* 24px */
+  line-height: 1.35;
+  color: var(--color-fg-default);
+}
+
+/** Default body copy */
+@utility t-body {
+  font-family: var(--primitive-font-sans);
+  font-weight: 400;
+  font-size: 1rem;  /* 16px */
+  line-height: 1.55;
+  color: var(--color-fg-subtle);
+}
+
+/** Small body / caption */
+@utility t-small {
+  font-family: var(--primitive-font-sans);
+  font-weight: 500;
+  font-size: 0.875rem;  /* 14px */
+  line-height: 1.45;
+  color: var(--color-fg-subtle);
+}
+
+/**
+ * Eyebrow label — "ULZIIBAT.TECH © 2025" pattern.
+ * Black weight + 0.08em tracking + uppercase.
+ */
+@utility t-eyebrow {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: 0.75rem;  /* 12px */
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+}
+
+/** Metadata / tag label — smaller tracking */
+@utility t-meta {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 0.75rem;  /* 12px */
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+/** Code / monospace inline */
+@utility t-mono {
+  font-family: var(--primitive-font-mono);
+  font-weight: 400;
+  font-size: 0.8125rem;  /* 13px */
+  line-height: 1.5;
+}
+
+/** Pull-quote / blockquote featured text */
+@utility t-quote {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: 1.5rem;  /* 24px */
+  line-height: 1.15;
+  color: var(--color-fg-default);
+}

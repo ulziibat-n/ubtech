@@ -27,8 +27,16 @@
 		<div class="flex items-center gap-12 select-none">
 			<div class="flex gap-8">
 				<a class="flex items-center gap-2 focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<svg class="w-8 h-auto fill-fg-inverse" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m443-340 74-101 73 101 148-202-85-63-63 86-74-102-73 102-74-101-147 202 85 63 62-86 74 101Zm37 294q-91 0-169.99-34.08-78.98-34.09-137.41-92.52-58.43-58.43-92.52-137.41Q46-389 46-480q0-91 34.08-169.99 34.09-78.98 92.52-137.41 58.43-58.43 137.41-92.52Q389-914 480-914q91 0 169.99 34.08 78.98 34.09 137.41 92.52 58.43 58.43 92.52 137.41Q914-571 914-480q0 91-34.08 169.99-34.09 78.98-92.52 137.41-58.43 58.43-137.41 92.52Q571-46 480-46Z"/></svg>
-					<span class="w-20 text-sm font-black leading-3 tracking-wide uppercase" aria-label="ulziibat.tech"><span class="block">ulziibat</span><span class="block text-brand-primary">tech</span></span>
+					<!-- DS logomark: design-system/assets/logo-color-black.svg (circle + lightning M) -->
+					<svg width="32" height="32" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M128 256C57.3075 256 0 198.693 0 128C0 57.3075 57.3075 0 128 0C198.693 0 256 57.3075 256 128C256 198.693 198.693 256 128 256Z" fill="#0C0D0B"/>
+						<path d="M117.088 169.29L138.912 139.502L160.442 169.29L204.092 109.714L179.023 91.1336L160.442 116.498L138.618 86.4147L117.088 116.498L95.2627 86.7097L51.9078 146.286L76.977 164.866L95.2627 139.502L117.088 169.29Z" fill="#82BD39"/>
+					</svg>
+					<!-- DS wordmark: font-weight 900, 12px, 0.04em tracking, uppercase, two-line stack -->
+					<span class="text-[12px] font-black leading-[1] tracking-[0.04em] uppercase" aria-label="ulziibat.tech">
+						<span class="block text-fg-default">ulziibat</span>
+						<span class="block text-brand-primary">tech</span>
+					</span>
 				</a>
 				<?php
 				$ub_description = get_bloginfo( 'description', 'display' );

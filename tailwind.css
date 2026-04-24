@@ -77,6 +77,12 @@
 @import "./tailwind/custom/utilities.css";
 
 /**
+ * DS Typescale safelist — template-д ашиглагдаагүй ч output-д байх ёстой utilities.
+ * Gutenberg editor, PHP template-үүдэд дурын газар ашиглах боломжтой болгоно.
+ */
+@source inline("t-h4 t-small t-mono");
+
+/**
  * Add styles exclusively for the WordPress editor.
  */
 @if $target == editor {
