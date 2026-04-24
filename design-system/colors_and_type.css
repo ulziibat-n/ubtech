@@ -1,0 +1,269 @@
+/*
+ * ULZIIBAT.TECH — colors & typography
+ * ------------------------------------
+ * Single-file flattening of the WordPress theme's token system
+ * (tailwind/custom/tokens.css + tailwind-theme.css + fonts.css).
+ *
+ * Load this, set `<html data-theme="light">` (or `"dark"`), give
+ * <body> the base class, and semantic vars are live.
+ *
+ * Namespaces:
+ *   fg-*       → foreground (text, icons)
+ *   surface-*  → background layers
+ *   stroke-*   → borders, dividers
+ *   brand-*    → the lime accent system
+ *   status-*   → feedback (success/error/warning/info)
+ */
+
+@import url('./fonts/fonts.css');
+
+/* ─── Primitive tokens — do NOT use directly in markup ─────────── */
+:root {
+  /* Brand — lime green, lifted straight from the logo (#82BD39) */
+  --primitive-lime-500:   oklch(76.8% 0.233 130.85);
+  --primitive-lime-600:   oklch(64.8% 0.200 131.68);
+  --primitive-lime-900:   oklch(22.0% 0.080 130.00);
+  --primitive-lime-tint:  oklch(95%   0.06  130);   /* brand-subtle */
+
+  /* Neutral — cool slate */
+  --primitive-slate-50:   oklch(98.4% 0.003 247.86);
+  --primitive-slate-100:  oklch(96.8% 0.007 247.90);
+  --primitive-slate-200:  oklch(93.0% 0.013 255.51);
+  --primitive-slate-400:  oklch(70.4% 0.028 261.33);
+  --primitive-slate-600:  oklch(44.6% 0.030 256.80);
+  --primitive-slate-700:  oklch(37.2% 0.028 259.73);
+  --primitive-slate-800:  oklch(27.9% 0.029 256.85);
+  --primitive-slate-900:  oklch(20.8% 0.042 265.76);
+
+  --primitive-white:      oklch(100% 0 0);
+  --primitive-black:      oklch(0%   0 0);
+
+  /* Figma brand hexes (reference, for asset work) */
+  --brand-hex-lime:     #82BD39;   /* primary brand lime (pure) */
+  --brand-hex-ink:      #0C0D0B;   /* almost-black ink */
+  --brand-hex-tint:     #E3F2CE;   /* lime tint surface */
+
+  /* Typography */
+  --primitive-font-sans: "TT Hoves", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --primitive-font-hairline: "TT Hoves Hairline", "TT Hoves", ui-sans-serif, sans-serif;
+  --primitive-font-mono: "TT Hoves Pro Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Radii (brand-wide: generously rounded) */
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;
+
+  /* Spacing scale (8-pt grid, matches Tailwind v4 default) */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Motion — one shared easing */
+  --ease-primary: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --dur-fast:    150ms;
+  --dur-base:    300ms;
+  --dur-slow:    500ms;
+}
+
+/* ─── Light theme (default) ────────────────────────────────────── */
+[data-theme="light"], :root:not([data-theme="dark"]) {
+  --color-surface-base:          var(--primitive-slate-50);
+  --color-surface-card:          var(--primitive-white);
+  --color-surface-raised:        var(--primitive-slate-100);
+  --color-surface-overlay:       oklch(98.4% 0.003 247.86 / 85%);
+  --color-surface-inverse:       var(--primitive-slate-900);
+  --color-surface-inverse-hover: var(--primitive-slate-800);
+  --color-surface-brand-soft:    var(--brand-hex-tint);
+
+  --color-fg-default:   var(--primitive-slate-900);
+  --color-fg-subtle:    var(--primitive-slate-600);
+  --color-fg-muted:     var(--primitive-slate-400);
+  --color-fg-disabled:  oklch(75% 0.01 260);
+  --color-fg-inverse:   var(--primitive-slate-50);
+  --color-fg-link:      var(--primitive-lime-600);
+
+  --color-stroke-default: var(--primitive-slate-200);
+  --color-stroke-strong:  oklch(80% 0.015 260);
+  --color-stroke-focus:   var(--primitive-lime-500);
+
+  --color-brand-primary: var(--primitive-lime-500);
+  --color-brand-hover:   var(--primitive-lime-600);
+  --color-brand-subtle:  var(--primitive-lime-tint);
+  --color-brand-fg:      var(--primitive-lime-900);
+  --color-brand-on-subtle: var(--primitive-lime-900);
+
+  --color-status-success: oklch(60% 0.17 145);
+  --color-status-error:   oklch(58% 0.22 29);
+  --color-status-warning: oklch(72% 0.17 75);
+  --color-status-info:    oklch(62% 0.17 230);
+
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 8%);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 10%);
+  --shadow-lg: 0 8px 24px oklch(0 0 0 / 12%);
+}
+
+/* ─── Dark theme ───────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --color-surface-base:          oklch(15% 0.01 260);
+  --color-surface-card:          oklch(20% 0.01 260);
+  --color-surface-raised:        oklch(24% 0.01 260);
+  --color-surface-overlay:       oklch(15% 0.01 260 / 88%);
+  --color-surface-inverse:       var(--primitive-slate-50);
+  --color-surface-inverse-hover: oklch(93% 0.003 247.86);
+  --color-surface-brand-soft:    oklch(22% 0.06 130);
+
+  --color-fg-default:   oklch(95% 0.005 260);
+  --color-fg-subtle:    oklch(70% 0.008 260);
+  --color-fg-muted:     oklch(50% 0.008 260);
+  --color-fg-disabled:  oklch(38% 0.008 260);
+  --color-fg-inverse:   var(--primitive-slate-900);
+  --color-fg-link:      var(--primitive-lime-500);
+
+  --color-stroke-default: oklch(28% 0.01 260);
+  --color-stroke-strong:  oklch(38% 0.01 260);
+  --color-stroke-focus:   var(--primitive-lime-500);
+
+  --color-brand-primary: var(--primitive-lime-500);
+  --color-brand-hover:   oklch(82% 0.22 131);
+  --color-brand-subtle:  oklch(22% 0.06 130);
+  /* brand-fg must read on brand-primary (lime). Keep ink. */
+  --color-brand-fg:      var(--primitive-lime-900);
+  /* brand-on-subtle: fg color when background is brand-subtle (dark forest) */
+  --color-brand-on-subtle: oklch(92% 0.12 130);
+
+  --color-status-success: oklch(72% 0.15 145);
+  --color-status-error:   oklch(70% 0.20 29);
+  --color-status-warning: oklch(80% 0.15 75);
+  --color-status-info:    oklch(72% 0.15 230);
+
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 30%);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 40%);
+  --shadow-lg: 0 8px 24px oklch(0 0 0 / 50%);
+}
+
+/* ─── Base body + element resets ───────────────────────────────── */
+html { font-size: 16px; }
+
+body {
+  font-family: var(--primitive-font-sans);
+  background: var(--color-surface-base);
+  color: var(--color-fg-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv01";
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--color-brand-hover);
+  color: var(--color-fg-inverse);
+}
+
+/* ─── Semantic type scale ──────────────────────────────────────── */
+/* Matches the theme's usage: .entry-title (3xl extrabold), single hero
+ * (6xl black), prose blockquote (2xl black), footer meta (xs black
+ * uppercase). Every heading defaults to Black/900 — the brand voice. */
+
+.t-display {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;             /* TT Hoves Black */
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.t-h1 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.t-h2 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.t-h3 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.15;
+}
+.t-h4 {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.t-lead {
+  font-family: var(--primitive-font-sans);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.35;
+  color: var(--color-fg-default);
+}
+.t-body {
+  font-family: var(--primitive-font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-fg-subtle);
+}
+.t-small {
+  font-family: var(--primitive-font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-fg-subtle);
+}
+.t-eyebrow {                    /* the "ULZIIBAT.TECH © 2025" pattern */
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+}
+.t-meta {
+  font-family: var(--primitive-font-sans);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+.t-mono {
+  font-family: var(--primitive-font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.t-quote {                      /* big pull-quote style from .prose */
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.15;
+  color: var(--color-fg-default);
+}
+
+/* Default element mappings (convenience) */
+h1 { font: inherit; font-weight: 900; font-size: 60px; line-height: 1; letter-spacing: -0.015em; }
+h2 { font: inherit; font-weight: 800; font-size: 36px; line-height: 1.05; }
+h3 { font: inherit; font-weight: 700; font-size: 24px; line-height: 1.2;  }
+h4 { font: inherit; font-weight: 700; font-size: 20px; line-height: 1.2;  }
+p  { font: inherit; font-size: 16px; line-height: 1.55; }
+code, pre, kbd, samp { font-family: var(--primitive-font-mono); }

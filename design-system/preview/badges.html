@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html data-theme="light"><head><meta charset="utf-8"><title>Badges</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 22px; background: var(--color-surface-card); display:flex; flex-wrap:wrap; gap: 8px; align-items:center; }
+  .b { display:inline-flex; align-items:center; gap:6px; font-family: var(--primitive-font-sans); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 10px; border-radius: 9999px; line-height: 1; }
+  .brand { background: var(--color-brand-subtle); color: var(--color-brand-fg); }
+  .ink   { background: var(--color-surface-inverse); color: var(--color-fg-inverse); }
+  .soft  { background: var(--color-surface-raised); color: var(--color-fg-subtle); }
+  .ok    { background: color-mix(in oklab, var(--color-status-success) 15%, transparent); color: var(--color-status-success); }
+  .err   { background: color-mix(in oklab, var(--color-status-error) 12%, transparent); color: var(--color-status-error); }
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+</style></head><body>
+  <span class="b brand">Шинэ</span>
+  <span class="b ink">Featured</span>
+  <span class="b soft">Дизайн</span>
+  <span class="b ok"><span class="dot"></span>Амжилттай</span>
+  <span class="b err"><span class="dot"></span>Алдаа</span>
+</body></html>

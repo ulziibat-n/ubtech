@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html data-theme="light"><head><meta charset="utf-8"><title>Shadows</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 28px; background: var(--color-surface-base); }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .c { background: var(--color-surface-card); border-radius: 14px; padding: 18px; min-height: 80px; display: flex; flex-direction: column; justify-content: space-between; }
+  .lbl { font-weight: 800; font-size: 13px; color: var(--color-fg-default); }
+  .val { font-family: var(--primitive-font-mono); font-size: 10px; color: var(--color-fg-muted); }
+</style></head><body>
+<div class="row">
+  <div class="c" style="box-shadow: var(--shadow-sm)"><div class="lbl">shadow-sm</div><div class="val">0 1px 3px rgba(0,0,0,.08)</div></div>
+  <div class="c" style="box-shadow: var(--shadow-md)"><div class="lbl">shadow-md</div><div class="val">0 4px 12px rgba(0,0,0,.10)</div></div>
+  <div class="c" style="box-shadow: var(--shadow-lg)"><div class="lbl">shadow-lg</div><div class="val">0 8px 24px rgba(0,0,0,.12)</div></div>
+</div>
+</body></html>

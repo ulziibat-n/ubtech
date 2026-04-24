@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="mn" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rits · Design System Preview</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  :root { color-scheme: light; }
+  html, body { margin: 0; background: var(--color-surface-base); color: var(--color-fg-default); font-family: var(--primitive-font-sans); }
+
+  /* ── Layout ──────────────────────────────────── */
+  .shell { max-width: 1320px; margin: 0 auto; padding: 48px 32px 96px; }
+
+  header.hero {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end;
+    padding-bottom: 28px; margin-bottom: 32px;
+    border-bottom: 1px solid var(--color-stroke-default);
+  }
+  .hero .eyebrow {
+    font-family: var(--primitive-font-mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--color-fg-muted); margin: 0 0 10px;
+  }
+  .hero h1 {
+    margin: 0; font-weight: 900; font-size: clamp(40px, 5.2vw, 68px);
+    letter-spacing: -0.025em; line-height: 0.98;
+  }
+  .hero h1 em { font-style: normal; color: var(--color-brand-primary); }
+  .hero p {
+    margin: 14px 0 0; font-size: 15px; line-height: 1.55; max-width: 56ch;
+    color: var(--color-fg-subtle);
+  }
+  .hero .logo { width: 140px; height: auto; }
+
+  /* ── Section header ──────────────────────────── */
+  .section-head {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: baseline;
+    margin: 48px 0 18px;
+  }
+  .section-head .num {
+    font-family: var(--primitive-font-mono); font-size: 11px; letter-spacing: .12em;
+    color: var(--color-fg-muted); text-transform: uppercase;
+  }
+  .section-head h2 {
+    margin: 0; font-weight: 900; font-size: 26px; letter-spacing: -0.01em;
+  }
+  .section-head .rule {
+    height: 1px; background: var(--color-stroke-default); align-self: center;
+  }
+  .section-head .count {
+    font-family: var(--primitive-font-mono); font-size: 11px; color: var(--color-fg-muted);
+  }
+
+  /* ── Card grid ──────────────────────────────── */
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
+  .grid.wide { grid-template-columns: repeat(auto-fill, minmax(540px, 1fr)); }
+
+  .card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-stroke-default);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover { border-color: var(--color-fg-default); }
+
+  .card .label {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 10px 14px; border-bottom: 1px solid var(--color-stroke-default);
+    font-family: var(--primitive-font-mono); font-size: 11px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--color-fg-subtle);
+  }
+  .card .label b { color: var(--color-fg-default); font-weight: 700; letter-spacing: .04em; text-transform: none; font-family: var(--primitive-font-sans); font-size: 13px; }
+  .card .label a {
+    color: var(--color-fg-muted); text-decoration: none;
+    font-family: var(--primitive-font-mono); font-size: 10px;
+  }
+  .card .label a:hover { color: var(--color-brand-primary); }
+
+  .card iframe {
+    width: 100%; border: 0; display: block;
+    background: var(--color-surface-base);
+  }
+
+  /* iframe height variants */
+  .h-sm { height: 180px; }
+  .h-md { height: 240px; }
+  .h-lg { height: 320px; }
+  .h-xl { height: 420px; }
+
+  /* ── Footer ─────────────────────────────────── */
+  footer {
+    margin-top: 72px; padding-top: 24px;
+    border-top: 1px solid var(--color-stroke-default);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    font-family: var(--primitive-font-mono); font-size: 11px; color: var(--color-fg-muted);
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  footer a { color: var(--color-fg-default); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- HERO ─────────────────────────────────────── -->
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Rits · Design System · v1.0</p>
+      <h1>Бүх <em>tokens,</em><br>нэг хуудсанд.</h1>
+      <p>Өнгө, үсгийн хэв маяг, зай, сүүдэр, компонент — бүгд нэг дор. Доорх карт бүр тухайн preview файлын жинхэнэ render. Компонентээ шууд нээж засварлах бол картын баруун дээд талын <b style="color:var(--color-fg-default)">↗</b> дүрсийг дарна уу.</p>
+    </div>
+    <img class="logo" src="../assets/logo-color-black.svg" alt="Rits logo">
+  </header>
+
+  <!-- 01 · BRAND ──────────────────────────────── -->
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>Brand &amp; Logo</h2>
+    <div class="rule"></div>
+    <span class="count">2 files</span>
+  </div>
+  <div class="grid wide">
+    <div class="card">
+      <div class="label"><b>Logo lockups</b><a href="logo-lockups.html" target="_blank">logo-lockups.html ↗</a></div>
+      <iframe src="logo-lockups.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Logo — mono</b><a href="logo-mono.html" target="_blank">logo-mono.html ↗</a></div>
+      <iframe src="logo-mono.html" class="h-md" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- 02 · COLOR ──────────────────────────────── -->
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>Color</h2>
+    <div class="rule"></div>
+    <span class="count">4 files</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="label"><b>Brand palette</b><a href="colors-brand.html" target="_blank">↗</a></div>
+      <iframe src="colors-brand.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Neutrals — slate</b><a href="colors-neutrals.html" target="_blank">↗</a></div>
+      <iframe src="colors-neutrals.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Status colors</b><a href="colors-status.html" target="_blank">↗</a></div>
+      <iframe src="colors-status.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Dark mode</b><a href="colors-dark.html" target="_blank">↗</a></div>
+      <iframe src="colors-dark.html" class="h-md" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- 03 · TYPOGRAPHY ─────────────────────────── -->
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Typography</h2>
+    <div class="rule"></div>
+    <span class="count">4 files</span>
+  </div>
+  <div class="grid wide">
+    <div class="card">
+      <div class="label"><b>Display — TT Hoves Black</b><a href="type-display.html" target="_blank">↗</a></div>
+      <iframe src="type-display.html" class="h-lg" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Type scale</b><a href="type-scale.html" target="_blank">↗</a></div>
+      <iframe src="type-scale.html" class="h-lg" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Weights — 100 → 900</b><a href="type-weights.html" target="_blank">↗</a></div>
+      <iframe src="type-weights.html" class="h-lg" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Eyebrow &amp; meta</b><a href="type-eyebrow-meta.html" target="_blank">↗</a></div>
+      <iframe src="type-eyebrow-meta.html" class="h-md" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- 04 · SPACING / RADII / SHADOWS ──────────── -->
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Spacing, Radii &amp; Shadows</h2>
+    <div class="rule"></div>
+    <span class="count">3 files</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="label"><b>Spacing scale</b><a href="spacing.html" target="_blank">↗</a></div>
+      <iframe src="spacing.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Border radii</b><a href="radii.html" target="_blank">↗</a></div>
+      <iframe src="radii.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Shadows</b><a href="shadows.html" target="_blank">↗</a></div>
+      <iframe src="shadows.html" class="h-md" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- 05 · COMPONENTS ─────────────────────────── -->
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Components</h2>
+    <div class="rule"></div>
+    <span class="count">6 files</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="label"><b>Buttons</b><a href="buttons.html" target="_blank">↗</a></div>
+      <iframe src="buttons.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Badges &amp; pills</b><a href="badges.html" target="_blank">↗</a></div>
+      <iframe src="badges.html" class="h-sm" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Inputs</b><a href="inputs.html" target="_blank">↗</a></div>
+      <iframe src="inputs.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Author card</b><a href="card-author.html" target="_blank">↗</a></div>
+      <iframe src="card-author.html" class="h-md" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Nav / header</b><a href="nav-header.html" target="_blank">↗</a></div>
+      <iframe src="nav-header.html" class="h-sm" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <div class="label"><b>Iconography</b><a href="iconography.html" target="_blank">↗</a></div>
+      <iframe src="iconography.html" class="h-md" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- FOOTER ──────────────────────────────────── -->
+  <footer>
+    <span>Rits · Design System · 2026</span>
+    <span><a href="../ui_kits/website/index.html">Live UI Kit →</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

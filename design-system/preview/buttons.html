@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html data-theme="light"><head><meta charset="utf-8"><title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 22px; background: var(--color-surface-card); display:flex; flex-wrap:wrap; gap: 10px; }
+  .btn { display:inline-flex; align-items:center; gap:6px; font-family: var(--primitive-font-sans); font-weight: 500; font-size: 14px; padding: 10px 16px 10px 16px; border-radius: 9999px; border: 0; cursor: pointer; transition: background var(--dur-base) var(--ease-primary); line-height: 1; }
+  .btn svg { width: 18px; height: 18px; fill: currentColor; }
+  .primary { background: var(--color-surface-inverse); color: var(--color-fg-inverse); }
+  .primary:hover { background: var(--color-surface-inverse-hover); }
+  .brand { background: var(--color-brand-primary); color: var(--color-brand-fg); font-weight: 700; }
+  .brand:hover { background: var(--color-brand-hover); color: var(--color-fg-inverse); }
+  .ghost { background: transparent; color: var(--color-fg-default); border: 1px solid var(--color-stroke-default); }
+  .ghost:hover { background: var(--color-surface-raised); }
+  .link { background: transparent; color: var(--color-fg-link); padding: 10px 4px; }
+  .link:hover { color: var(--color-brand-hover); }
+</style></head><body>
+  <button class="btn primary">Надтай холбогдох <svg viewBox="0 -960 960 960"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg></button>
+  <button class="btn brand">Эхлэх</button>
+  <button class="btn ghost">Дэлгэрэнгүй</button>
+  <button class="btn link">Нийтлэл унших →</button>
+</body></html>

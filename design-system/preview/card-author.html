@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html data-theme="light"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 24px; background: var(--color-surface-base); }
+  .card { background: var(--color-surface-card); border: 1px solid var(--color-stroke-default); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: center; }
+  .av { width: 60px; height: 60px; border-radius: 999px; background: var(--color-brand-subtle); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 22px; color: var(--color-brand-fg); }
+  h3 { margin: 0 0 4px; font-weight: 800; font-size: 18px; color: var(--color-fg-default); }
+  p  { margin: 0 0 10px; font-size: 13px; color: var(--color-fg-subtle); line-height: 1.5; }
+  .row { display:flex; gap: 6px; align-items: center; }
+  .tag { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .lime { color: var(--color-brand-primary); }
+</style></head><body>
+<div class="card">
+  <div class="av">У</div>
+  <div>
+    <h3>Ulziibat N.</h3>
+    <p>Senior front-end engineer. WordPress, Tailwind v4, дизайн системүүд бүтээгч.</p>
+    <div class="row">
+      <span class="tag">Ulaanbaatar</span><span class="tag lime">·</span><span class="tag">2025</span>
+    </div>
+  </div>
+</div>
+</body></html>

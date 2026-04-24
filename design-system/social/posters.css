@@ -1,0 +1,150 @@
+/*
+ * Social poster system — shared styles
+ * All poster frames use tokens from ../colors_and_type.css.
+ * This file adds only poster-level primitives (bleed, frame, brand band,
+ * repeating patterns, photo placeholders).
+ */
+
+/* ── Frame chrome ───────────────────────────────────────── */
+.poster {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--primitive-font-sans);
+  color: var(--color-fg-default);
+  background: #FAFAF8; /* cream default */
+  isolation: isolate;
+}
+.poster * { box-sizing: border-box; }
+
+/* Variants — via data-variant attr */
+.poster[data-variant="cream"]  { background: #FAFAF8; color: #0C0D0B; }
+.poster[data-variant="lime"]   { background: #82BD39; color: #0C0D0B; }
+.poster[data-variant="ink"]    { background: #0C0D0B; color: #FAFAF8; }
+.poster[data-variant="tint"]   { background: #E3F2CE; color: #0C0D0B; }
+.poster[data-variant="photo"]  { background: #2A2F1E; color: #FAFAF8; }
+
+/* ── Brand band (bottom footer with logo + handle) ─────── */
+.poster-band {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 3.2% 4.2%;
+  gap: 2%;
+  font-family: var(--primitive-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.poster-band .left,
+.poster-band .right {
+  display: flex; align-items: center; gap: 1.6%;
+}
+.poster-band .logo {
+  height: 7%;
+  width: auto;
+  display: block;
+}
+.poster-band .handle {
+  opacity: .72;
+}
+
+/* ── Typography scale for posters (fluid) ──────────────── */
+/* Posters use cqw (container query units) so they scale 1:1 at any size */
+.poster-title {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* Landscape cap is handled inline per-layout (see poster-layouts.jsx) —
+   browsers silently drop @container aspect-ratio rules on some versions. */
+.poster-eyebrow {
+  font-family: var(--primitive-font-mono);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.poster-meta {
+  font-family: var(--primitive-font-mono);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: .72;
+  margin: 0;
+}
+
+/* ── Photo placeholder ──────────────────────────────────── */
+.poster-photo {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, #2F3A1E 0%, #151B0D 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 8px);
+  background-blend-mode: normal;
+}
+.poster-photo::before {
+  content: "PHOTO";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--primitive-font-mono);
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.2);
+}
+.poster-photo--overlay::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.78) 100%);
+}
+
+/* ── Giant "quote mark" as background ornament ─────────── */
+.poster-quotemark {
+  position: absolute;
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  line-height: 0.8;
+  color: currentColor;
+  opacity: .12;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Rule lines ─────────────────────────────────────────── */
+.poster-rule {
+  border: none; border-top: 1px solid currentColor;
+  opacity: .25;
+}
+
+/* ── Number bullets for tip carousels ─────────────────── */
+.poster-numbadge {
+  font-family: var(--primitive-font-sans);
+  font-weight: 900;
+  line-height: 1;
+  font-feature-settings: "tnum";
+}
+
+/* ── Copy-SVG button (overlay on each poster) ──────────── */
+.poster-copybtn {
+  position: absolute;
+  top: 8px; right: 8px;
+  z-index: 10;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(12, 13, 11, 0.88);
+  color: #FAFAF8;
+  font-family: var(--primitive-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.dc-artboard:hover .poster-copybtn,
+.dc-focus-stage .poster-copybtn { opacity: 1; }
+.poster-copybtn:hover { background: #82BD39; color: #0C0D0B; }
+.poster-copybtn[data-state="copied"] { background: #82BD39; color: #0C0D0B; opacity: 1; }
