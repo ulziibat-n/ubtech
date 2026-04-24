@@ -1,11 +1,26 @@
 /**
- * Custom styles to immediately follow Tailwind’s `base` layer
+ * Custom styles to immediately follow Tailwind's `base` layer
+ *
+ * DS Reference: design-system/colors_and_type.css → body + ::selection rules
  */
 
 /**
- * This uses the background and foreground colors declared in the `theme.json`
- * file and is applied both to the front end and in the block editor.
+ * Body base — фон, текст, фонт, antialiasing, OpenType feature flags.
+ * Бүх дэлгэц дээр хурц харагдахын тулд font-smoothing нэмнэ.
  */
 body {
 	@apply font-sans bg-surface-base text-fg-default;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "ss01", "cv01"; /* TT Hoves-ийн тусгай дуртай variant-ууд */
+	line-height: 1.5;
+}
+
+/**
+ * Selection — брэнд lime hover өнгөөр текст сонголтыг будна.
+ * DS: background = brand-hover, текст = fg-inverse (цагаан)
+ */
+::selection {
+	background: var(--color-brand-hover);
+	color: var(--color-fg-inverse);
 }

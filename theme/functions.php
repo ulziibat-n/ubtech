@@ -141,6 +141,33 @@ function ub_widgets_init() {
 add_action( 'widgets_init', 'ub_widgets_init' );
 
 /**
+ * Design System: <html data-theme="light"> attribute нэмнэ.
+ *
+ * Tailwind-ийн `@custom-variant dark ([data-theme=dark] *)` патерн ашиглаж байгаа.
+ * Default нь light горим.
+ *
+ * @param string $output language_attributes output.
+ * @return string
+ */
+function site_html_theme_attribute( string $output ): string {
+	return $output . ' data-theme="light"';
+}
+add_filter( 'language_attributes', 'site_html_theme_attribute' );
+
+/**
+ * Design System: FOUC-аас сэргийлэх inline script.
+ *
+ * defer-тэй JS-ийн өмнө localStorage-аас theme preference-г уншиж
+ * <html data-theme="...">-г тохируулна.
+ *
+ * @since 0.3.0
+ */
+function site_fouc_prevent_script(): void {
+	echo '<script>!function(){var t=localStorage.getItem("ub_theme");t&&(document.documentElement.dataset.theme=t)}();</script>' . "\n";
+}
+add_action( 'wp_head', 'site_fouc_prevent_script', 0 );
+
+/**
  * Enqueue scripts and styles.
  */
 function ub_scripts() {

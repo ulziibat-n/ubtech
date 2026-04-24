@@ -19,7 +19,7 @@
   /* Brand */
   --primitive-lime-500:   oklch(76.8% 0.233 130.85);
   --primitive-lime-600:   oklch(64.8% 0.200 131.68);
-  --primitive-lime-900:   oklch(35.0% 0.120 130.00);
+  --primitive-lime-900:   oklch(22.0% 0.080 130.00);
 
   /* Neutral */
   --primitive-slate-50:   oklch(98.4% 0.003 247.86);
@@ -49,6 +49,7 @@
   --color-surface-overlay:      oklch(98.4% 0.003 247.86 / 85%);
   --color-surface-inverse:      var(--primitive-slate-900);
   --color-surface-inverse-hover: var(--primitive-slate-800);
+  --color-surface-brand-soft:    #E3F2CE;
 
   /* Foreground — Текст, icon */
   --color-fg-default:    var(--primitive-slate-900);
@@ -68,6 +69,7 @@
   --color-brand-hover:    var(--primitive-lime-600);
   --color-brand-subtle:   oklch(95% 0.06 130);
   --color-brand-fg:       var(--primitive-lime-900);
+  --color-brand-on-subtle: var(--primitive-lime-900);
 
   /* Status — Мэдэгдлийн өнгө */
   --color-status-success: oklch(60% 0.17 145);
@@ -90,6 +92,7 @@
   --color-surface-overlay:       oklch(15% 0.01 260 / 88%);
   --color-surface-inverse:       var(--primitive-slate-50);
   --color-surface-inverse-hover: oklch(93% 0.003 247.86);
+  --color-surface-brand-soft:    oklch(22% 0.06 130);
 
   /* Foreground — Текст, icon */
   --color-fg-default:    oklch(95% 0.005 260);
@@ -108,7 +111,8 @@
   --color-brand-primary:  var(--primitive-lime-500);
   --color-brand-hover:    oklch(82% 0.22 131);
   --color-brand-subtle:   oklch(22% 0.06 130);
-  --color-brand-fg:       var(--primitive-lime-500);
+  --color-brand-fg:       var(--primitive-lime-900);
+  --color-brand-on-subtle: oklch(92% 0.12 130);
 
   /* Status — Мэдэгдлийн өнгө */
   --color-status-success: oklch(72% 0.15 145);

@@ -29,7 +29,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
 		"Liberation Mono", "Courier New", monospace;
   --color-lime-500: oklch(76.8% 0.233 130.85);
   --color-lime-600: oklch(64.8% 0.2 131.684);
-  --color-indigo-400: oklch(67.3% 0.182 276.935);
   --color-slate-50: oklch(98.4% 0.003 247.858);
   --color-slate-100: oklch(96.8% 0.007 247.896);
   --color-slate-400: oklch(70.4% 0.04 256.788);
@@ -46,7 +45,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-zinc-700: oklch(37% 0.013 285.805);
   --color-zinc-800: oklch(27.4% 0.006 286.033);
   --color-zinc-900: oklch(21% 0.006 285.885);
-  --color-neutral-900: oklch(20.5% 0 0);
   --color-black: #000;
   --color-white: #fff;
   --spacing: 0.25rem;
@@ -84,9 +82,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --leading-tight: 1.25;
   --leading-snug: 1.375;
   --leading-relaxed: 1.625;
-  --radius-xs: 0.125rem;
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
@@ -103,6 +98,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-surface-overlay: var(--color-surface-overlay);
   --color-surface-inverse: var(--color-surface-inverse);
   --color-surface-inverse-hover: var(--color-surface-inverse-hover);
+  --color-surface-brand-soft: var(--color-surface-brand-soft);
   --color-fg-default: var(--color-fg-default);
   --color-fg-subtle: var(--color-fg-subtle);
   --color-fg-muted: var(--color-fg-muted);
@@ -116,6 +112,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-brand-hover: var(--color-brand-hover);
   --color-brand-subtle: var(--color-brand-subtle);
   --color-brand-fg: var(--color-brand-fg);
+  --color-brand-on-subtle: var(--color-brand-on-subtle);
   --color-status-success: var(--color-status-success);
   --color-status-error: var(--color-status-error);
   --color-status-warning: var(--color-status-warning);
@@ -130,7 +127,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
 :root {
   --primitive-lime-500: oklch(76.8% 0.233 130.85);
   --primitive-lime-600: oklch(64.8% 0.200 131.68);
-  --primitive-lime-900: oklch(35.0% 0.120 130.00);
+  --primitive-lime-900: oklch(22.0% 0.080 130.00);
   --primitive-slate-50: oklch(98.4% 0.003 247.86);
   --primitive-slate-100: oklch(96.8% 0.007 247.90);
   --primitive-slate-200: oklch(93.0% 0.013 255.51);
@@ -151,6 +148,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-surface-overlay: oklch(98.4% 0.003 247.86 / 85%);
   --color-surface-inverse: var(--primitive-slate-900);
   --color-surface-inverse-hover: var(--primitive-slate-800);
+  --color-surface-brand-soft: #E3F2CE;
   --color-fg-default: var(--primitive-slate-900);
   --color-fg-subtle: var(--primitive-slate-600);
   --color-fg-muted: var(--primitive-slate-400);
@@ -164,6 +162,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-brand-hover: var(--primitive-lime-600);
   --color-brand-subtle: oklch(95% 0.06 130);
   --color-brand-fg: var(--primitive-lime-900);
+  --color-brand-on-subtle: var(--primitive-lime-900);
   --color-status-success: oklch(60% 0.17 145);
   --color-status-error: oklch(58% 0.22 29);
   --color-status-warning: oklch(72% 0.17 75);
@@ -179,6 +178,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-surface-overlay: oklch(15% 0.01 260 / 88%);
   --color-surface-inverse: var(--primitive-slate-50);
   --color-surface-inverse-hover: oklch(93% 0.003 247.86);
+  --color-surface-brand-soft: oklch(22% 0.06 130);
   --color-fg-default: oklch(95% 0.005 260);
   --color-fg-subtle: oklch(70% 0.008 260);
   --color-fg-muted: oklch(50% 0.008 260);
@@ -191,7 +191,8 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   --color-brand-primary: var(--primitive-lime-500);
   --color-brand-hover: oklch(82% 0.22 131);
   --color-brand-subtle: oklch(22% 0.06 130);
-  --color-brand-fg: var(--primitive-lime-500);
+  --color-brand-fg: var(--primitive-lime-900);
+  --color-brand-on-subtle: oklch(92% 0.12 130);
   --color-status-success: oklch(72% 0.15 145);
   --color-status-error: oklch(70% 0.20 29);
   --color-status-warning: oklch(80% 0.15 75);
@@ -202,156 +203,156 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
 }
 @font-face {
   font-family: 'TT Hoves Hairline';
-  src: url('fonts/TTHoves-HairlineItalic.eot');
-  src: local('TT Hoves Hairline Italic'), local('TTHoves-HairlineItalic'), url('fonts/TTHoves-HairlineItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-HairlineItalic.woff2') format('woff2'), url('fonts/TTHoves-HairlineItalic.woff') format('woff'), url('fonts/TTHoves-HairlineItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-ExtraLightItalic.eot');
-  src: local('TT Hoves ExtraLight Italic'), local('TTHoves-ExtraLightItalic'), url('fonts/TTHoves-ExtraLightItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-ExtraLightItalic.woff2') format('woff2'), url('fonts/TTHoves-ExtraLightItalic.woff') format('woff'), url('fonts/TTHoves-ExtraLightItalic.ttf') format('truetype');
-  font-weight: 200;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Thin.eot');
-  src: local('TT Hoves Thin'), local('TTHoves-Thin'), url('fonts/TTHoves-Thin.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Thin.woff2') format('woff2'), url('fonts/TTHoves-Thin.woff') format('woff'), url('fonts/TTHoves-Thin.ttf') format('truetype');
+  src: url('fonts/TTHoves-Hairline.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-DemiBold.eot');
-  src: local('TT Hoves DemiBold'), local('TTHoves-DemiBold'), url('fonts/TTHoves-DemiBold.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-DemiBold.woff2') format('woff2'), url('fonts/TTHoves-DemiBold.woff') format('woff'), url('fonts/TTHoves-DemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-BoldItalic.eot');
-  src: local('TT Hoves Bold Italic'), local('TTHoves-BoldItalic'), url('fonts/TTHoves-BoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-BoldItalic.woff2') format('woff2'), url('fonts/TTHoves-BoldItalic.woff') format('woff'), url('fonts/TTHoves-BoldItalic.ttf') format('truetype');
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Black.eot');
-  src: local('TT Hoves Black'), local('TTHoves-Black'), url('fonts/TTHoves-Black.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Black.woff2') format('woff2'), url('fonts/TTHoves-Black.woff') format('woff'), url('fonts/TTHoves-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-ExtraLight.eot');
-  src: local('TT Hoves ExtraLight'), local('TTHoves-ExtraLight'), url('fonts/TTHoves-ExtraLight.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-ExtraLight.woff2') format('woff2'), url('fonts/TTHoves-ExtraLight.woff') format('woff'), url('fonts/TTHoves-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Bold.eot');
-  src: local('TT Hoves Bold'), local('TTHoves-Bold'), url('fonts/TTHoves-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Bold.woff2') format('woff2'), url('fonts/TTHoves-Bold.woff') format('woff'), url('fonts/TTHoves-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-ThinItalic.eot');
-  src: local('TT Hoves Thin Italic'), local('TTHoves-ThinItalic'), url('fonts/TTHoves-ThinItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-ThinItalic.woff2') format('woff2'), url('fonts/TTHoves-ThinItalic.woff') format('woff'), url('fonts/TTHoves-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Italic.eot');
-  src: local('TT Hoves Italic'), local('TTHoves-Italic'), url('fonts/TTHoves-Italic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Italic.woff2') format('woff2'), url('fonts/TTHoves-Italic.woff') format('woff'), url('fonts/TTHoves-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-BlackItalic.eot');
-  src: local('TT Hoves Black Italic'), local('TTHoves-BlackItalic'), url('fonts/TTHoves-BlackItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-BlackItalic.woff2') format('woff2'), url('fonts/TTHoves-BlackItalic.woff') format('woff'), url('fonts/TTHoves-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-ExtraBold.eot');
-  src: local('TT Hoves ExtraBold'), local('TTHoves-ExtraBold'), url('fonts/TTHoves-ExtraBold.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-ExtraBold.woff2') format('woff2'), url('fonts/TTHoves-ExtraBold.woff') format('woff'), url('fonts/TTHoves-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-DemiBoldItalic.eot');
-  src: local('TT Hoves DemiBold Italic'), local('TTHoves-DemiBoldItalic'), url('fonts/TTHoves-DemiBoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-DemiBoldItalic.woff2') format('woff2'), url('fonts/TTHoves-DemiBoldItalic.woff') format('woff'), url('fonts/TTHoves-DemiBoldItalic.ttf') format('truetype');
-  font-weight: 600;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-MediumItalic.eot');
-  src: local('TT Hoves Medium Italic'), local('TTHoves-MediumItalic'), url('fonts/TTHoves-MediumItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-MediumItalic.woff2') format('woff2'), url('fonts/TTHoves-MediumItalic.woff') format('woff'), url('fonts/TTHoves-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-ExtraBoldItalic.eot');
-  src: local('TT Hoves ExtraBold Italic'), local('TTHoves-ExtraBoldItalic'), url('fonts/TTHoves-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-ExtraBoldItalic.woff2') format('woff2'), url('fonts/TTHoves-ExtraBoldItalic.woff') format('woff'), url('fonts/TTHoves-ExtraBoldItalic.ttf') format('truetype');
-  font-weight: 800;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Regular.eot');
-  src: local('TT Hoves Regular'), local('TTHoves-Regular'), url('fonts/TTHoves-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Regular.woff2') format('woff2'), url('fonts/TTHoves-Regular.woff') format('woff'), url('fonts/TTHoves-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'TT Hoves Hairline';
-  src: url('fonts/TTHoves-Hairline.eot');
-  src: local('TT Hoves Hairline'), local('TTHoves-Hairline'), url('fonts/TTHoves-Hairline.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Hairline.woff2') format('woff2'), url('fonts/TTHoves-Hairline.woff') format('woff'), url('fonts/TTHoves-Hairline.ttf') format('truetype');
+  src: url('fonts/TTHoves-HairlineItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-LightItalic.eot');
-  src: local('TT Hoves Light Italic'), local('TTHoves-LightItalic'), url('fonts/TTHoves-LightItalic.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-LightItalic.woff2') format('woff2'), url('fonts/TTHoves-LightItalic.woff') format('woff'), url('fonts/TTHoves-LightItalic.ttf') format('truetype');
+  src: url('fonts/TTHoves-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Light.eot');
-  src: local('TT Hoves Light'), local('TTHoves-Light'), url('fonts/TTHoves-Light.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Light.woff2') format('woff2'), url('fonts/TTHoves-Light.woff') format('woff'), url('fonts/TTHoves-Light.ttf') format('truetype');
-  font-weight: 300;
+  src: url('fonts/TTHoves-Regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'TT Hoves';
-  src: url('fonts/TTHoves-Medium.eot');
-  src: local('TT Hoves Medium'), local('TTHoves-Medium'), url('fonts/TTHoves-Medium.eot?#iefix') format('embedded-opentype'), url('fonts/TTHoves-Medium.woff2') format('woff2'), url('fonts/TTHoves-Medium.woff') format('woff'), url('fonts/TTHoves-Medium.ttf') format('truetype');
+  src: url('fonts/TTHoves-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
-  font-family: 'TT Hoves Pro Mono';
-  src: url('fonts/TTHovesProMono-It.woff2') format('woff2'), url('fonts/TTHovesProMono-It.woff') format('woff');
-  font-weight: normal;
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-DemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-DemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves';
+  src: url('fonts/TTHoves-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'TT Hoves Pro Mono';
-  src: url('fonts/TTHovesProMono-Rg.woff2') format('woff2'), url('fonts/TTHovesProMono-Rg.woff') format('woff');
-  font-weight: normal;
+  src: url('fonts/TTHovesProMono-Rg.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TT Hoves Pro Mono';
+  src: url('fonts/TTHovesProMono-It.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
 :where(.not-prose) *,:where(.not-prose) ::after,:where(.not-prose) ::before,:where(.not-prose) ::backdrop,:where(.not-prose) ::file-selector-button {
@@ -506,13 +507,21 @@ body {
   background-color: var(--color-surface-base);
   font-family: var(--font-sans);
   color: var(--color-fg-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv01";
+  line-height: 1.5;
+}
+::selection {
+  background: var(--color-brand-hover);
+  color: var(--color-fg-inverse);
 }
 @layer components {
   .wp-block-code {
     position: relative;
     margin-block: calc(var(--spacing) * 8);
     overflow: hidden;
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
     border-style: var(--tw-border-style);
     border-width: 1px;
     border-color: var(--color-stroke-default);
@@ -553,7 +562,7 @@ body {
   line-height: var(--tw-leading, var(--text-3xl--line-height));
   --tw-font-weight: var(--font-weight-extrabold);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-neutral-900);
+  color: var(--color-fg-default);
 }
 .entry-meta, .entry-footer, .post-navigation, #comments {
   margin-inline: auto;
@@ -588,15 +597,206 @@ body {
     margin: calc(var(--spacing) * 0);
   }
   .prose blockquote::before {
-    position: absolute;
-    top: calc(var(--spacing) * -4);
-    left: calc(var(--spacing) * -2);
-    font-size: var(--text-6xl);
-    line-height: var(--tw-leading, var(--text-6xl--line-height));
-    color: var(--color-indigo-400);
-    opacity: 30%;
-    content: '“';
-    font-family: Georgia, serif;
+    --tw-content: '';
+    content: var(--tw-content);
+  }
+}
+@layer components {
+  .btn {
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    gap: calc(var(--spacing) * 1.5);
+    border-radius: 9999px;
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2.5);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    --tw-leading: 1;
+    line-height: 1;
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    text-decoration-line: none;
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+    --tw-ease: var(--ease-primary);
+    transition-timing-function: var(--ease-primary);
+  }
+  .btn-primary {
+    background-color: var(--color-surface-inverse);
+    color: var(--color-fg-inverse);
+  }
+  @media (hover: hover) {
+    .btn-primary:hover {
+      background-color: var(--color-surface-inverse-hover);
+    }
+  }
+  .btn-brand {
+    background-color: var(--color-brand-primary);
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand-fg);
+  }
+  @media (hover: hover) {
+    .btn-brand:hover {
+      background-color: var(--color-brand-hover);
+    }
+  }
+  @media (hover: hover) {
+    .btn-brand:hover {
+      color: var(--color-fg-inverse);
+    }
+  }
+  .btn-ghost {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-stroke-default);
+    background-color: transparent;
+    color: var(--color-fg-default);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover {
+      background-color: var(--color-surface-raised);
+    }
+  }
+  .btn-link {
+    background-color: transparent;
+    padding-inline: calc(var(--spacing) * 1);
+    color: var(--color-fg-link);
+  }
+  @media (hover: hover) {
+    .btn-link:hover {
+      color: var(--color-brand-hover);
+    }
+  }
+  .btn svg {
+    height: 18px;
+    width: 18px;
+    fill: currentcolor;
+  }
+}
+@layer components {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 1.5);
+    border-radius: 9999px;
+    padding-inline: calc(var(--spacing) * 2.5);
+    padding-block: 5px;
+    font-size: 11px;
+    --tw-leading: 1;
+    line-height: 1;
+    --tw-font-weight: var(--font-weight-extrabold);
+    font-weight: var(--font-weight-extrabold);
+    --tw-tracking: var(--tracking-widest);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+  .badge-brand {
+    background-color: var(--color-brand-subtle);
+    color: var(--color-brand-on-subtle);
+  }
+  .badge-ink {
+    background-color: var(--color-surface-inverse);
+    color: var(--color-fg-inverse);
+  }
+  .badge-soft {
+    background-color: var(--color-surface-raised);
+    color: var(--color-fg-subtle);
+  }
+  .badge-ok {
+    background: var(--color-status-success);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .badge-ok {
+      background: color-mix(in oklab, var(--color-status-success) 15%, transparent);
+    }
+  }
+  .badge-ok {
+    color: var(--color-status-success);
+  }
+  .badge-err {
+    background: var(--color-status-error);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .badge-err {
+      background: color-mix(in oklab, var(--color-status-error) 12%, transparent);
+    }
+  }
+  .badge-err {
+    color: var(--color-status-error);
+  }
+  .badge-dot {
+    height: calc(var(--spacing) * 1.5);
+    width: calc(var(--spacing) * 1.5);
+    border-radius: 9999px;
+    background-color: currentcolor;
+  }
+}
+@layer components {
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .ds-field > label, .ds-label {
+    font-size: 12px;
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    --tw-tracking: 0.06em;
+    letter-spacing: 0.06em;
+    color: var(--color-fg-subtle);
+    text-transform: uppercase;
+  }
+  .ds-input {
+    width: 100%;
+    border-radius: 1rem;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-stroke-default);
+    background-color: var(--color-surface-base);
+    padding-inline: calc(var(--spacing) * 3.5);
+    padding-block: 11px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-fg-default);
+    transition-property: border-color,box-shadow;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+    --tw-ease: var(--ease-primary);
+    transition-timing-function: var(--ease-primary);
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  .ds-input::placeholder {
+    color: var(--color-fg-disabled);
+  }
+  .ds-input:focus {
+    border-color: var(--color-stroke-focus);
+    box-shadow: 0 0 0 3px var(--color-brand-primary);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .ds-input:focus {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-primary) 28%, transparent);
+    }
+  }
+  .ds-input-error {
+    border-color: var(--color-status-error);
+  }
+  .ds-hint {
+    font-size: 11px;
+    color: var(--color-fg-muted);
+  }
+  .ds-err-hint {
+    font-size: 11px;
+    color: var(--color-status-error);
   }
 }
 .visible {
@@ -694,7 +894,7 @@ body {
   font-style: normal;
 }
 :is(.prose :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(code) {
-  border-radius: var(--radius-xs);
+  border-radius: 0.125rem;
   background-color: var(--color-surface-raised);
   padding-inline: calc(var(--spacing) * 0.5);
   font-family: var(--font-sans);
@@ -720,7 +920,7 @@ body {
   line-height: var(--tw-leading, var(--text-xs--line-height));
 }
 :is(.prose :not(:where([class~='not-prose'],[class~='not-prose'] *))):where(kbd) {
-  border-radius: var(--radius-xs);
+  border-radius: 0.125rem;
   background-color: var(--color-brand-primary);
   padding-inline: calc(var(--spacing) * 1);
   padding-block: calc(var(--spacing) * 0);
@@ -738,8 +938,14 @@ body {
 .absolute {
   position: absolute;
 }
+.fixed {
+  position: fixed;
+}
 .relative {
   position: relative;
+}
+.static {
+  position: static;
 }
 .sticky {
   position: sticky;
@@ -799,6 +1005,9 @@ body {
 .container {
   margin-inline: auto;
   padding-inline: calc(var(--spacing) * 8);
+}
+.mx-auto {
+  margin-inline: auto;
 }
 .my-2 {
   margin-block: calc(var(--spacing) * 2);
@@ -1490,6 +1699,9 @@ body {
 .inline {
   display: inline;
 }
+.inline-block {
+  display: inline-block;
+}
 .inline-flex {
   display: inline-flex;
 }
@@ -1556,6 +1768,9 @@ body {
 .max-w-4xl {
   max-width: var(--container-4xl);
 }
+.max-w-7xl {
+  max-width: var(--container-7xl);
+}
 .max-w-44 {
   max-width: calc(var(--spacing) * 44);
 }
@@ -1564,6 +1779,9 @@ body {
 }
 .max-w-none {
   max-width: none;
+}
+.max-w-wide {
+  max-width: var(--container-wide);
 }
 .max-w-xs {
   max-width: var(--container-xs);
@@ -1576,6 +1794,12 @@ body {
 }
 .grow {
   flex-grow: 1;
+}
+.transform {
+  transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+}
+.resize {
+  resize: both;
 }
 .list-none {
   list-style-type: none;
@@ -1628,8 +1852,11 @@ body {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+.rounded {
+  border-radius: 0.25rem;
+}
 .rounded-2xl {
-  border-radius: var(--radius-2xl);
+  border-radius: 2rem;
 }
 .rounded-full {
   border-radius: 9999px;
@@ -1784,6 +2011,9 @@ body {
 .px-6 {
   padding-inline: calc(var(--spacing) * 6);
 }
+.px-8 {
+  padding-inline: calc(var(--spacing) * 8);
+}
 .py-1 {
   padding-block: calc(var(--spacing) * 1);
 }
@@ -1902,6 +2132,9 @@ body {
 .text-brand-fg {
   color: var(--color-brand-fg);
 }
+.text-brand-hover {
+  color: var(--color-brand-hover);
+}
 .text-brand-primary {
   color: var(--color-brand-primary);
 }
@@ -1985,21 +2218,68 @@ body {
 .text-zinc-900 {
   color: var(--color-zinc-900);
 }
+.lowercase {
+  text-transform: lowercase;
+}
 .uppercase {
   text-transform: uppercase;
+}
+.italic {
+  font-style: italic;
+}
+.tabular-nums {
+  --tw-numeric-spacing: tabular-nums;
+  font-variant-numeric: var(--tw-ordinal,) var(--tw-slashed-zero,) var(--tw-numeric-figure,) var(--tw-numeric-spacing,) var(--tw-numeric-fraction,);
+}
+.line-through {
+  text-decoration-line: line-through;
 }
 .no-underline {
   text-decoration-line: none;
 }
+.shadow {
+  --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.shadow-lg {
+  --tw-shadow: var(--shadow-lg);
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.shadow-md {
+  --tw-shadow: var(--shadow-md);
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
 .shadow-sm {
   --tw-shadow: var(--shadow-sm);
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.ring {
+  --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.outline {
+  outline-style: var(--tw-outline-style);
+  outline-width: 1px;
 }
 .outline-stroke-strong {
   outline-color: var(--color-stroke-strong);
 }
 .outline-zinc-700 {
   outline-color: var(--color-zinc-700);
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+}
+.backdrop-blur {
+  --tw-backdrop-blur: blur(8px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+}
+.transition {
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
 }
 .transition-all {
   transition-property: all;
@@ -2108,6 +2388,11 @@ body {
   }
 }
 @media (hover: hover) {
+  .hover\:bg-surface-raised:hover {
+    background-color: var(--color-surface-raised);
+  }
+}
+@media (hover: hover) {
   .hover\:bg-zinc-800:hover {
     background-color: var(--color-zinc-800);
   }
@@ -2149,7 +2434,7 @@ body {
   }
 }
 .focus\:rounded-xs:focus {
-  border-radius: var(--radius-xs);
+  border-radius: 0.125rem;
 }
 .focus\:bg-surface-inverse-hover:focus {
   background-color: var(--color-surface-inverse-hover);
@@ -2316,6 +2601,38 @@ body {
   inherits: false;
   initial-value: "";
 }
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-gradient-position {
   syntax: "*";
   inherits: false;
@@ -2358,7 +2675,23 @@ body {
   inherits: false;
   initial-value: 100%;
 }
-@property --tw-tracking {
+@property --tw-ordinal {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-slashed-zero {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-figure {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-spacing {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-fraction {
   syntax: "*";
   inherits: false;
 }
@@ -2427,11 +2760,97 @@ body {
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-duration {
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-blur {
   syntax: "*";
   inherits: false;
 }
-@property --tw-ease {
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
   syntax: "*";
   inherits: false;
 }
@@ -2450,11 +2869,6 @@ body {
   inherits: false;
   initial-value: 1;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -2462,6 +2876,14 @@ body {
       --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-content: "";
+      --tw-duration: initial;
+      --tw-ease: initial;
+      --tw-tracking: initial;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
       --tw-gradient-via: #0000;
@@ -2471,7 +2893,11 @@ body {
       --tw-gradient-from-position: 0%;
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
-      --tw-tracking: initial;
+      --tw-ordinal: initial;
+      --tw-slashed-zero: initial;
+      --tw-numeric-figure: initial;
+      --tw-numeric-spacing: initial;
+      --tw-numeric-fraction: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
@@ -2486,12 +2912,32 @@ body {
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-duration: initial;
-      --tw-ease: initial;
+      --tw-outline-style: solid;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
       --tw-scale-x: 1;
       --tw-scale-y: 1;
       --tw-scale-z: 1;
-      --tw-outline-style: solid;
     }
   }
 }
