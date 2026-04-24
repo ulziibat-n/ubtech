@@ -1,58 +1,29 @@
 /**
- * This file outputs to `style.css`, your main front-end style sheet, and to
- * `style-editor.css`, for the WordPress editor.
+ * Main Tailwind CSS file
  */
 
-/**
- * Add the WordPress file header.
- */
 @import "./tailwind/custom/file-header.css";
-
-/**
- * Add Tailwind’s default theme and your custom theme.
- */
 @import "tailwindcss";
 @import "./tailwind/tailwind-theme.css";
 
-/**
- * Add Tailwind’s Preflight styles.
- */
-@if $target != editor {
-	@import "tailwindcss/preflight";
-} @else  {
-	/**
-	 * In the editor, we only want to apply Preflight to descendents of an
-	 * element with the `not-prose` class.
-	 */
-	:where(.not-prose) {
-		@import "tailwindcss/preflight";
-	}
-}
+/* ─── Layers ────────────────────────────────────────────────────────────────── */
 
-/**
- * Add your custom base styles.
- */
+/* Base styles */
 @import "./tailwind/custom/base.css";
 
-/**
- * Add your custom component styles.
- */
+/* Components */
 @import-glob "./tailwind/custom/components/**/*.css";
 
-/**
- * Add Tailwind’s utility classes and any utility classes registered by
- * plugins, then add custom utility classes.
- */
-@import "tailwindcss/utilities";
+/* Custom Utilities */
 @import "./tailwind/custom/utilities.css";
 
 /**
- * DS Typescale safelist.
+ * Safelist
  */
 @source inline("t-h4 t-small t-mono");
 
 /**
- * Add styles exclusively for the WordPress editor.
+ * Editor styles
  */
 @if $target == editor {
 	@import "./tailwind/tailwind-editor.css";

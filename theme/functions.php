@@ -140,6 +140,25 @@ function ub_scripts() {
 add_action( 'wp_enqueue_scripts', 'ub_scripts' );
 
 /**
+ * Completely remove Gutenberg global styles and block library CSS.
+ */
+function ub_remove_global_styles_and_blocks() {
+	wp_dequeue_style( 'global-styles' );
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_dequeue_style( 'wc-block-style' );
+	wp_dequeue_style( 'classic-theme-styles' );
+}
+add_action( 'wp_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'admin_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
+
+// Aggressive removal of core actions.
+remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+remove_action( 'admin_enqueue_scripts', 'wp_enqueue_global_styles' );
+remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+
+/**
  * Enqueue the block editor script.
  */
 function ub_enqueue_block_editor_script() {
