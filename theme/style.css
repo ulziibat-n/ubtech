@@ -34,6 +34,7 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
     --color-lime-400: oklch(84.1% 0.238 128.85);
     --color-lime-500: oklch(76.8% 0.233 130.85);
     --color-lime-600: oklch(64.8% 0.2 131.684);
+    --color-lime-950: oklch(27.4% 0.072 132.109);
     --color-emerald-500: oklch(69.6% 0.17 162.48);
     --color-teal-600: oklch(60% 0.118 184.704);
     --color-blue-600: oklch(54.6% 0.245 262.881);
@@ -833,11 +834,20 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .bg-lime-600 {
     background-color: var(--color-lime-600);
   }
+  .bg-lime-950 {
+    background-color: var(--color-lime-950);
+  }
   .bg-slate-50 {
     background-color: var(--color-slate-50);
   }
   .bg-slate-100 {
     background-color: var(--color-slate-100);
+  }
+  .bg-slate-200 {
+    background-color: var(--color-slate-200);
+  }
+  .bg-slate-600 {
+    background-color: var(--color-slate-600);
   }
   .bg-slate-900 {
     background-color: var(--color-slate-900);
@@ -1075,6 +1085,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .pt-20 {
     padding-top: calc(var(--spacing) * 20);
   }
+  .pt-24 {
+    padding-top: calc(var(--spacing) * 24);
+  }
   .pt-32 {
     padding-top: calc(var(--spacing) * 32);
   }
@@ -1149,6 +1162,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   }
   .text-\[13px\] {
     font-size: 13px;
+  }
+  .text-\[14px\] {
+    font-size: 14px;
   }
   .leading-none {
     --tw-leading: 1;
@@ -1629,6 +1645,11 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
       font-size: 14px;
     }
   }
+  @media (width >= 40rem) {
+    .sm\:text-\[15px\] {
+      font-size: 15px;
+    }
+  }
   @media (width >= 48rem) {
     .md\:flex-row {
       flex-direction: row;
@@ -1658,6 +1679,11 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   @media (width >= 48rem) {
     .md\:text-\[14px\] {
       font-size: 14px;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:text-\[16px\] {
+      font-size: 16px;
     }
   }
   @media (width >= 64rem) {
@@ -1722,6 +1748,11 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   @media (width >= 64rem) {
     .lg\:text-\[13px\] {
       font-size: 13px;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:text-\[14px\] {
+      font-size: 14px;
     }
   }
   @media (width >= 80rem) {

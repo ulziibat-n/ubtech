@@ -11,7 +11,7 @@
  */
 
 ?><!doctype html>
-<html <?php language_attributes(); ?> class="text-[13px] sm:text-[14px] md:text-[14px] lg:text-[13px] xl:text-[15px] xxl:text-[16px]" style="--header-height: 4.25rem;">
+<html <?php language_attributes(); ?> class="text-[14px] sm:text-[15px] md:text-[16px] lg:text-[14px] xl:text-[15px] xxl:text-[16px]" style="--header-height: 4.25rem;">
 
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
