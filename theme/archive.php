@@ -18,8 +18,8 @@ if ( is_author() ) {
 	$archive_type = 'list';
 } elseif ( is_category() ) {
 	$archive_type = 'list';
-	if ( function_exists( 'get_field' ) && get_field( 'archive_image', 'category_' . $term_id ) ) {
-		$archive_type = get_field( 'archive_image', 'category_' . $term_id );
+	if ( function_exists( 'get_field' ) && get_field( 'archive_type', 'category_' . $term_id ) ) {
+		$archive_type = get_field( 'archive_type', 'category_' . $term_id );
 	}
 } elseif ( is_tag() ) {
 	$archive_type = 'list';

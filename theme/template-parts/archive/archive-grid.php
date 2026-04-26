@@ -7,7 +7,7 @@
  * @package ulziibat-tech
  */
 ?>
-<div class="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+<div class="grid grid-cols-1 gap-2 py-16 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
 	<?php
 	while ( have_posts() ) :
 		the_post();
