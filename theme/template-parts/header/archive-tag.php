@@ -30,13 +30,7 @@ if ( $term_img ) {
 	?>
 	<div class="container <?php echo esc_attr( $padding_class ); ?>">
 		<div class="flex flex-col items-start">
-			<span class="text-[0.75rem] pl-0.5 leading-none uppercase font-semibold rounded-xs 
-			<?php
-			if ( $term_img ) {
-				echo 'text-white'; } else {
-				echo 'text-lime-600'; }
-				?>
-				"><?php esc_html_e( 'Ангилал', 'ulziibat-tech' ); ?></span>
+			<span class="text-[0.75rem] pl-0.5 leading-none uppercase font-semibold rounded-xs text-lime-600"><?php esc_html_e( 'Сэдэв', 'ulziibat-tech' ); ?></span>
 			<?php the_archive_title( '<h1 class="text-3xl font-black tracking-tight lg:h1' . $text_color . '">', '</h1>' ); ?>
 		</div>
 		<?php if ( term_description() ) : ?>

@@ -30,16 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				const level = heading.tagName.toLowerCase();
 				const listItem = document.createElement('li');
-				listItem.className = 'list-none p-0 m-0';
+				listItem.className = 'p-0 m-0 list-none';
 
 				const link = document.createElement('a');
 				link.href = `#${heading.id}`;
-				link.className = 'no-underline text-slate-600/70 hover:text-lime-600 transition-colors duration-200 block';
+				link.className = 'block no-underline toc-link group';
 				
 				const span = document.createElement('span');
 				span.textContent = text;
-				const fontSizeClass = level === 'h2' ? 'text-sm' : 'text-xs';
-				span.className = `${fontSizeClass} data-current:text-slate-900 transition-colors duration-200 data-current:font-medium leading-none block py-1`;
+				const levelClass = level === 'h2' ? 'toc-text-h2' : 'toc-text-h3';
+				span.className = `${levelClass} toc-text transition-all duration-300 block py-0.5 leading-none`;
 				
 				link.appendChild(span);
 				listItem.appendChild(link);
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						let nestedUl = lastH2Li.querySelector('ul');
 						if (!nestedUl) {
 							nestedUl = document.createElement('ul');
-							nestedUl.className = 'border-l border-slate-200/50 pl-2 my-2';
+							nestedUl.className = 'border-l border-slate-200/50';
 							lastH2Li.appendChild(nestedUl);
 						}
 						nestedUl.appendChild(listItem);
@@ -62,15 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 
+			// Reveal TOC after content is ready
+			const tocContainer = document.querySelector('[data-post-toc]');
+			if (tocContainer) {
+				tocContainer.classList.remove('opacity-0', 'invisible');
+				tocContainer.classList.add('opacity-100', 'visible');
+			}
+
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						const id = entry.target.getAttribute('id');
 						const currentLink = tocList.querySelector(`a[href="#${id}"]`);
 						if (currentLink) {
-							const currentSpan = currentLink.querySelector('span');
-							tocList.querySelectorAll('span').forEach(s => s.removeAttribute('data-current'));
-							if (currentSpan) currentSpan.setAttribute('data-current', '');
+							tocList.querySelectorAll('.toc-link').forEach(l => l.removeAttribute('data-current'));
+							currentLink.setAttribute('data-current', '');
 						}
 					}
 				});

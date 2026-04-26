@@ -291,8 +291,40 @@ function ub_body_classes( $classes ) {
 		}
 	}
 
+	// ✅ Transparent header for single posts with featured images.
+	if ( is_singular( 'post' ) ) {
+		$classes[] = 'is-header-transparent';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );
+
+/**
+ * Restrict Gutenberg blocks to a specific set.
+ *
+ * @param bool|array              $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
+ * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+ *
+ * @return array|bool
+ */
+function ub_allowed_block_types( $allowed_block_types, $block_editor_context ) {
+	// Restrict blocks for the 'post' post type.
+	if ( isset( $block_editor_context->post ) && 'post' === $block_editor_context->post->post_type ) {
+		return array(
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/list-item',
+			'core/quote',
+			'core/table',
+			'core/image',
+			'core/separator',
+		);
+	}
+
+	return $allowed_block_types;
+}
+add_filter( 'allowed_block_types_all', 'ub_allowed_block_types', 10, 2 );
 
 

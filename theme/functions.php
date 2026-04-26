@@ -140,6 +140,21 @@ function ub_scripts() {
 add_action( 'wp_enqueue_scripts', 'ub_scripts' );
 
 /**
+ * Completely remove unnecessary CSS and scripts.
+ */
+function ub_cleanup_head() {
+	// Remove emoji support.
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+}
+add_action( 'init', 'ub_cleanup_head' );
+
+/**
  * Completely remove Gutenberg global styles and block library CSS.
  */
 function ub_remove_global_styles_and_blocks() {
@@ -148,9 +163,36 @@ function ub_remove_global_styles_and_blocks() {
 	wp_dequeue_style( 'wp-block-library-theme' );
 	wp_dequeue_style( 'wc-block-style' );
 	wp_dequeue_style( 'classic-theme-styles' );
+	wp_dequeue_style( 'core-block-supports' );
+
+	// Remove individual core block styles (WordPress 6.1+).
+	global $wp_styles;
+	foreach ( $wp_styles->registered as $handle => $data ) {
+		if ( str_starts_with( $handle, 'wp-block-' ) ) {
+			wp_dequeue_style( $handle );
+		}
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
 add_action( 'admin_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'enqueue_block_assets', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'enqueue_block_editor_assets', 'ub_remove_global_styles_and_blocks', 100 );
+add_filter( 'should_load_separate_core_block_assets', '__return_false' );
+
+/**
+ * Remove wide/full alignment support from all blocks.
+ */
+function ub_remove_align_support( $args, $block_type ) {
+	if ( isset( $args['supports']['align'] ) ) {
+		if ( is_array( $args['supports']['align'] ) ) {
+			$args['supports']['align'] = array_diff( $args['supports']['align'], array( 'wide', 'full' ) );
+		} elseif ( true === $args['supports']['align'] ) {
+			$args['supports']['align'] = array( 'left', 'right', 'center' );
+		}
+	}
+	return $args;
+}
+add_filter( 'register_block_type_args', 'ub_remove_align_support', 10, 2 );
 
 // Aggressive removal of core actions.
 remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );

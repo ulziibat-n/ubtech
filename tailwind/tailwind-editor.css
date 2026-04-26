@@ -1,16 +1,6 @@
 /**
  * Additional styles applied only to the WordPress editor
- *
- * It is sometimes necessary to add additional styles for the WordPress block
- * editor, generally to improve the editor experience. For example, you may
- * want to tweak the appearance of the title area to better match your site’s
- * front end, or you may need to change the appearance of a block to better
- * distinguish between its fields while editing.
- *
- * Those styles should be added in this file, and they will be added only to
- * the block editor.
  */
-
 
 /**
  * Add horizontal padding for smaller screens.
@@ -21,8 +11,23 @@
 }
 
 /**
- * Add your editor styles below:
+ * Main Post Title in the editor
+ * Requested style: text-2xl font-black leading-none sm:text-3xl lg:text-5xl xl:text-6xl
  */
 .wp-block-post-title {
-	@apply max-w-lg mb-20 text-4xl font-black text-white sm:text-6xl;
+	@apply mb-12 text-2xl font-black leading-none sm:text-3xl lg:text-5xl xl:text-6xl text-slate-900!;
+}
+
+/**
+ * Editor-specific tweaks for consistency
+ * The core typography is handled by single-content.css
+ */
+.editor-styles-wrapper {
+	/* Ensure the background matches the frontend content area */
+	@apply bg-white antialiased;
+	
+	/* Reset some Gutenberg defaults if needed */
+	.block-editor-block-list__layout {
+		@apply max-w-none;
+	}
 }

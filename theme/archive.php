@@ -22,9 +22,8 @@ if ( is_author() ) {
 		$archive_type = get_field( 'archive_type', 'category_' . $term_id );
 	}
 } elseif ( is_tag() ) {
-	$archive_type = 'list';
+	$archive_type = 'grid';
 }
-
 get_header();
 ?>
 
@@ -43,7 +42,7 @@ get_header();
 				}
 				?>
 
-				<section class="w-full relative">
+				<section class="relative w-full">
 					<div class="container">
 						<div class="<?php echo esc_attr( $archive_type ); ?>">
 							<?php

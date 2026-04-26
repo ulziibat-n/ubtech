@@ -17,9 +17,11 @@
 	</a>
 	<div class="flex flex-col gap-2 items-start p-6 w-full md:p-6 2xl:p-8 xl:gap-3 grow">
 		<div class="flex gap-2 items-center">
-			<?php ub_the_primary_category( 'text-[0.75rem] leading-none uppercase font-[400] text-lime-600' ); ?>
-			<span class="leading-none text-red-500">•</span>
-			<?php ub_the_read_time( get_the_ID(), 'text-xs leading-none font-[500]] text-slate-500' ); ?>
+			<?php ub_the_primary_category( 'text-[0.75rem] leading-none uppercase text-lime-600' ); ?>
+			<span class="leading-none text-red-500">
+				<svg class="w-1 h-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>
+			</span>
+			<?php ub_the_read_time( get_the_ID(), 'text-xs leading-none text-slate-500' ); ?>
 		</div>
 		<h2 class="leading-none text-xl font-black pr-4 tracking-[-0.03125rem]">
 			<a href="<?php echo esc_url( get_permalink( get_the_ID() ) ); ?>" class="inline bg-bottom-left bg-linear-to-r from-lime-500 to-lime-500 bg-size-[0%_3px] bg-no-repeat group-hover/post-card:bg-size-[100%_3px] transition-[background-size] duration-500 ease-out"><?php echo esc_html( get_the_title( get_the_ID() ) ); ?></a>
