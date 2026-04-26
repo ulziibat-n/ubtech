@@ -98,6 +98,68 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 
-	window.addEventListener('resize', updateHeaderHeight);
+	/**
+	 * Sync heights of all related slider slides
+	 */
+	const syncRelatedSliderHeights = () => {
+		const slides = document.querySelectorAll('[data-related-slider] .swiper-slide');
+		if (!slides.length) return;
+
+		// Reset heights first to get natural height
+		slides.forEach(slide => {
+			slide.style.height = 'auto';
+			const card = slide.querySelector('article');
+			if (card) card.style.height = 'auto';
+		});
+
+		let maxHeight = 0;
+		slides.forEach(slide => {
+			const height = slide.offsetHeight;
+			if (height > maxHeight) maxHeight = height;
+		});
+
+		if (maxHeight > 0) {
+			slides.forEach(slide => {
+				slide.style.height = `${maxHeight}px`;
+				const card = slide.querySelector('article');
+				if (card) card.style.height = '100%';
+			});
+		}
+	};
+
+	/**
+	 * Initialize Related Posts Slider
+	 */
+	const initRelatedSlider = () => {
+		const sliderElement = document.querySelector('[data-related-slider]');
+		if (sliderElement && typeof Swiper !== 'undefined') {
+			new Swiper(sliderElement, {
+				slidesPerView: 'auto',
+				spaceBetween: 10,
+				loop: false,
+				watchSlidesProgress: true,
+				navigation: {
+					nextEl: '[data-related-next]',
+					prevEl: '[data-related-prev]',
+				},
+				on: {
+					init: syncRelatedSliderHeights,
+					resize: syncRelatedSliderHeights
+				}
+			});
+
+			// Initial sync
+			setTimeout(syncRelatedSliderHeights, 100);
+		}
+	};
+
+	// Initialize all
+	updateHeaderHeight();
+	initRelatedSlider();
+
+	window.addEventListener('resize', () => {
+		updateHeaderHeight();
+		syncRelatedSliderHeights();
+	});
 	updateHeaderHeight();
 });

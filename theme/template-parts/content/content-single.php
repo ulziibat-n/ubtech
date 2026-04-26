@@ -153,8 +153,8 @@
 	}
 	?>
 
-	<div class="container py-16 border-t border-slate-100">
-		<div class="flex flex-col gap-10 md:flex-row md:items-start">
+	<div class="container">
+		<div class="flex flex-col gap-10 py-16 border-t md:flex-row md:items-start border-slate-200">
 			
 			<!-- Author Image -->
 			<div class="overflow-hidden relative w-36 h-36 rounded-sm shrink-0">
@@ -199,3 +199,68 @@
 	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
+
+<?php
+$categories = get_the_category( get_the_ID() );
+if ( $categories ) {
+	$category_ids = array();
+	foreach ( $categories as $category ) {
+		$category_ids[] = $category->term_id;
+	}
+
+	$related_query = new WP_Query(
+		array(
+			'category__in'   => $category_ids,
+			'post__not_in'   => array( get_the_ID() ),
+			'posts_per_page' => 6,
+			'no_found_rows'  => true,
+		)
+	);
+
+	if ( $related_query->have_posts() ) :
+		?>
+		<section class="overflow-hidden bg-slate-50">
+			<div class="container">
+				<div class="py-16 border-t border-slate-200">
+					<div class="flex flex-col gap-8 justify-between items-start mb-10 w-full sm:flex-row sm:items-end">
+						<div class="flex flex-col gap-0">
+							<span class="text-[0.75rem] font-semibold leading-none uppercase text-lime-600"><?php esc_html_e( 'Санал болгох', 'ulziibat-tech' ); ?></span>
+							<h2 class="text-4xl font-black tracking-tight leading-none text-slate-900"><?php esc_html_e( 'Холбоотой нийтлэлүүд', 'ulziibat-tech' ); ?></h2>
+						</div>
+						<!-- Swiper Navigation -->
+						<div class="flex gap-2">
+							<button data-related-prev class="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md transition-colors cursor-pointer shadow-slate-200/20 text-slate-400 hover:border-lime-500 hover:text-lime-600">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+							</button>
+							<button data-related-next class="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md transition-colors cursor-pointer shadow-slate-200/20 text-slate-400 hover:border-lime-500 hover:text-lime-600">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+							</button>
+						</div>
+					</div>
+					<!-- Swiper -->
+					<div data-related-slider class="overflow-visible! swiper group">
+						<div class="swiper-wrapper gap-[10px] group-[.swiper-initialized]:gap-0">
+							<?php
+							while ( $related_query->have_posts() ) :
+								$related_query->the_post();
+								?>
+								<div class="h-auto swiper-slide max-w-[20rem]">
+									<?php
+									get_template_part(
+										'template-parts/card/card',
+										'carousel',
+										array( 'class' => 'h-full w-full' )
+									);
+									?>
+								</div>
+							<?php endwhile; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<?php
+		wp_reset_postdata();
+	endif;
+}
+?>

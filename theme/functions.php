@@ -120,12 +120,23 @@ add_action( 'widgets_init', 'ub_widgets_init' );
  * Enqueue scripts and styles.
  */
 function ub_scripts() {
+	// Register Swiper assets locally.
+	wp_register_style( 'swiper-bundle', get_template_directory_uri() . '/vendor/swiper/swiper-bundle.min.css', array(), '11.1.1' );
+	wp_register_script( 'swiper-bundle', get_template_directory_uri() . '/vendor/swiper/swiper-bundle.min.js', array(), '11.1.1', true );
+
+	// Enqueue Swiper only on single posts where the related slider exists.
+	$deps = array();
+	if ( is_singular( 'post' ) ) {
+		wp_enqueue_style( 'swiper-bundle' );
+		$deps[] = 'swiper-bundle';
+	}
+
 	wp_enqueue_style( 'ulziibat-tech-style', get_stylesheet_uri(), array(), UB_VERSION );
 
 	wp_enqueue_script(
 		'ulziibat-tech-script',
 		get_template_directory_uri() . '/js/script.min.js',
-		array(),
+		$deps,
 		UB_VERSION,
 		array(
 			'in_footer' => true, // Load in the footer.
