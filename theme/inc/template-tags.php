@@ -353,7 +353,7 @@ function ub_the_posts_navigation( $link_class = '', $wrapper_class = '', $nav_cl
 		$wrapper_class   = ! empty( $wrapper_class ) ? $wrapper_class : 'flex items-center gap-4';
 		$item_base_class = 'text-6xl font-thin text-slate-600 hover:text-lime-600 transition-colors duration-300';
 
-		echo '<nav class="custom-pagination ' . esc_attr( $nav_class ) . '" aria-label="' . esc_attr__( 'Хуудаслалт', 'ulziibat-tech' ) . '">';
+		echo '<nav class="custom-pagination' . esc_attr( $nav_class ) . '" aria-label="' . esc_attr__( 'Хуудаслалт', 'ulziibat-tech' ) . '">';
 		echo '<div class="' . esc_attr( $wrapper_class ) . '">';
 
 		foreach ( $links as $link ) {

@@ -7,13 +7,11 @@
  * @package ulziibat-tech
  */
 
-$text_color    = ' text-slate-900';
 $padding_class = 'pt-20';
 $term_id       = get_queried_object_id();
 $term_img      = get_field( 'archive_image', 'category_' . $term_id );
 
 if ( $term_img ) {
-	$text_color    = ' text-white';
 	$padding_class = 'z-30 relative pt-64 pb-12';
 }
 ?>
@@ -31,10 +29,10 @@ if ( $term_img ) {
 	<div class="container <?php echo esc_attr( $padding_class ); ?>">
 		<div class="flex flex-col items-start">
 			<span class="text-[0.75rem] pl-0.5 leading-none uppercase font-semibold rounded-xs text-lime-600"><?php esc_html_e( 'Сэдэв', 'ulziibat-tech' ); ?></span>
-			<?php the_archive_title( '<h1 class="text-3xl font-black tracking-tight lg:h1' . $text_color . '">', '</h1>' ); ?>
+			<?php the_archive_title( '<h1 class="max-w-7xl text-2xl font-black leading-none text-slate-900 sm:text-3xl lg:text-5xl xl:text-6xl">', '</h1>' ); ?>
 		</div>
 		<?php if ( term_description() ) : ?>
-			<div class="mt-4 max-w-3xl leading-tight text-lg py-2 <?php echo esc_attr( $text_color ); ?>">
+			<div class="py-2 mt-4 max-w-3xl text-lg leading-tight">
 				<?php echo wp_kses_post( term_description() ); ?>
 			</div>
 		<?php endif; ?>

@@ -10,49 +10,54 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'relative' ); ?>>
-	<header class="flex overflow-hidden relative flex-col justify-end items-start w-full min-h-200">
+	<header class="flex overflow-hidden relative flex-col justify-end items-start w-full bg-lime-600 min-h-200">
 		<?php
 		if ( 'full' === get_field( 'featured_image_type' ) && has_post_thumbnail() ) {
 			the_post_thumbnail( 'full', array( 'class' => 'absolute w-full h-full inset-0 object-cover z-0' ) );
-			?>
-			<div class="absolute inset-0 w-full h-full z-11 bg-slate-950/60"></div>
-			<?php
 		} else {
 			?>
 			<div class="absolute inset-0 z-10 w-full h-full bg-lime-600"></div>
 			<?php
 		}
 		?>
-		<div class="container flex relative z-20 flex-col gap-4 items-start pt-64 pb-16">
-			<div class="flex gap-2 items-center">
-				<?php ub_the_primary_category( 'text-sm leading-none uppercase font-medium text-white' ); ?>
-				<span class="leading-none text-white">
-					<svg class="w-1 h-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>
-				</span>
-				<?php ub_the_read_time( get_the_ID(), 'text-sm leading-none font-medium text-white' ); ?>
-			</div>
-			<h1 class="max-w-7xl text-2xl font-black leading-none text-white sm:text-3xl lg:text-5xl xl:text-6xl"><?php the_title(); ?></h1>
+		<div class="overflow-hidden relative pt-64 pb-16 w-full">
 			<?php
-			if ( has_excerpt() ) :
+			if ( 'full' === get_field( 'featured_image_type' ) && has_post_thumbnail() ) {
 				?>
-				<div class="max-w-3xl text-lg leading-tight text-white">
-					<?php the_excerpt(); ?>
-				</div>
+				<div class="absolute inset-0 w-full h-full to-transparent z-11 bg-linear-to-t from-slate-950/80"></div>
 				<?php
-			endif;
+			}
 			?>
-
-			<div class="flex flex-col gap-1 items-start mt-2 text-xs font-medium leading-none text-white uppercase opacity-70">
+						<div class="container flex relative z-20 flex-col gap-4 items-start">
 				<div class="flex gap-2 items-center">
-					<span><?php esc_html_e( 'Нийтэлсэн:', 'ulziibat-tech' ); ?></span>
-					<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+					<?php ub_the_primary_category( 'text-sm leading-none uppercase font-medium text-white' ); ?>
+					<span class="leading-none text-white">
+						<svg class="w-1 h-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>
+					</span>
+					<?php ub_the_read_time( get_the_ID(), 'text-sm leading-none font-medium text-white' ); ?>
 				</div>
-				<?php if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) : ?>
-					<div class="flex gap-2 items-center">
-						<span><?php esc_html_e( 'Шинэчлэгдсэн:', 'ulziibat-tech' ); ?></span>
-						<time datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date() ); ?></time>
+				<h1 class="max-w-7xl text-2xl font-black leading-none text-white sm:text-3xl lg:text-5xl xl:text-6xl"><?php the_title(); ?></h1>
+				<?php
+				if ( has_excerpt() ) :
+					?>
+					<div class="max-w-3xl text-lg leading-tight text-white">
+						<?php the_excerpt(); ?>
 					</div>
-				<?php endif; ?>
+					<?php
+				endif;
+				?>
+				<div class="flex flex-col gap-1 items-start mt-2 text-xs font-medium leading-none text-white uppercase opacity-70">
+					<div class="flex gap-2 items-center">
+						<span><?php esc_html_e( 'Нийтэлсэн:', 'ulziibat-tech' ); ?></span>
+						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+					</div>
+					<?php if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) : ?>
+						<div class="flex gap-2 items-center">
+							<span><?php esc_html_e( 'Шинэчлэгдсэн:', 'ulziibat-tech' ); ?></span>
+							<time datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date() ); ?></time>
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 		

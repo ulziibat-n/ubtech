@@ -8,7 +8,7 @@
  */
 ?>
 <div class="flex flex-col gap-16 justify-between items-start py-16 xl:flex-row">
-	<div class="flex flex-col gap-16 w-full xl:w-3/4">
+	<div class="flex flex-col gap-10 w-full xl:w-3/4">
 		<div class="flex flex-col gap-12 lg:gap-8">
 			<?php
 			while ( have_posts() ) :

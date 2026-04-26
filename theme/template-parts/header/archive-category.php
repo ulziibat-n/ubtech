@@ -37,7 +37,7 @@ if ( $term_img ) {
 				echo 'text-lime-600'; }
 				?>
 				"><?php esc_html_e( 'Ангилал', 'ulziibat-tech' ); ?></span>
-			<?php the_archive_title( '<h1 class="text-3xl font-black tracking-tight lg:h1' . $text_color . '">', '</h1>' ); ?>
+			<?php the_archive_title( '<h1 class="max-w-7xl text-2xl font-black leading-none sm:text-3xl lg:text-5xl xl:text-6xl' . $text_color . '">', '</h1>' ); ?>
 		</div>
 		<?php if ( term_description() ) : ?>
 			<div class="mt-4 max-w-3xl leading-tight text-lg py-2 <?php echo esc_attr( $text_color ); ?>">
