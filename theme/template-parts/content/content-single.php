@@ -51,7 +51,13 @@
 						<span><?php esc_html_e( 'Нийтэлсэн:', 'ulziibat-tech' ); ?></span>
 						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
 					</div>
-					<?php if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) : ?>
+					<?php
+					$published_time = get_the_time( 'U' );
+					$modified_time  = get_the_modified_time( 'U' );
+					$seven_days     = 7 * 24 * 60 * 60;
+
+					if ( $modified_time > ( $published_time + $seven_days ) ) :
+						?>
 						<div class="flex gap-2 items-center">
 							<span><?php esc_html_e( 'Шинэчлэгдсэн:', 'ulziibat-tech' ); ?></span>
 							<time datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date() ); ?></time>
