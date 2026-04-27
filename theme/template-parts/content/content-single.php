@@ -12,8 +12,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'relative' ); ?>>
 	<header class="flex overflow-hidden relative flex-col justify-end items-start w-full bg-lime-600 min-h-200">
 		<?php
-		$featured_image_type = function_exists( 'get_field' ) ? get_field( 'featured_image_type' ) : 'full';
-		if ( has_post_thumbnail() && ( empty( $featured_image_type ) || 'full' === $featured_image_type ) ) {
+		if ( has_post_thumbnail() ) {
 			the_post_thumbnail( 'full', array( 'class' => 'absolute w-full h-full inset-0 object-cover z-0' ) );
 		} else {
 			?>
@@ -23,7 +22,7 @@
 		?>
 		<div class="overflow-hidden relative pt-64 pb-16 w-full">
 			<?php
-			if ( has_post_thumbnail() && ( empty( $featured_image_type ) || 'full' === $featured_image_type ) ) {
+			if ( has_post_thumbnail() ) {
 				?>
 				<div class="absolute inset-0 w-full h-full to-transparent z-11 bg-linear-to-t from-slate-950/80"></div>
 				<?php
