@@ -29,6 +29,7 @@
 			}
 			?>
 			<div class="container flex relative z-20 flex-col gap-4 items-start">
+				<?php ub_breadcrumb( 'text-xs text-white/60 mb-0' ); ?>
 				<div class="flex gap-2 items-center">
 					<?php ub_the_primary_category( 'text-sm leading-none uppercase font-medium text-white' ); ?>
 					<span class="leading-none text-white">

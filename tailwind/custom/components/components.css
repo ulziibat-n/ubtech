@@ -68,3 +68,14 @@
 	@apply float-right ml-8;
 }
 
+/**
+ * Breadcrumbs styles (Yoast SEO)
+ */
+#breadcrumbs {
+	@apply flex flex-wrap items-center;
+	
+	a {
+		@apply transition-colors duration-300;
+	}
+}
+

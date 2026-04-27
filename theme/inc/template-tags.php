@@ -533,4 +533,17 @@ if ( ! function_exists( 'ub_the_primary_category' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'ub_breadcrumb' ) ) :
+	/**
+	 * Display Yoast SEO breadcrumbs with custom styling.
+	 *
+	 * @param string $class Additional CSS classes for the wrapper.
+	 */
+	function ub_breadcrumb( $class = 'text-xs text-slate-400 mb-4' ) {
+		if ( function_exists( 'yoast_breadcrumb' ) ) {
+			yoast_breadcrumb( '<div id="breadcrumbs" class="' . esc_attr( $class ) . '">', '</div>' );
+		}
+	}
+endif;
+
 
