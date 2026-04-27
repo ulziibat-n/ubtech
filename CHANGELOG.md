@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.3] — 2026-04-27
+
+### Changed
+- **Transliteration Improvements** — Enhanced slug conversion for existing posts
+  - Added support for transliterating slugs during post updates via `wp_insert_post_data`
+  - Ensures that existing Cyrillic slugs can be easily converted to Latin by simply re-saving/updating the post
+
+---
+
 ## [1.0.2] — 2026-04-27
 
 ### Added
@@ -112,5 +121,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.2
+- Version: 1.0.3
 - Refactor code structure for improved readability and maintainability
