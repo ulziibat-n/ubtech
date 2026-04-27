@@ -16,6 +16,7 @@
 		<div class="container py-16">
 			<header>
 				<div class="flex flex-col gap-8 pt-4 pb-20">
+					<?php ub_breadcrumb( 'text-xs text-slate-400 mb-0' ); ?>
 					<?php
 					if ( ! is_front_page() ) {
 						the_title( '<h1 class="max-w-lg text-4xl font-black text-slate-900 sm:text-6xl">', '</h1>' );

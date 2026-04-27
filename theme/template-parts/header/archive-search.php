@@ -12,6 +12,7 @@ $text_color = ' text-slate-900';
 
 <header class="overflow-hidden relative z-10 pt-16 w-full">
 	<div class="container">
+		<?php ub_breadcrumb( 'text-xs text-slate-400 mb-2' ); ?>
 		<div class="flex flex-col items-start">
 			<span class="text-[0.75rem] pl-0.5 leading-none uppercase font-semibold text-lime-600 mb-2"><?php esc_html_e( 'Хайлт', 'ulziibat-tech' ); ?></span>
 			<h1 class="max-w-7xl text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl <?php echo esc_attr( $text_color ); ?>">
