@@ -1,6 +1,6 @@
 {
     "key": "group_692bf6d3cef68",
-    "title": "Site Settings",
+    "title": "Загварын тохиргоо",
     "fields": [
         {
             "key": "field_692bf6d33fe68",
@@ -27,6 +27,87 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_699a94cc9e522",
+            "label": "Featured Category",
+            "name": "featured_category",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "field_type": "select",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_69eb291128ac4",
+            "label": "Толгой хэсгийн товчлуур",
+            "name": "header_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_69eb29d21b0bd",
+            "label": "Толгой хэсгийн товчлуурын хэв маяг",
+            "name": "header_link_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69eb291128ac4",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Үндсэн",
+                "brand": "Брэнд",
+                "ghost": "Сүнс",
+                "link": "Холбоос"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         }
     ],
     "location": [
@@ -48,5 +129,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1764491237
+    "modified": 1777019497
 }

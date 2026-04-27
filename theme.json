@@ -34,6 +34,20 @@
 		"layout": {
 			"contentSize": "40rem",
 			"wideSize": "60rem"
+		},
+		"blocks": {
+			"core/image": {
+				"color": { "text": false, "background": false },
+				"typography": { "fontSize": false, "lineHeight": false },
+				"spacing": { "margin": false, "padding": false },
+				"border": { "color": false, "radius": false, "style": false, "width": false }
+			},
+			"core/table": {
+				"color": { "text": false, "background": false },
+				"typography": { "fontSize": false, "lineHeight": false },
+				"spacing": { "margin": false, "padding": false },
+				"border": { "color": false, "radius": false, "style": false, "width": false }
+			}
 		}
 	}
 }

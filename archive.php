@@ -7,39 +7,69 @@
  * @package ulziibat-tech
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$term_id      = get_queried_object_id();
+$archive_type = 'grid';
+
+if ( is_author() || is_category() ) {
+	$archive_type = 'list';
+	if ( is_category() && function_exists( 'get_field' ) && get_field( 'archive_type', 'category_' . $term_id ) ) {
+		$archive_type = get_field( 'archive_type', 'category_' . $term_id );
+	}
+} elseif ( is_tag() || is_search() ) {
+	$archive_type = 'grid';
+} else {
+	$archive_type = 'list';
+}
+
 get_header();
 ?>
 
-	<section id="primary">
-		<main id="main">
+	<div id="content">
+		<section id="primary">
+			<main id="main">
 
-		<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) : ?>
+				<?php
+				if ( is_author() ) {
+					get_template_part( 'template-parts/header/archive', 'author' );
+				} elseif ( is_category() ) {
+					get_template_part( 'template-parts/header/archive', 'category' );
+				} elseif ( is_tag() ) {
+					get_template_part( 'template-parts/header/archive', 'tag' );
+				} elseif ( is_search() ) {
+					get_template_part( 'template-parts/header/archive', 'search' );
+				} else {
+					get_template_part( 'template-parts/header/archive', 'default' );
+				}
+				?>
 
-			<header class="page-header">
-				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-			</header><!-- .page-header -->
+				<section class="relative w-full">
+					<div class="container">
+						<div class="<?php echo esc_attr( $archive_type ); ?>">
+							<?php
+							if ( 'grid' === $archive_type ) {
+								get_template_part( 'template-parts/archive/archive', 'grid' );
+							} else {
+								get_template_part( 'template-parts/archive/archive', 'list' );
+							}
+							?>
+						</div>
+					</div>
+				</section>
 
-			<?php
-			// Start the Loop.
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
+			<?php else : ?>
 
-				// End the loop.
-			endwhile;
+				<?php get_template_part( 'template-parts/archive/archive', 'none' ); ?>
 
-			// Previous/next page navigation.
-			ub_the_posts_navigation();
+			<?php endif; ?>
 
-		else :
-
-			// If no content, include the "No posts found" template.
-			get_template_part( 'template-parts/content/content', 'none' );
-
-		endif;
-		?>
-		</main><!-- #main -->
-	</section><!-- #primary -->
+			</main><!-- #main -->
+		</section><!-- #primary -->
+	</div><!-- #content -->
 
 <?php
 get_footer();

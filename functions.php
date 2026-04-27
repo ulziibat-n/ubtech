@@ -18,30 +18,6 @@ if ( ! defined( 'UB_VERSION' ) ) {
 	define( 'UB_VERSION', wp_get_theme()->get( 'Version' ) );
 }
 
-if ( ! defined( 'UB_TYPOGRAPHY_CLASSES' ) ) {
-	/*
-	 * Set Tailwind Typography classes for the front end, block editor and
-	 * classic editor using the constant below.
-	 *
-	 * For the front end, these classes are added by the `ub_content_class`
-	 * function. You will see that function used everywhere an `entry-content`
-	 * or `page-content` class has been added to a wrapper element.
-	 *
-	 * For the block editor, these classes are converted to a JavaScript array
-	 * and then used by the `./javascript/block-editor.js` file, which adds
-	 * them to the appropriate elements in the block editor (and adds them
-	 * again when they’re removed.)
-	 *
-	 * For the classic editor (and anything using TinyMCE, like Advanced Custom
-	 * Fields), these classes are added to TinyMCE’s body class when it
-	 * initializes.
-	 */
-	define(
-		'UB_TYPOGRAPHY_CLASSES',
-		''
-	);
-}
-
 if ( ! function_exists( 'ub_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -144,12 +120,23 @@ add_action( 'widgets_init', 'ub_widgets_init' );
  * Enqueue scripts and styles.
  */
 function ub_scripts() {
+	// Register Swiper assets locally.
+	wp_register_style( 'swiper-bundle', get_template_directory_uri() . '/vendor/swiper/swiper-bundle.min.css', array(), '11.1.1' );
+	wp_register_script( 'swiper-bundle', get_template_directory_uri() . '/vendor/swiper/swiper-bundle.min.js', array(), '11.1.1', true );
+
+	// Enqueue Swiper only on single posts where the related slider exists.
+	$deps = array();
+	if ( is_singular( 'post' ) ) {
+		wp_enqueue_style( 'swiper-bundle' );
+		$deps[] = 'swiper-bundle';
+	}
+
 	wp_enqueue_style( 'ulziibat-tech-style', get_stylesheet_uri(), array(), UB_VERSION );
 
 	wp_enqueue_script(
 		'ulziibat-tech-script',
 		get_template_directory_uri() . '/js/script.min.js',
-		array(),
+		$deps,
 		UB_VERSION,
 		array(
 			'in_footer' => true, // Load in the footer.
@@ -162,6 +149,67 @@ function ub_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ub_scripts' );
+
+/**
+ * Completely remove unnecessary CSS and scripts.
+ */
+function ub_cleanup_head() {
+	// Remove emoji support.
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_head', 'print_emoji_styles' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+}
+add_action( 'init', 'ub_cleanup_head' );
+
+/**
+ * Completely remove Gutenberg global styles and block library CSS.
+ */
+function ub_remove_global_styles_and_blocks() {
+	wp_dequeue_style( 'global-styles' );
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_dequeue_style( 'wc-block-style' );
+	wp_dequeue_style( 'classic-theme-styles' );
+	wp_dequeue_style( 'core-block-supports' );
+
+	// Remove individual core block styles (WordPress 6.1+).
+	global $wp_styles;
+	foreach ( $wp_styles->registered as $handle => $data ) {
+		if ( str_starts_with( $handle, 'wp-block-' ) ) {
+			wp_dequeue_style( $handle );
+		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'admin_enqueue_scripts', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'enqueue_block_assets', 'ub_remove_global_styles_and_blocks', 100 );
+add_action( 'enqueue_block_editor_assets', 'ub_remove_global_styles_and_blocks', 100 );
+add_filter( 'should_load_separate_core_block_assets', '__return_false' );
+
+/**
+ * Remove wide/full alignment support from all blocks.
+ */
+function ub_remove_align_support( $args, $block_type ) {
+	if ( isset( $args['supports']['align'] ) ) {
+		if ( is_array( $args['supports']['align'] ) ) {
+			$args['supports']['align'] = array_diff( $args['supports']['align'], array( 'wide', 'full' ) );
+		} elseif ( true === $args['supports']['align'] ) {
+			$args['supports']['align'] = array( 'left', 'right', 'center' );
+		}
+	}
+	return $args;
+}
+add_filter( 'register_block_type_args', 'ub_remove_align_support', 10, 2 );
+
+// Aggressive removal of core actions.
+remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+remove_action( 'admin_enqueue_scripts', 'wp_enqueue_global_styles' );
+remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
 
 /**
  * Enqueue the block editor script.
@@ -187,41 +235,9 @@ function ub_enqueue_block_editor_script() {
 				'strategy'  => 'defer', // Defer the script.
 			)
 		);
-		wp_add_inline_script( 'ulziibat-tech-editor', "tailwindTypographyClasses = '" . esc_attr( UB_TYPOGRAPHY_CLASSES ) . "'.split(' ');", 'before' );
 	}
 }
 add_action( 'enqueue_block_assets', 'ub_enqueue_block_editor_script' );
-
-/**
- * Add the Tailwind Typography classes to TinyMCE.
- *
- * @param array $settings TinyMCE settings.
- * @return array
- */
-function ub_tinymce_add_class( $settings ) {
-	$settings['body_class'] = UB_TYPOGRAPHY_CLASSES;
-	return $settings;
-}
-add_filter( 'tiny_mce_before_init', 'ub_tinymce_add_class' );
-
-/**
- * Limit the block editor to heading levels supported by Tailwind Typography.
- *
- * @param array  $args Array of arguments for registering a block type.
- * @param string $block_type Block type name including namespace.
- * @return array
- */
-function ub_modify_heading_levels( $args, $block_type ) {
-	if ( 'core/heading' !== $block_type ) {
-		return $args;
-	}
-
-	// Remove <h1>, <h5> and <h6>.
-	$args['attributes']['levelOptions']['default'] = array( 2, 3, 4 );
-
-	return $args;
-}
-add_filter( 'register_block_type_args', 'ub_modify_heading_levels', 10, 2 );
 
 /**
  * Custom template tags for this theme.
@@ -237,3 +253,17 @@ require get_template_directory() . '/inc/template-functions.php';
  * Disable WordPress comments.
  */
 require get_template_directory() . '/inc/disable-comments.php';
+
+/**
+ * Limit search results to only 'post' post type.
+ *
+ * @param WP_Query $query The query object.
+ * @return WP_Query
+ */
+function site_limit_search_to_posts( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
+		$query->set( 'post_type', 'post' );
+	}
+	return $query;
+}
+add_filter( 'pre_get_posts', 'site_limit_search_to_posts' );

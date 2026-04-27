@@ -22,7 +22,7 @@
 
 	<?php ub_post_thumbnail(); ?>
 
-	<div <?php ub_content_class( 'entry-content' ); ?>>
+	<div class="entry-content">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
 

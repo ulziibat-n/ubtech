@@ -14,13 +14,13 @@
 		<header>
 			<?php
 			if ( ! is_front_page() ) {
-				the_title( '<h1 class="max-w-lg text-4xl font-black text-fg-default sm:text-6xl">', '</h1>' );
+				the_title( '<h1 class="max-w-lg text-4xl font-black text-slate-900 sm:text-6xl">', '</h1>' );
 			} else {
-				the_title( '<h2 class="max-w-lg text-4xl font-black text-fg-default sm:text-6xl">', '</h2>' );
+				the_title( '<h2 class="max-w-lg text-4xl font-black text-slate-900 sm:text-6xl">', '</h2>' );
 			}
 			?>
 		</header>
-		<div <?php ub_content_class( 'mt-20 max-w-2xl' ); ?>>
+		<div class="mt-20 max-w-2xl">
 			<?php
 			the_content();
 			?>
