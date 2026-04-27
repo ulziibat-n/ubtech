@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] — 2026-04-27
+
+### Added
+- **ACF Safety & Requirements** — Prevented site crashes when ACF is missing
+  - Added `function_exists('get_field')` checks across all theme files
+  - Implemented a friendly custom error page (matching 404 design) when ACF PRO is inactive
+  - Added administrative notices for required plugin activation
+
+### Changed
+- **Modified Date Logic** — Refined the display of updated dates on posts
+  - Updated dates now only show if they are at least 7 days newer than the published date
+  - Prevents "Modified" date from appearing for minor immediate edits
+- **Featured Image Logic** — Simplified single post header display
+  - Removed dependency on custom ACF `featured_image_type` field
+  - Now uses WordPress default Featured Image logic for better compatibility with existing posts
+
+---
+
 ## [1.0.0] — 2026-04-27
 
 ### Added
