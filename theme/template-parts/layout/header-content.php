@@ -49,10 +49,12 @@
 
 				<div class="flex gap-4 items-center ml-auto">
 					<?php
-					$header_link      = get_field( 'header_link', 'option' );
-					$header_link_type = get_field( 'header_link_type', 'option' );
-					if ( $header_link ) :
-						ub_button( $header_link, $header_link_type, '', true );
+					if ( function_exists( 'get_field' ) ) :
+						$header_link      = get_field( 'header_link', 'option' );
+						$header_link_type = get_field( 'header_link_type', 'option' );
+						if ( $header_link ) :
+							ub_button( $header_link, $header_link_type, '', true );
+						endif;
 					endif;
 					?>
 				</div>

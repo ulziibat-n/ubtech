@@ -10,7 +10,11 @@
 $text_color    = ' text-slate-900';
 $padding_class = 'pt-20';
 $term_id       = get_queried_object_id();
-$term_img      = get_field( 'archive_image', 'category_' . $term_id );
+$term_img      = false;
+
+if ( function_exists( 'get_field' ) ) {
+	$term_img = get_field( 'archive_image', 'category_' . $term_id );
+}
 
 if ( $term_img ) {
 	$text_color    = ' text-white';

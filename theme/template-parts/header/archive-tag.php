@@ -9,7 +9,11 @@
 
 $padding_class = 'pt-20';
 $term_id       = get_queried_object_id();
-$term_img      = get_field( 'archive_image', 'category_' . $term_id );
+$term_img      = false;
+
+if ( function_exists( 'get_field' ) ) {
+	$term_img = get_field( 'archive_image', 'category_' . $term_id );
+}
 
 if ( $term_img ) {
 	$padding_class = 'z-30 relative pt-64 pb-12';
