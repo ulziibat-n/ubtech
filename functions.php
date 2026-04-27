@@ -255,6 +255,11 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/disable-comments.php';
 
 /**
+ * ACF Requirement Check.
+ */
+require get_template_directory() . '/inc/acf-requirement.php';
+
+/**
  * Limit search results to only 'post' post type.
  *
  * @param WP_Query $query The query object.

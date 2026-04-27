@@ -285,9 +285,11 @@ function ub_body_classes( $classes ) {
 	// ✅ Transparent header for category archives with images.
 	if ( is_category() ) {
 		$term_id  = get_queried_object_id();
-		$term_img = get_field( 'archive_image', 'category_' . $term_id );
-		if ( $term_img ) {
-			$classes[] = 'is-header-transparent';
+		if ( function_exists( 'get_field' ) ) {
+			$term_img = get_field( 'archive_image', 'category_' . $term_id );
+			if ( $term_img ) {
+				$classes[] = 'is-header-transparent';
+			}
 		}
 	}
 
