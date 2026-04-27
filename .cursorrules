@@ -1,0 +1,6 @@
+# Project Specific Rules
+- NEVER add `declare(strict_types=1);` to any PHP files.
+- ALWAYS apply code changes directly to the respective files immediately. Do not just show the code in the response; use file editing tools (write_to_file, replace_file_content) to implement the changes.
+- Follow WordPress Coding Standards (WPCS).
+- Use Tailwind CSS for styling.
+- Use `site_` prefix for new functions and CPTs as per global rules.

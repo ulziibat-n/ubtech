@@ -1,7 +1,7 @@
 @layer components {
 	/* ─── Code Blocks Wrapper ───────────────────────────────────────────────── */
 	.wp-block-code {
-		@apply relative my-8 overflow-hidden rounded-xl border border-stroke-default bg-surface-card selection:bg-brand-primary/30;
+		@apply relative my-8 overflow-hidden rounded-xl border border-slate-200 bg-white selection:bg-lime-500/30;
 	}
 
 	.wp-block-code pre {

@@ -39,8 +39,6 @@ Or [deploy with the tool of your choice](https://underscoretw.com/docs/deploymen
   Find solutions to potential issues and answers to frequently asked questions
 
 ### In Depth
-
-* [Using Tailwind Typography](https://underscoretw.com/docs/tailwind-typography/)  
   Customize front-end and back-end typographic styles
 * [JavaScript Bundling with esbuild](https://underscoretw.com/docs/esbuild/)  
   Install and bundle JavaScript libraries (very quickly)

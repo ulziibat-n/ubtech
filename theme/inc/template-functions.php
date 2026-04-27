@@ -36,34 +36,20 @@ add_filter( 'comment_form_defaults', 'ub_comment_form_defaults' );
  * Filters the default archive titles.
  */
 function ub_get_the_archive_title() {
-	if ( is_category() ) {
-		$title = __( 'Category Archives: ', 'ulziibat-tech' ) . '<span>' . single_term_title( '', false ) . '</span>';
-	} elseif ( is_tag() ) {
-		$title = __( 'Tag Archives: ', 'ulziibat-tech' ) . '<span>' . single_term_title( '', false ) . '</span>';
+	if ( is_category() || is_tag() || is_tax() ) {
+		$title = single_term_title( '', false );
 	} elseif ( is_author() ) {
-		$title = __( 'Author Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_author_meta( 'display_name' ) . '</span>';
+		$title = get_the_author_meta( 'display_name' );
 	} elseif ( is_year() ) {
-		$title = __( 'Yearly Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'ulziibat-tech' ) ) . '</span>';
+		$title = get_the_date( _x( 'Y', 'yearly archives date format', 'ulziibat-tech' ) );
 	} elseif ( is_month() ) {
-		$title = __( 'Monthly Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'ulziibat-tech' ) ) . '</span>';
+		$title = get_the_date( _x( 'F Y', 'monthly archives date format', 'ulziibat-tech' ) );
 	} elseif ( is_day() ) {
-		$title = __( 'Daily Archives: ', 'ulziibat-tech' ) . '<span>' . get_the_date() . '</span>';
+		$title = get_the_date();
 	} elseif ( is_post_type_archive() ) {
-		$cpt   = get_post_type_object( get_queried_object()->name );
-		$title = sprintf(
-			/* translators: %s: Post type singular name */
-			esc_html__( '%s Archives', 'ulziibat-tech' ),
-			$cpt->labels->singular_name
-		);
-	} elseif ( is_tax() ) {
-		$tax   = get_taxonomy( get_queried_object()->taxonomy );
-		$title = sprintf(
-			/* translators: %s: Taxonomy singular name */
-			esc_html__( '%s Archives', 'ulziibat-tech' ),
-			$tax->labels->singular_name
-		);
+		$title = post_type_archive_title( '', false );
 	} else {
-		$title = __( 'Archives:', 'ulziibat-tech' );
+		$title = __( 'Архив', 'ulziibat-tech' );
 	}
 	return $title;
 }
@@ -181,7 +167,7 @@ function ub_html5_comment( $comment, $args, $depth ) {
 				<?php endif; ?>
 			</footer><!-- .comment-meta -->
 
-			<div <?php ub_content_class( 'comment-content' ); ?>>
+			<div class="comment-content">
 				<?php comment_text(); ?>
 			</div><!-- .comment-content -->
 
@@ -216,7 +202,7 @@ function ub_html5_comment( $comment, $args, $depth ) {
  * @return string
  */
 function ub_acf_json_save_point( $path ) {
-	// Update path
+	// Update path.
 	$path = get_stylesheet_directory() . '/json';
 
 	return $path;
@@ -230,7 +216,7 @@ add_filter( 'acf/settings/save_json', 'ub_acf_json_save_point' );
  * @return array
  */
 function ub_acf_json_load_point( $paths ) {
-	// Remove original path (optional)
+	// Remove original path (optional).
 	unset( $paths[0] );
 
 	// Append path
@@ -266,11 +252,14 @@ add_filter( 'nav_menu_css_class', 'ub_add_group_class_to_menu_items', 10, 3 );
  */
 function ub_add_classes_to_menu_links( $atts, $item, $args ) {
 	if ( 'menu-1' === $args->theme_location ) {
-		$atts['class'] = 'text-sm font-semibold leading-none text-fg-default duration-300 ease-primary hover:text-fg-link transition-colors focus:text-fg-inverse py-2 px-4 group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0 ';
+		$atts['class'] = ' text-sm text-slate-600 hover:text-lime-600 duration-300 ease-primary [*.is-active]:bg-white [*.is-active]:text-lime-600 px-3 py-1.5 rounded-md font-semibold transition-colors focus:text-slate-500 focus:outline-none focus:ring-0 group-[.is-header-transparent]/body:text-white group-[.is-header-transparent]/body:hover:text-lime-400 group-[.is-header-transparent]/body:[*.is-active]:bg-white/20 group-[.is-header-transparent]/body:[*.is-active]:text-lime-500';
+		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
+			$atts['class'] .= ' is-active';
+		}
 	}
 
 	if ( 'menu-2' === $args->theme_location ) {
-		$atts['class'] = 'text-xs font-semibold leading-none text-fg-subtle duration-300 ease-primary hover:text-fg-default transition-colors focus:text-fg-inverse group-[.current-menu-item]:bg-surface-raised group-[.current-menu-item]:text-fg-link group-[.current-menu-item]:hover:text-fg-link focus:outline-none focus:ring-0';
+		$atts['class'] = 'text-xs font-semibold leading-none text-slate-600 duration-300 ease-primary hover:text-slate-900 transition-colors focus:text-white group-[.current-menu-item]:bg-slate-100 group-[.current-menu-item]:text-lime-600 group-[.current-menu-item]:hover:text-lime-600 focus:outline-none focus:ring-0';
 	}
 	return $atts;
 }
@@ -284,10 +273,58 @@ add_filter( 'nav_menu_link_attributes', 'ub_add_classes_to_menu_links', 10, 3 );
  */
 function ub_body_classes( $classes ) {
 
-		$classes[] = ' scroll-smooth';
+	// ✅ Add 'no-js' by default for CSS reliance.
+	$classes[] = 'no-js';
+
+	// ✅ Add body classes for Tailwind Typography.
+	$classes[] = 'antialiased';
+	$classes[] = 'bg-white';
+	$classes[] = 'text-slate-900';
+	$classes[] = 'group/body';
+
+	// ✅ Transparent header for category archives with images.
+	if ( is_category() ) {
+		$term_id  = get_queried_object_id();
+		$term_img = get_field( 'archive_image', 'category_' . $term_id );
+		if ( $term_img ) {
+			$classes[] = 'is-header-transparent';
+		}
+	}
+
+	// ✅ Transparent header for single posts with featured images.
+	if ( is_singular( 'post' ) ) {
+		$classes[] = 'is-header-transparent';
+	}
 
 	return $classes;
 }
 add_filter( 'body_class', 'ub_body_classes' );
+
+/**
+ * Restrict Gutenberg blocks to a specific set.
+ *
+ * @param bool|array              $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
+ * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+ *
+ * @return array|bool
+ */
+function ub_allowed_block_types( $allowed_block_types, $block_editor_context ) {
+	// Restrict blocks for the 'post' post type.
+	if ( isset( $block_editor_context->post ) && 'post' === $block_editor_context->post->post_type ) {
+		return array(
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/list-item',
+			'core/quote',
+			'core/table',
+			'core/image',
+			'core/separator',
+		);
+	}
+
+	return $allowed_block_types;
+}
+add_filter( 'allowed_block_types_all', 'ub_allowed_block_types', 10, 2 );
 
 

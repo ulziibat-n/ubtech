@@ -7,5 +7,5 @@
  * file and is applied both to the front end and in the block editor.
  */
 body {
-	@apply font-sans bg-surface-base text-fg-default;
+	@apply font-sans bg-slate-50 text-slate-900;
 }

@@ -1,0 +1,190 @@
+/**
+ * Shared Content Styles (Frontend & Editor)
+ *
+ * This file serves as the single source of truth for post content typography.
+ * Refined sizes using rem and Tailwind utilities.
+ */
+
+.editor-styles-wrapper {
+	@apply bg-slate-50!;
+}
+ .content-single,
+.editor-styles-wrapper .is-root-container {
+	@apply text-base;
+	/* Typography: Headings */
+	& > h1 {
+		@apply mt-12 mb-4 text-4xl font-black leading-tight first:mt-0 text-slate-900;
+		letter-spacing: -0.025em;
+	}
+
+	& > h2 {
+		@apply mt-10 mb-4 text-3xl font-extrabold leading-tight first:mt-0 text-slate-900;
+		letter-spacing: -0.02em;
+	}
+
+	& > h3 {
+		@apply mt-8 mb-4 text-2xl font-bold leading-tight first:mt-0 text-slate-900;
+		letter-spacing: -0.01em;
+	}
+
+	& > h4 {
+		@apply mt-6 mb-4 text-xl font-bold leading-tight first:mt-0 text-slate-900;
+	}
+
+	& > h5 {
+		@apply mt-5 mb-4 text-lg font-bold leading-tight first:mt-0 text-slate-900;
+	}
+
+	& > h6 {
+		@apply mt-4 mb-4 text-base font-bold leading-tight first:mt-0 text-slate-900;
+	}
+
+	/* Typography: Paragraphs */
+	& > p {
+		@apply mb-4 text-base leading-relaxed last:mb-0 text-slate-700;
+	}
+
+	/* Typography: Lists */
+	& > ul, 
+	& > ol {
+		@apply mb-4 ml-6 text-slate-700;
+
+		li {
+			@apply mb-2 last:mb-0;
+		}
+	}
+
+	& > ul { @apply list-disc; }
+	& > ol { @apply list-decimal; }
+
+	& li > ul,
+	& li > ol {
+		@apply mt-2 mb-0;
+	}
+
+	/* Typography: Blockquotes */
+	& > blockquote.wp-block-quote {
+		@apply py-6 pr-6 pl-6 my-8 text-lg italic bg-white border-l-4 border-lime-500 text-slate-800;
+	}
+
+	& > blockquote.wp-block-quote p {
+		@apply not-italic font-medium text-2xl leading-[1.15] mt-0;
+	}
+
+	& > blockquote.wp-block-quote p:last-child {
+		@apply mb-0! ;
+	}
+
+	/* Typography: Tables (Gutenberg Structure) */
+	& > figure.wp-block-table {
+		@apply mt-10 mb-10 border-0 first:mt-0 last:mb-0;
+
+		table {
+			@apply w-full border-collapse border-spacing-0! text-sm;
+			
+			/* Fixed layout support */
+			&.has-fixed-layout {
+				@apply table-fixed!;
+			}
+
+			th, td {
+				@apply py-3 pr-4 pl-0 text-sm leading-tight text-left border-0;
+			}
+
+			th {
+				@apply font-bold;
+			}
+
+			tr {
+				@apply border-b border-slate-200;
+			}
+
+			thead tr {
+				@apply border-b-2 border-slate-600;
+			}
+
+			tbody:last-child tr:last-child {
+				@apply border-b-0!;
+			}
+
+			tfoot tr {
+				@apply border-b-0
+			}
+		}
+	}
+
+	/* Separator (hr) */
+	& > hr {
+		@apply my-10 border-t border-slate-200;
+	}
+
+	/* Images & Figures */
+	& > figure:not(.wp-block-table) {
+		@apply my-10 first:mt-0 last:mb-0;
+	}
+
+	& > figure img {
+		@apply max-w-full h-auto rounded-sm;
+	}
+
+	& > figure figcaption {
+		@apply mt-4 text-xs font-medium text-center text-slate-400;
+	}
+
+	/* ──────────────────────────────────────────────────────────────────────────
+	   Block Exclusion Logic
+	   ────────────────────────────────────────────────────────────────────────── */
+
+	/* Hide unsupported blocks as requested */
+	& > *:not(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, table, figure, img, hr, div) {
+		@apply hidden!;
+	}
+
+	/* Handle Gutenberg wrappers while maintaining the "> *" aesthetic */
+	& > .wp-block-group,
+	& > .wp-block-column {
+		@apply max-w-none p-0 m-0!;
+	}
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Table of Contents (TOC) Styling
+   ────────────────────────────────────────────────────────────────────────── */
+[data-post-toc] {
+
+	ul[data-post-toc-list] {
+		@apply flex flex-col gap-0;
+
+		.toc-link {
+			@apply relative -ml-px border-l border-transparent transition-all duration-300;
+			
+			&:hover {
+				@apply border-slate-300;
+				.toc-text { @apply text-slate-900; }
+			}
+
+			&[data-current] {
+				.toc-text { 
+					@apply font-semibold text-slate-950; 
+				}
+			}
+		}
+
+		.toc-text {
+			@apply py-1 leading-snug transition-colors duration-300 text-slate-600;
+
+			&.toc-text-h2 {
+				@apply text-[0.875rem] font-medium;
+			}
+
+			&.toc-text-h3 {
+				@apply text-[0.8125rem] opacity-80;
+			}
+		}
+
+		/* Nested hierarchy reset */
+		ul {
+			@apply mt-0 mb-0 ml-0 border-0;
+		}
+	}
+}

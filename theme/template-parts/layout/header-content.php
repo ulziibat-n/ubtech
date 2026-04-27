@@ -9,53 +9,54 @@
 
 ?>
 
-<header id="masthead">
-	<div class="hidden">
-		<?php
-		if ( is_front_page() ) :
-			?>
-			<h1 class="hidden"><?php bloginfo( 'name' ); ?></h1>
+<header data-site-header id="masthead" class="site-header group-[.is-header-transparent]/body:absolute group-[.is-header-transparent]/body:top-0 group-[.is-header-transparent]/body:left-0 group-[.is-header-transparent]/body:w-full group-[.is-header-transparent]/body:z-50 z-50">
+	<div class="container">
+		<div class="hidden">
 			<?php
-		else :
-			?>
-			<p class="hidden"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-		endif;
-		?>
-	</div>
-	<div class="container py-6">
-		<div class="flex items-center gap-12 select-none">
-			<div class="flex gap-8">
-				<a class="flex items-center gap-2 focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<svg class="w-8 h-auto fill-fg-inverse" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m443-340 74-101 73 101 148-202-85-63-63 86-74-102-73 102-74-101-147 202 85 63 62-86 74 101Zm37 294q-91 0-169.99-34.08-78.98-34.09-137.41-92.52-58.43-58.43-92.52-137.41Q46-389 46-480q0-91 34.08-169.99 34.09-78.98 92.52-137.41 58.43-58.43 137.41-92.52Q389-914 480-914q91 0 169.99 34.08 78.98 34.09 137.41 92.52 58.43 58.43 92.52 137.41Q914-571 914-480q0 91-34.08 169.99-34.09 78.98-92.52 137.41-58.43 58.43-137.41 92.52Q571-46 480-46Z"/></svg>
-					<span class="w-20 text-sm font-black leading-3 tracking-wide uppercase" aria-label="ulziibat.tech"><span class="block">ulziibat</span><span class="block text-brand-primary">tech</span></span>
-				</a>
-				<?php
-				$ub_description = get_bloginfo( 'description', 'display' );
-				if ( $ub_description || is_customize_preview() ) :
-					?>
-					<p class="hidden text-xs max-w-44 text-fg-muted"><?php echo $ub_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-				<?php endif; ?>
-			</div>
-			
-			<nav id="site-navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'ulziibat-tech' ); ?>">
-			
-				<?php
-				if ( has_nav_menu( 'menu-1' ) ) {
-					wp_nav_menu(
-						array(
-							'theme_location' => 'menu-1',
-							'menu_id'        => 'primary-menu',
-							'items_wrap'     => '<ul id="%1$s" class="%2$s flex gap-1" aria-label="submenu">%3$s</ul>',
-						)
-					);
-				}
+			if ( is_front_page() ) :
 				?>
-			</nav>
-			<a class="flex py-2 pl-4 pr-2.5 rounded-full ml-auto items-center gap-1 transition-colors ease-primary duration-300 bg-surface-inverse hover:bg-surface-inverse-hover focus:ring-0 focus:bg-surface-inverse-hover focus:outline-0 text-fg-inverse" href="mailto:ulziibat.n@gmail.com">
-				<span class="text-sm font-medium leading-none">Надтай холбогдох</span>
-				<svg class="w-6 h-auto fill-current" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
-			</a>
+				<h1 class="hidden"><?php bloginfo( 'name' ); ?></h1>
+				<?php
+			else :
+				?>
+				<p class="hidden"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<?php
+			endif;
+			?>
+		</div>
+
+		<div class="py-4">
+			<div class="flex gap-8 items-center select-none">
+				<a class="block shrink-0 focus:outline-0" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-black.svg" class="h-9 w-auto shrink block group-[.is-header-transparent]/body:hidden" alt="<?php bloginfo( 'name' ); ?>">
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo-white.svg" class="h-9 w-auto shrink hidden group-[.is-header-transparent]/body:block" alt="<?php bloginfo( 'name' ); ?>">
+				</a>
+
+				<nav id="site-navigation" class="ml-4 ds-nav-menu" aria-label="<?php esc_attr_e( 'Main Navigation', 'ulziibat-tech' ); ?>">
+					<?php
+					if ( has_nav_menu( 'menu-1' ) ) {
+						wp_nav_menu(
+							array(
+								'theme_location' => 'menu-1',
+								'menu_id'        => 'primary-menu',
+								'container'      => false,
+								'items_wrap'     => '<ul id="%1$s" class="%2$s flex gap-1 list-none p-0 m-0">%3$s</ul>',
+							)
+						);
+					}
+					?>
+				</nav>
+
+				<div class="flex gap-4 items-center ml-auto">
+					<?php
+					$header_link      = get_field( 'header_link', 'option' );
+					$header_link_type = get_field( 'header_link_type', 'option' );
+					if ( $header_link ) :
+						ub_button( $header_link, $header_link_type, '', true );
+					endif;
+					?>
+				</div>
+			</div>
 		</div>
 	</div>
 
