@@ -260,6 +260,11 @@ require get_template_directory() . '/inc/disable-comments.php';
 require get_template_directory() . '/inc/acf-requirement.php';
 
 /**
+ * Transliteration for slugs.
+ */
+require get_template_directory() . '/inc/transliteration.php';
+
+/**
  * Limit search results to only 'post' post type.
  *
  * @param WP_Query $query The query object.
