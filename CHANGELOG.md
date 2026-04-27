@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.5] — 2026-04-27
+
+### Added
+- **Breadcrumbs** — Integrated Yoast SEO breadcrumbs across all templates (single posts, pages, archives, search results)
+- **Design Tokens** — Updated typography styles for headings (strong/bold support) and link hover effects
+
+---
+
 ## [1.0.4] — 2026-04-27
 
 ### Fixed
@@ -136,5 +144,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.4
+- Version: 1.0.5
 - Refactor code structure for improved readability and maintainability
