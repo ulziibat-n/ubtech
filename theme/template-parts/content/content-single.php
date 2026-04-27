@@ -28,7 +28,7 @@
 				<?php
 			}
 			?>
-						<div class="container flex relative z-20 flex-col gap-4 items-start">
+			<div class="container flex relative z-20 flex-col gap-4 items-start">
 				<div class="flex gap-2 items-center">
 					<?php ub_the_primary_category( 'text-sm leading-none uppercase font-medium text-white' ); ?>
 					<span class="leading-none text-white">
@@ -36,11 +36,11 @@
 					</span>
 					<?php ub_the_read_time( get_the_ID(), 'text-sm leading-none font-medium text-white' ); ?>
 				</div>
-				<h1 class="max-w-7xl text-2xl font-black leading-none text-white sm:text-3xl lg:text-5xl xl:text-6xl"><?php the_title(); ?></h1>
+				<h1 class="max-w-7xl text-3xl font-black leading-none text-white lg:text-5xl xl:text-6xl"><?php the_title(); ?></h1>
 				<?php
 				if ( has_excerpt() ) :
 					?>
-					<div class="max-w-3xl text-lg leading-tight text-white">
+					<div class="max-w-4xl text-xl leading-tight text-white">
 						<?php the_excerpt(); ?>
 					</div>
 					<?php
@@ -72,7 +72,7 @@
 	<div class="py-16">
 		<div class="container">
 			<div class="flex gap-24 justify-between">
-				<div class="w-full xl:max-w-3xl">
+				<div class="w-full xl:max-w-4xl">
 					<div data-post-content class="w-full content-single">
 						<?php
 						the_content();
@@ -168,14 +168,14 @@
 
 							<!-- Social Links Group -->
 							<?php if ( ! empty( $site_active_socials ) ) : ?>
-								<div class="flex gap-4 items-center mt-4">
+								<div class="flex gap-2 items-center mt-4">
 									<?php foreach ( $site_active_socials as $site_social ) : ?>
 										<a href="<?php echo esc_url( $site_social['url'] ); ?>" 
 											class="transition-colors hover:text-lime-600"
 											target="_blank"
 											rel="noopener noreferrer"
 											title="<?php echo esc_attr( $site_social['label'] ); ?>">
-											<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+											<svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
 												<?php echo $site_social['icon']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											</svg>
 										</a>

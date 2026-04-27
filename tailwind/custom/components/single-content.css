@@ -18,7 +18,7 @@
 	}
 
 	& > h2 {
-		@apply mt-10 mb-4 text-3xl font-extrabold leading-tight first:mt-0 text-slate-900;
+		@apply mt-10 mb-4 text-3xl font-bold leading-tight first:mt-0 text-slate-900;
 		letter-spacing: -0.02em;
 	}
 
@@ -41,16 +41,28 @@
 
 	/* Typography: Paragraphs */
 	& > p {
-		@apply mb-4 text-base leading-relaxed last:mb-0 text-slate-700;
+		@apply mb-4 text-lg leading-snug last:mb-0 text-slate-700;
+
+		strong, b {
+			@apply font-semibold;
+		}
+
+		a {
+			@apply border-b-2 border-lime-600;
+		}
 	}
 
 	/* Typography: Lists */
 	& > ul, 
 	& > ol {
-		@apply mb-4 ml-6 text-slate-700;
+		@apply mb-4 ml-6 text-lg text-slate-700;
 
 		li {
 			@apply mb-2 last:mb-0;
+
+			strong, b {
+				@apply font-semibold
+			}
 		}
 	}
 
@@ -69,6 +81,10 @@
 
 	& > blockquote.wp-block-quote p {
 		@apply not-italic font-medium text-2xl leading-[1.15] mt-0;
+
+		strong, b {
+			@apply font-semibold
+		}
 	}
 
 	& > blockquote.wp-block-quote p:last-child {
@@ -89,6 +105,10 @@
 
 			th, td {
 				@apply py-3 pr-4 pl-0 text-sm leading-tight text-left border-0;
+
+				strong, b {
+					@apply font-semibold
+				}
 			}
 
 			th {
@@ -128,7 +148,7 @@
 	}
 
 	& > figure figcaption {
-		@apply mt-4 text-xs font-medium text-center text-slate-400;
+		@apply mt-2 text-xs font-medium text-slate-400;
 	}
 
 	/* ──────────────────────────────────────────────────────────────────────────
@@ -159,7 +179,6 @@
 			@apply relative -ml-px border-l border-transparent transition-all duration-300;
 			
 			&:hover {
-				@apply border-slate-300;
 				.toc-text { @apply text-slate-900; }
 			}
 

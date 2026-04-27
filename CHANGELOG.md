@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.4] — 2026-04-27
+
+### Fixed
+- **Fonts** — Fixed an issue where custom fonts were not being loaded by correctly importing `fonts.css` in Tailwind
+- **Linting** — Replaced `date()` with `gmdate()` in footer to comply with WordPress DateTime standards
+
+### Changed
+- **Design Updates** — Various UI/UX improvements to single post and page templates
+  - Increased content width and font sizes for better readability
+  - Added underline effect to links within post content
+  - Adjusted social link icons and spacing
+  - Updated page template to support TOC and similar layout to posts
+
+---
+
 ## [1.0.3] — 2026-04-27
 
 ### Changed
@@ -121,5 +136,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.3
+- Version: 1.0.4
 - Refactor code structure for improved readability and maintainability
