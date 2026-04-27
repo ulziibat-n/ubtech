@@ -11,6 +11,7 @@
 
 <header class="overflow-hidden relative pt-16 w-full">
 	<div class="container">
+		<?php ub_breadcrumb( 'text-xs text-slate-400 mb-2' ); ?>
 		<div class="flex flex-col items-start">
 			<span class="text-[0.75rem] pl-0.5 leading-none uppercase font-semibold text-lime-600"><?php esc_html_e( 'Архив', 'ulziibat-tech' ); ?></span>
 			<?php the_archive_title( '<h1 class="max-w-7xl text-2xl font-black leading-none sm:text-3xl lg:text-5xl xl:text-6xl">', '</h1>' ); ?>
