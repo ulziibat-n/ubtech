@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.2] — 2026-04-27
+
+### Added
+- **Post Transliteration** — Automatic Cyrillic to Latin slug conversion
+  - Implemented custom transliteration logic for Mongolian Cyrillic
+  - Automatically converts long/encoded Cyrillic slugs into clean Latin URLs upon post save/update
+
+---
+
 ## [1.0.1] — 2026-04-27
 
 ### Added
@@ -103,5 +112,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Update theme version to 0.0.143
+- Version: 1.0.2
 - Refactor code structure for improved readability and maintainability
