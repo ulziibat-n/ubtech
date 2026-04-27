@@ -14,8 +14,8 @@
 	<div class="container">
 		<div class="flex gap-12 justify-between items-center py-16">
 			<div class="flex gap-4 items-center">
-				<p class="text-xs font-black">
-						<a class="" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">ULZIIBAT.<span class="text-lime-600">TECH</span></a> © <?php echo esc_html( (string) date( 'Y' ) ); ?>
+				<p class="text-xs font-bold">
+						<a class="" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">ULZIIBAT.<span class="text-lime-600">TECH</span></a> © <?php echo esc_html( (string) gmdate( 'Y' ) ); ?>
 				</p>
 			</div>
 			<div class="flex gap-8 items-center">
