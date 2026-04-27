@@ -14,16 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 $term_id      = get_queried_object_id();
 $archive_type = 'grid';
 
-if ( is_author() ) {
+if ( is_author() || is_category() ) {
 	$archive_type = 'list';
-} elseif ( is_category() ) {
-	$archive_type = 'list';
-	if ( function_exists( 'get_field' ) && get_field( 'archive_type', 'category_' . $term_id ) ) {
+	if ( is_category() && function_exists( 'get_field' ) && get_field( 'archive_type', 'category_' . $term_id ) ) {
 		$archive_type = get_field( 'archive_type', 'category_' . $term_id );
 	}
-} elseif ( is_tag() ) {
+} elseif ( is_tag() || is_search() ) {
 	$archive_type = 'grid';
+} else {
+	$archive_type = 'list';
 }
+
 get_header();
 ?>
 
@@ -39,6 +40,10 @@ get_header();
 					get_template_part( 'template-parts/header/archive', 'category' );
 				} elseif ( is_tag() ) {
 					get_template_part( 'template-parts/header/archive', 'tag' );
+				} elseif ( is_search() ) {
+					get_template_part( 'template-parts/header/archive', 'search' );
+				} else {
+					get_template_part( 'template-parts/header/archive', 'default' );
 				}
 				?>
 

@@ -157,7 +157,7 @@ function ub_cleanup_head() {
 	// Remove emoji support.
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'wp_head', 'print_emoji_styles' );
 	remove_action( 'admin_print_styles', 'print_emoji_styles' );
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
@@ -253,3 +253,17 @@ require get_template_directory() . '/inc/template-functions.php';
  * Disable WordPress comments.
  */
 require get_template_directory() . '/inc/disable-comments.php';
+
+/**
+ * Limit search results to only 'post' post type.
+ *
+ * @param WP_Query $query The query object.
+ * @return WP_Query
+ */
+function site_limit_search_to_posts( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
+		$query->set( 'post_type', 'post' );
+	}
+	return $query;
+}
+add_filter( 'pre_get_posts', 'site_limit_search_to_posts' );

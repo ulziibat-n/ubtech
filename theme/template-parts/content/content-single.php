@@ -186,8 +186,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="hidden flex-col items-end max-w-sm xl:flex">
-					<div data-post-toc class="sticky top-24 invisible p-4 bg-white rounded-md shadow-md opacity-0 transition-all duration-500 shadow-slate-200/20 xl:p-8">
+				<div class="hidden flex-col items-end w-full max-w-sm xl:flex">
+					<div data-post-toc class="sticky top-24 invisible p-4 w-full bg-white rounded-md shadow-md opacity-0 transition-all duration-500 shadow-slate-200/20 xl:p-8">
 						<h4 class="text-base font-bold leading-none sm:text-xl xl:text-sm"><?php echo esc_html__( 'Нийтлэлийн агуулга', 'ulziibat-tech' ); ?></h4>
 						<ul data-post-toc-list class="p-0 mt-2">
 						</ul>
@@ -218,7 +218,7 @@ if ( $categories ) {
 
 	if ( $related_query->have_posts() ) :
 		?>
-		<section class="overflow-hidden bg-slate-100">
+		<section class="overflow-hidden bg-slate-50">
 			<div class="container">
 				<div class="py-16">
 					<div class="flex flex-col gap-8 justify-between items-start mb-10 w-full sm:flex-row sm:items-end">
