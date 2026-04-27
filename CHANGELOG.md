@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.0] — 2026-04-27
+
+### Added
+- **Search Experience** — Unified and enhanced search functionality
+  - Added dedicated search result header with integrated search form
+  - Restricted search results to blog posts only (excluding pages and other post types)
+  - Implemented search results list view for better readability
+- **Archive Improvements** — Refined archive empty states and headers
+  - Redesigned `archive-none.php` to match 404 page aesthetics
+  - Created dynamic search and fallback headers for generic archives
+- **Theme Infrastructure** — Unified template logic and coding standards
+  - Re-created `search.php` to delegate to `archive.php` for consistency (DRY)
+  - Removed `declare(strict_types=1);` from all PHP files to match project preference
+  - Updated Antigravity rules in `.agent/instructions.md` for better automation
+- **Footer Updates** — Dynamic copyright year implementation
+
+### Changed
+- Refined archive header padding and z-index for better visibility
+- Optimized `archive.php` logic to determine layout types dynamically
+
+---
+
 ## [0.2.0] — 2026-03-15
 
 ### Added
