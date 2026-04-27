@@ -3,6 +3,7 @@
  */
 
 @import "./tailwind/custom/file-header.css";
+@import "./tailwind/custom/fonts.css";
 @import "tailwindcss";
 @import "./tailwind/tailwind-theme.css";
 
