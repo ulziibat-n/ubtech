@@ -39,3 +39,20 @@ function site_sanitize_title_transliterate( $title, $raw_title, $context ) {
 	return $title;
 }
 add_filter( 'sanitize_title', 'site_sanitize_title_transliterate', 1, 3 );
+
+/**
+ * Forces transliteration on post update/save by filtering post data.
+ *
+ * @param array $data An array of slashed post data.
+ * @param array $postarr An array of sanitized, but otherwise unchanged post data.
+ * @return array
+ */
+function site_force_slug_transliteration( $data, $postarr ) {
+	if ( ! empty( $data['post_name'] ) ) {
+		// Transliterate the slug just in case it contains Cyrillic characters.
+		// We use urldecode because some systems might pass encoded Cyrillic.
+		$data['post_name'] = sanitize_title( site_transliterate_cyrillic( urldecode( $data['post_name'] ) ) );
+	}
+	return $data;
+}
+add_filter( 'wp_insert_post_data', 'site_force_slug_transliteration', 10, 2 );
