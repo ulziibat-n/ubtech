@@ -1,0 +1,16 @@
+{
+	"name": "acf/code-block",
+	"title": "Code Block (Advanced)",
+	"description": "A premium code block with title, copy button, and wrap options.",
+	"category": "ubtech",
+	"icon": "code-standards",
+	"keywords": ["code", "syntax", "highlight"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"anchor": true,
+		"jsx": true
+	}
+}

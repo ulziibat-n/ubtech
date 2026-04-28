@@ -542,8 +542,42 @@ if ( ! function_exists( 'ub_breadcrumb' ) ) :
 	function ub_breadcrumb( $class = 'text-xs text-slate-400 mb-4' ) {
 		if ( function_exists( 'yoast_breadcrumb' ) ) {
 			yoast_breadcrumb( '<div id="breadcrumbs" class="' . esc_attr( $class ) . '">', '</div>' );
+
+			// Register Breadcrumbs Schema to Manager
+			if ( ! is_admin() && class_exists( 'Site_Schema_Manager' ) && class_exists( 'WPSEO_Breadcrumbs' ) ) {
+					$itemsList = array();
+					$links     = WPSEO_Breadcrumbs::get_instance()->get_links();
+
+					// If it's a single post and only has 2 links (Home > Post), try to inject category.
+					if ( is_singular( 'post' ) && count( $links ) <= 2 ) {
+						$categories = get_the_category();
+						if ( ! empty( $categories ) ) {
+							$primary_cat = $categories[0];
+							// Insert category link between Home and Post
+							array_splice( $links, 1, 0, array(
+								array(
+									'text' => $primary_cat->name,
+									'url'  => get_category_link( $primary_cat->term_id ),
+								),
+							) );
+						}
+					}
+
+					foreach ( $links as $index => $link ) {
+						$itemsList[] = array(
+							'@type'    => 'ListItem',
+							'position' => $index + 1,
+							'name'     => isset( $link['text'] ) ? $link['text'] : '',
+							'item'     => isset( $link['url'] ) ? $link['url'] : '',
+						);
+					}
+					Site_Schema_Manager::add_part( 'BreadcrumbList', array(
+						'@type'           => 'BreadcrumbList',
+						'itemListElement' => $itemsList,
+					) );
+				}
+			}
 		}
-	}
 endif;
 
 

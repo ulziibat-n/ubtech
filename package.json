@@ -32,6 +32,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.14",
+		"@tailwindcss/typography": "^0.5.19",
 		"@wordpress/prettier-config": "^4.32.0",
 		"adm-zip": "^0.5.16",
 		"archiver": "^7.0.1",
