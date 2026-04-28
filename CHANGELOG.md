@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.9] — 2026-04-28
+
+### Fixed
+- **Gemini API Endpoint** — Updated API URL from `v1beta` to `v1` to ensure stable support for `gemini-1.5-flash` model.
+
+---
+
 ## [1.0.8] — 2026-04-28
 
 ### Added
@@ -175,5 +182,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.8
+- Version: 1.0.9
 - Refactor code structure for improved readability and maintainability
