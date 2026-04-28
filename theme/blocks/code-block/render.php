@@ -12,14 +12,12 @@ declare(strict_types=1);
  * @package ulziibat-tech
  */
 
-$anchor = '';
-if ( ! empty( $block['anchor'] ) ) {
-	$anchor = ' id="' . esc_attr( $block['anchor'] ) . '"';
-}
+$block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : '';
 
-$title = get_field( 'code_title' );
-$code  = get_field( 'code_content' );
-$wrap  = get_field( 'code_wrap' );
+$code_title = get_field( 'code_title' );
+$code       = get_field( 'code_content' );
+$wrap       = get_field( 'code_wrap' );
+$collapse   = get_field( 'code_collapse' );
 
 if ( ! $code ) {
 	if ( $is_preview ) {
@@ -31,10 +29,10 @@ if ( ! $code ) {
 $white_space = $wrap ? 'normal' : 'pre';
 ?>
 
-<div<?php echo $anchor; ?> class="overflow-hidden my-10 rounded-sm shadow-md border-0! code-block-container bg-white flex flex-col group shadow-slate-200/20">
-	<?php if ( $title || ! $is_preview ) : ?>
-		<div class="flex relative z-10 justify-between items-center px-5 py-2 shadow-md shadow-slate-200/20">
-			<span class="text-sm font-medium leading-none text-slate-500"><?php echo esc_html( $title ); ?></span>
+<div <?php echo $block_id ? 'id="' . esc_attr( $block_id ) . '"' : ''; ?> class="overflow-hidden my-10 rounded-md shadow-md border-0! code-block-container bg-white flex flex-col group shadow-slate-200/20" data-code-block>
+	<?php if ( $code_title || ! $is_preview ) : ?>
+		<div class="flex relative z-20 justify-between items-center px-5 py-2 bg-white shadow-md shadow-slate-200/20">
+			<span class="text-sm font-semibold leading-none text-slate-500"><?php echo esc_html( $code_title ? $code_title : 'Code' ); ?></span>
 			<button 
 				type="button" 
 				class="flex gap-1.5 items-center px-3 py-1 text-[0.65rem]! leading-none font-bold! tracking-wide uppercase transition-colors cursor-pointer copy-code-btn text-slate-500 hover:text-lime-600"
@@ -46,7 +44,15 @@ $white_space = $wrap ? 'normal' : 'pre';
 		</div>
 	<?php endif; ?>
 
-	<div class="relative">
-		<pre class="m-0 p-6 text-xs font-mono text-slate-600 tracking-tight leading-relaxed <?php echo $title ? '' : 'rounded-md'; ?> overflow-x-auto" style="white-space: <?php echo esc_attr( $white_space ); ?>;"><code class="font-mono"><?php echo esc_html( $code ); ?></code></pre>
+	<div class="relative code-content-wrapper <?php echo $collapse ? 'is-collapsed' : ''; ?>" data-code-wrapper>
+		<pre class="overflow-x-auto p-6 m-0 font-mono text-xs tracking-tight leading-relaxed text-slate-600" style="white-space: <?php echo esc_attr( $white_space ); ?>;"><code class="font-mono"><?php echo esc_html( $code ); ?></code></pre>
+		
+		<?php if ( $collapse ) : ?>
+			<div class="flex absolute inset-x-0 bottom-0 z-10 justify-center items-end pb-6 h-32 bg-gradient-to-t from-white to-transparent transition-all duration-300 via-white/80 code-expand-overlay">
+				<button type="button" class="px-6 py-3 text-[0.65rem]! font-bold! tracking-widest uppercase bg-white rounded-full border shadow-xl transition-all cursor-pointer border-slate-200 shadow-slate-200/50 hover:bg-lime-600 leading-none hover:text-white code-expand-btn text-slate-500">
+					<?php esc_html_e( 'Бүгдийг үзэх', 'ulziibat-tech' ); ?>
+				</button>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>

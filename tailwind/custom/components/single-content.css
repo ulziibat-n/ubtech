@@ -178,10 +178,25 @@
 	/* Typography: Code Blocks */
 	& > pre.wp-block-code {
 		@apply overflow-x-auto p-6 my-8 font-mono text-xs leading-relaxed bg-white rounded-md shadow-md shadow-slate-200/20 border-0! tracking-tight text-slate-600;
-		border: 1px solid theme('colors.slate.800');
 
 		code {
 			@apply p-0 font-mono bg-transparent text-inherit;
+		}
+	}
+
+	.code-content-wrapper {
+		@apply transition-[max-height] duration-700 ease-in-out;
+
+		&.is-collapsed {
+			@apply max-h-[160px] overflow-hidden;
+		}
+
+		&.is-expanded {
+			@apply max-h-[5000px];
+
+			.code-expand-overlay {
+				@apply opacity-0 pointer-events-none;
+			}
 		}
 	}
 

@@ -32,6 +32,15 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'ui'            => 1,
 				'default_value' => 0,
 			),
+			array(
+				'key'           => 'field_code_collapse',
+				'label'         => 'Хураангуйлах (Collapse)',
+				'name'          => 'code_collapse',
+				'type'          => 'true_false',
+				'ui'            => 1,
+				'default_value' => 0,
+				'instructions'  => 'Идэвхжүүлсэн үед урт кодыг 6 мөрөөр хязгаарлаж "Бүгдийг үзэх" товч харуулна.',
+			),
 		),
 		'location'              => array(
 			array(

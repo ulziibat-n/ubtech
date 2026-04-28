@@ -184,6 +184,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
+	/**
+	 * Code Block Expand Logic
+	 */
+	const expandButtons = document.querySelectorAll('.code-expand-btn');
+	expandButtons.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const wrapper = btn.closest('[data-code-wrapper]');
+			if (wrapper) {
+				wrapper.classList.remove('is-collapsed');
+				wrapper.classList.add('is-expanded');
+			}
+		});
+	});
+
 	// Initialize all
 	updateHeaderHeight();
 	initRelatedSlider();
