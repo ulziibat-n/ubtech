@@ -16,7 +16,7 @@ class Site_SEO_Analysis {
 	 * Call Gemini AI API
 	 *
 	 * @param string $prompt The prompt to send.
-	 * @return string|null Response from AI.
+	 * @return array Result containing text or error.
 	 */
 	private static function call_gemini( $prompt ) {
 		$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' . self::$api_key;
@@ -37,26 +37,30 @@ class Site_SEO_Analysis {
 		$response = wp_remote_post( $url, array(
 			'body'      => wp_json_encode( $body ),
 			'headers'   => array( 'Content-Type' => 'application/json' ),
-			'timeout'   => 45, // Increased timeout
+			'timeout'   => 45,
 			'sslverify' => false,
 		) );
 
 		if ( is_wp_error( $response ) ) {
-			error_log( 'Gemini API Error: ' . $response->get_error_message() );
-			return null;
+			return array( 'error' => $response->get_error_message() );
 		}
 
-		$raw_body = wp_remote_retrieve_body( $response );
-		$data     = json_decode( $raw_body, true );
+		$http_code = wp_remote_retrieve_response_code( $response );
+		$raw_body  = wp_remote_retrieve_body( $response );
+		$data      = json_decode( $raw_body, true );
+
+		if ( $http_code !== 200 ) {
+			$error_msg = $data['error']['message'] ?? 'HTTP Error ' . $http_code;
+			return array( 'error' => $error_msg );
+		}
 		
 		$text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
 		
 		if ( $text ) {
-			// Clean Markdown JSON blocks if present
 			$text = preg_replace('/^```json\s*|\s*```$/m', '', trim($text));
 		}
 
-		return $text;
+		return array( 'text' => $text );
 	}
 
 	/**
@@ -103,44 +107,49 @@ class Site_SEO_Analysis {
 	 */
 	public static function auto_optimize( $post_id ): array {
 		$post    = get_post( $post_id );
-		// Trim content to avoid API issues with very long posts
 		$content = mb_substr( wp_strip_all_tags( strip_shortcodes( $post->post_title . ' ' . $post->post_content ) ), 0, 4000 );
 		
 		$prompt = "You are an Expert SEO Specialist. Analyze this WordPress article and provide SEO optimization data in JSON format.
 		Language: Mongolian.
 		Content: '{$content}'
 		
-		Requirements:
-		1. Provide a professional Focus Keyphrase.
-		2. Create a compelling SEO Title (max 60 chars) and Meta Description (max 155 chars).
-		3. Suggest related keyphrases.
-		4. Ensure the output is valid JSON.
-		
-		Return ONLY a JSON object:
-		{
-			\"focus\": \"focus keyphrase\",
-			\"related\": \"related, phrases\",
-			\"seo_title\": \"SEO Title\",
-			\"seo_desc\": \"SEO Description\",
-			\"keywords\": \"keywords\",
-			\"social_title\": \"Social Title\",
-			\"social_desc\": \"Social Description\",
-			\"analysis\": [\"Recommendation 1\", \"Recommendation 2\"]
-		}";
+		Return ONLY a JSON object with these keys:
+		- focus: (Ideal focus keyphrase)
+		- related: (Related keyphrases)
+		- seo_title: (SEO title under 60 chars)
+		- seo_desc: (Meta description under 155 chars)
+		- keywords: (Comma separated keywords)
+		- social_title: (Facebook title)
+		- social_desc: (Facebook description)
+		- analysis: (An array of 3-4 professional SEO recommendations)";
 
-		$ai_response = self::call_gemini( $prompt );
-		$data        = $ai_response ? json_decode( $ai_response, true ) : null;
+		$ai_res = self::call_gemini( $prompt );
 
-		if ( ! $data ) {
+		if ( isset( $ai_res['error'] ) ) {
 			return array(
-				'focus'        => 'AI-аар оновчлох боломжгүй байна',
+				'focus'        => 'API Connection Error',
 				'related'      => '',
 				'seo_title'    => $post->post_title,
 				'seo_desc'     => '',
 				'keywords'     => '',
 				'social_title' => $post->post_title,
 				'social_desc'  => '',
-				'analysis'     => array( 'Gemini API холболтод алдаа гарлаа. Дараа дахин оролдоно уу.' ),
+				'analysis'     => array( '🔴 Алдаа: ' . $ai_res['error'], 'API Key эсвэл сүлжээгээ шалгана уу.' ),
+			);
+		}
+
+		$data = json_decode( (string) $ai_res['text'], true );
+
+		if ( ! $data ) {
+			return array(
+				'focus'        => 'JSON Parsing Error',
+				'related'      => '',
+				'seo_title'    => $post->post_title,
+				'seo_desc'     => '',
+				'keywords'     => '',
+				'social_title' => $post->post_title,
+				'social_desc'  => '',
+				'analysis'     => array( 'AI-аас ирсэн хариултыг уншиж чадсангүй.', 'Агуулга хэт урт эсвэл тусгай тэмдэгтээс болсон байж магадгүй.' ),
 			);
 		}
 
@@ -179,12 +188,12 @@ class Site_SEO_Analysis {
 		?>
 		<div class="site-seo-analysis-results" data-post-id="<?php echo (int) $post->ID; ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
 			
-			<div class="seo-optimize-section" style="margin-bottom: 25px; padding: 20px; background: #eefbff; border-radius: 12px; border: 1px solid #7ed3ed; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+			<div class="seo-optimize-section" style="margin-bottom: 25px; padding: 20px; background: #eefbff; border-radius: 12px; border: 1px solid #7ed3ed;">
 				<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
 					<h4 style="margin: 0; font-size: 16px; color: #007cba; font-weight: 600;">✨ Gemini AI Auto-Optimizer</h4>
-					<button type="button" class="button button-primary" id="btn-auto-optimize" style="background: #007cba; height: 36px; border-radius: 18px; padding: 0 20px; font-weight: 600;">AI-аар оновчлох</button>
+					<button type="button" class="button button-primary" id="btn-auto-optimize" style="background: #007cba; height: 36px; border-radius: 18px; padding: 0 20px;">AI-аар оновчлох</button>
 				</div>
-				<p style="font-size: 13px; color: #50575e; margin: 0;">AI ашиглан нэг товчоор SEO талбаруудыг автоматаар бөглөх боломжтой. Энэ нь таны цагийг маш их хэмнэнэ.</p>
+				<p style="font-size: 13px; color: #50575e; margin: 0;">AI ашиглан SEO талбаруудыг автоматаар бөглөх боломжтой.</p>
 			</div>
 
 			<div id="seo-analysis-dynamic-content">
@@ -222,45 +231,32 @@ class Site_SEO_Analysis {
 					if(!confirm('Gemini AI-аар SEO тохиргоог автоматаар бөглөх үү?')) return;
 					$btn.prop('disabled', true).html('AI Шинжилж байна...');
 					
-					$.ajax({
-						url: ajaxurl,
-						type: 'POST',
-						data: {
-							action: 'site_auto_optimize',
-							post_id: $('.site-seo-analysis-results').data('post-id'),
-							nonce: $('.site-seo-analysis-results').data('nonce')
-						},
-						success: function(r) {
-							$btn.prop('disabled', false).html('AI-аар оновчлох');
-							if(r.success) {
-								var d = r.data;
-								// Update ACF fields
-								$('input[name^="acf["][name$="site_focus_keyphrase]"]').val(d.focus).trigger('change');
-								$('textarea[name^="acf["][name$="site_related_keyphrases]"]').val(d.related).trigger('change');
-								$('input[name^="acf["][name$="site_seo_title]"]').val(d.seo_title).trigger('change');
-								$('textarea[name^="acf["][name$="site_seo_description]"]').val(d.seo_desc).trigger('change');
-								$('input[name^="acf["][name$="site_seo_keywords]"]').val(d.keywords).trigger('change');
-								$('input[name^="acf["][name$="site_social_title]"]').val(d.social_title).trigger('change');
-								$('textarea[name^="acf["][name$="site_social_description]"]').val(d.social_desc).trigger('change');
-								
-								alert('AI бүх талбарыг амжилттай бөглөлөө! Хадгалахын тулд "Update" хийнэ үү.');
-								
-								// Update recommendations list without full reload
-								if(d.analysis && d.analysis.length > 0) {
-									var listHtml = '<div class="ai-recommendations" style="margin-bottom: 25px; background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 5px solid #007cba;"><h5 style="margin: 0 0 10px 0; color: #007cba;">👨‍🏫 AI-ийн өгсөн зөвлөмж:</h5><ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #3c434a;">';
-									d.analysis.forEach(function(rec) {
-										listHtml += '<li style="margin-bottom: 5px;">' + rec + '</li>';
-									});
-									listHtml += '</ul></div>';
-									$('#seo-analysis-dynamic-content').prepend(listHtml);
-								}
-							} else {
-								alert('Алдаа гарлаа: ' + (r.data || 'AI холболт амжилтгүй'));
+					$.post(ajaxurl, {
+						action: 'site_auto_optimize',
+						post_id: $('.site-seo-analysis-results').data('post-id'),
+						nonce: $('.site-seo-analysis-results').data('nonce')
+					}, function(r) {
+						$btn.prop('disabled', false).html('AI-аар оновчлох');
+						if(r.success) {
+							var d = r.data;
+							$('input[name^="acf["][name$="site_focus_keyphrase]"]').val(d.focus).trigger('change');
+							$('textarea[name^="acf["][name$="site_related_keyphrases]"]').val(d.related).trigger('change');
+							$('input[name^="acf["][name$="site_seo_title]"]').val(d.seo_title).trigger('change');
+							$('textarea[name^="acf["][name$="site_seo_description]"]').val(d.seo_desc).trigger('change');
+							$('input[name^="acf["][name$="site_seo_keywords]"]').val(d.keywords).trigger('change');
+							$('input[name^="acf["][name$="site_social_title]"]').val(d.social_title).trigger('change');
+							$('textarea[name^="acf["][name$="site_social_description]"]').val(d.social_desc).trigger('change');
+							
+							alert('Дууслаа! "Update" хийж хадгална уу.');
+							
+							if(d.analysis) {
+								var listHtml = '<div class="ai-recommendations" style="margin-bottom: 25px; background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 5px solid #007cba;"><h5 style="margin: 0 0 10px 0; color: #007cba;">👨‍🏫 AI-ийн өгсөн зөвлөмж:</h5><ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #3c434a;">';
+								d.analysis.forEach(function(rec) { listHtml += '<li style="margin-bottom: 5px;">' + rec + '</li>'; });
+								listHtml += '</ul></div>';
+								$('#seo-analysis-dynamic-content').html(listHtml);
 							}
-						},
-						error: function() {
-							$btn.prop('disabled', false).html('AI-аар оновчлох');
-							alert('Сервертэй холбогдоход алдаа гарлаа.');
+						} else {
+							alert('Алдаа: ' + r.data);
 						}
 					});
 				});
