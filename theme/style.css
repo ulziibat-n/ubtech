@@ -1257,6 +1257,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .flex-col {
     flex-direction: column;
   }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
   .items-center {
     align-items: center;
   }
