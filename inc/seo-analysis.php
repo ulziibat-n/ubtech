@@ -19,22 +19,20 @@ class Site_SEO_Analysis {
 	 * @return array Result containing text or error.
 	 */
 	private static function call_gemini( $prompt ) {
-		// Use stable v1 endpoint
-		$url = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=' . self::$api_key;
+		// Use v1beta endpoint and gemini-pro model for maximum compatibility
+		$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . self::$api_key;
 
 		$body = array(
 			'contents' => array(
 				array(
+					'role'  => 'user',
 					'parts' => array(
 						array( 'text' => $prompt ),
 					),
 				),
 			),
-			// Removed response_mime_type as it might not be supported in v1 stable yet
 			'generationConfig' => array(
 				'temperature' => 0.7,
-				'topK'        => 40,
-				'topP'        => 0.95,
 				'maxOutputTokens' => 2048,
 			),
 		);
@@ -62,7 +60,6 @@ class Site_SEO_Analysis {
 		$text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
 		
 		if ( $text ) {
-			// Clean Markdown code blocks (```json ... ```)
 			$text = preg_replace('/^```json\s*|\s*```$/m', '', trim($text));
 		}
 
@@ -113,22 +110,16 @@ class Site_SEO_Analysis {
 	 */
 	public static function auto_optimize( $post_id ): array {
 		$post    = get_post( $post_id );
-		$content = mb_substr( wp_strip_all_tags( strip_shortcodes( $post->post_title . ' ' . $post->post_content ) ), 0, 4000 );
+		$content = mb_substr( wp_strip_all_tags( strip_shortcodes( $post->post_title . ' ' . $post->post_content ) ), 0, 3500 );
 		
 		$prompt = "You are an Expert SEO Specialist. Analyze this WordPress article and provide SEO optimization data in JSON format.
 		Language: Mongolian.
 		Content: '{$content}'
 		
-		Requirements:
-		1. Provide a professional Focus Keyphrase.
-		2. Create a compelling SEO Title (max 60 chars) and Meta Description (max 155 chars).
-		3. Suggest related keyphrases.
-		4. Ensure the output is a valid JSON object.
-		
 		Return ONLY a JSON object:
 		{
 			\"focus\": \"focus keyphrase\",
-			\"related\": \"related, phrases\",
+			\"related\": \"related keyphrases\",
 			\"seo_title\": \"SEO Title\",
 			\"seo_desc\": \"SEO Description\",
 			\"keywords\": \"keywords\",
@@ -148,7 +139,7 @@ class Site_SEO_Analysis {
 				'keywords'     => '',
 				'social_title' => $post->post_title,
 				'social_desc'  => '',
-				'analysis'     => array( '🔴 Алдаа: ' . $ai_res['error'], 'Gemini API тохиргоонд алдаа гарлаа.' ),
+				'analysis'     => array( '🔴 Алдаа: ' . $ai_res['error'], 'Модель эсвэл API тохиргоогоо шалгана уу.' ),
 			);
 		}
 
