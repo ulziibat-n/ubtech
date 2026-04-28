@@ -1,0 +1,18 @@
+{
+    "name": "acf/faq",
+    "title": "FAQ (SEO Friendly)",
+    "description": "A custom FAQ block with built-in JSON-LD schema for SEO.",
+    "category": "ubtech",
+    "icon": "welcome-learn-more",
+    "keywords": ["faq", "schema", "seo", "question", "answer"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "jsx": false
+    },
+    "textdomain": "ulziibat-tech"
+}

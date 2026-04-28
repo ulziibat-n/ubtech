@@ -100,7 +100,7 @@
 
 	/* Typography: Blockquotes */
 	& > blockquote.wp-block-quote {
-		@apply py-6 pr-6 pl-6 my-8 text-lg italic bg-white border-l-4 border-lime-500 text-slate-800;
+		@apply py-6 pr-6 pl-6 my-8 text-lg italic bg-white border-l-4 border-lime-500 shadow-md shadow-slate-200/20 text-slate-800;
 	}
 
 	& > blockquote.wp-block-quote p {
@@ -175,12 +175,37 @@
 		@apply mt-2 text-xs font-medium text-slate-400;
 	}
 
+	/* Typography: Code Blocks */
+	& > pre.wp-block-code {
+		@apply overflow-x-auto p-6 my-8 font-mono text-xs leading-relaxed bg-white rounded-md shadow-md shadow-slate-200/20 border-0! tracking-tight text-slate-600;
+
+		code {
+			@apply p-0 font-mono bg-transparent text-inherit;
+		}
+	}
+
+	.code-content-wrapper {
+		@apply transition-[max-height] duration-700 ease-in-out;
+
+		&.is-collapsed {
+			@apply max-h-[160px] overflow-hidden;
+		}
+
+		&.is-expanded {
+			@apply max-h-[5000px];
+
+			.code-expand-overlay {
+				@apply opacity-0 pointer-events-none;
+			}
+		}
+	}
+
 	/* ──────────────────────────────────────────────────────────────────────────
 	   Block Exclusion Logic
 	   ────────────────────────────────────────────────────────────────────────── */
 
 	/* Hide unsupported blocks as requested */
-	& > *:not(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, table, figure, img, hr, div) {
+	& > *:not(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, table, figure, img, hr, div, pre) {
 		@apply hidden!;
 	}
 

@@ -217,6 +217,14 @@ if ( $categories ) {
 	);
 
 	if ( $related_query->have_posts() ) :
+		// Register Related Posts to Schema Manager
+		if ( ! is_admin() && class_exists( 'Site_Schema_Manager' ) ) {
+			$related_links = array();
+			foreach ( $related_query->posts as $p ) {
+				$related_links[] = get_permalink( $p->ID );
+			}
+			Site_Schema_Manager::add_part( 'RelatedLinks', $related_links );
+		}
 		?>
 		<section class="overflow-hidden bg-slate-50">
 			<div class="container">

@@ -265,6 +265,20 @@ require get_template_directory() . '/inc/acf-requirement.php';
 require get_template_directory() . '/inc/transliteration.php';
 
 /**
+ * ACF Gutenberg Blocks.
+ */
+require get_template_directory() . '/inc/acf-blocks.php';
+
+require get_template_directory() . '/inc/seo-schema.php';
+
+/**
+ * Custom SEO System (Meta, OG, JSON-LD).
+ */
+require get_template_directory() . '/inc/seo-fields.php';
+require get_template_directory() . '/inc/seo-system.php';
+require get_template_directory() . '/inc/seo-analysis.php';
+
+/**
  * Limit search results to only 'post' post type.
  *
  * @param WP_Query $query The query object.

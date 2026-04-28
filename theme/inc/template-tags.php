@@ -535,13 +535,136 @@ endif;
 
 if ( ! function_exists( 'ub_breadcrumb' ) ) :
 	/**
-	 * Display Yoast SEO breadcrumbs with custom styling.
+	 * Custom Breadcrumbs implementation without Yoast SEO.
 	 *
 	 * @param string $class Additional CSS classes for the wrapper.
 	 */
 	function ub_breadcrumb( $class = 'text-xs text-slate-400 mb-4' ) {
-		if ( function_exists( 'yoast_breadcrumb' ) ) {
-			yoast_breadcrumb( '<div id="breadcrumbs" class="' . esc_attr( $class ) . '">', '</div>' );
+		if ( is_front_page() || is_admin() ) {
+			return;
+		}
+
+		$links = array();
+
+		// 1. Home Link
+		$links[] = array(
+			'text' => __( 'Нүүр', 'ulziibat-tech' ),
+			'url'  => home_url( '/' ),
+		);
+
+		// 2. Singular Logic
+		if ( is_singular() ) {
+			$post = get_post();
+
+			// Post Categories
+			if ( is_singular( 'post' ) ) {
+				$categories = get_the_category( $post->ID );
+				if ( ! empty( $categories ) ) {
+					$primary_cat = $categories[0];
+					$links[]     = array(
+						'text' => $primary_cat->name,
+						'url'  => get_category_link( $primary_cat->term_id ),
+					);
+				}
+			}
+
+			// Page Hierarchy
+			if ( is_page() && $post->post_parent ) {
+				$parent_id   = $post->post_parent;
+				$breadcrumbs = array();
+				while ( $parent_id ) {
+					$page          = get_post( $parent_id );
+					$breadcrumbs[] = array(
+						'text' => get_the_title( $page->ID ),
+						'url'  => get_permalink( $page->ID ),
+					);
+					$parent_id     = $page->post_parent;
+				}
+				$links = array_merge( $links, array_reverse( $breadcrumbs ) );
+			}
+
+			$links[] = array(
+				'text' => get_the_title(),
+				'url'  => '', // Current page
+			);
+		}
+
+		// 3. Archive Logic
+		elseif ( is_archive() ) {
+			if ( is_category() || is_tag() || is_tax() ) {
+				$links[] = array(
+					'text' => single_term_title( '', false ),
+					'url'  => '',
+				);
+			} elseif ( is_author() ) {
+				$links[] = array(
+					'text' => get_the_author(),
+					'url'  => '',
+				);
+			} elseif ( is_day() || is_month() || is_year() ) {
+				$links[] = array(
+					'text' => get_the_archive_title(),
+					'url'  => '',
+				);
+			} else {
+				$links[] = array(
+					'text' => post_type_archive_title( '', false ),
+					'url'  => '',
+				);
+			}
+		}
+
+		// 4. Search Logic
+		elseif ( is_search() ) {
+			$links[] = array(
+				/* translators: %s: Search query. */
+				'text' => sprintf( __( 'Хайлт: %s', 'ulziibat-tech' ), get_search_query() ),
+				'url'  => '',
+			);
+		}
+
+		// 5. 404 Logic
+		elseif ( is_404() ) {
+			$links[] = array(
+				'text' => __( '404 - Хуудас олдсонгүй', 'ulziibat-tech' ),
+				'url'  => '',
+			);
+		}
+
+		// Register Breadcrumbs Schema to Manager
+		if ( class_exists( 'Site_Schema_Manager' ) && ! empty( $links ) ) {
+			$itemsList = array();
+			foreach ( $links as $index => $link ) {
+				$itemsList[] = array(
+					'@type'    => 'ListItem',
+					'position' => $index + 1,
+					'name'     => $link['text'],
+					'item'     => ! empty( $link['url'] ) ? $link['url'] : get_permalink(),
+				);
+			}
+			Site_Schema_Manager::add_part(
+				'BreadcrumbList',
+				array(
+					'@type'           => 'BreadcrumbList',
+					'itemListElement' => $itemsList,
+				)
+			);
+		}
+
+		// Output HTML
+		if ( ! empty( $links ) ) {
+			echo '<div class="ub-breadcrumbs ' . esc_attr( $class ) . '" aria-label="Breadcrumb">';
+			foreach ( $links as $index => $link ) {
+				if ( $index > 0 ) {
+					echo '<span class="mx-2 opacity-50" aria-hidden="true">/</span>';
+				}
+				if ( ! empty( $link['url'] ) && $index < count( $links ) - 1 ) {
+					echo '<a href="' . esc_url( $link['url'] ) . '" class="hover:text-lime-600 transition-colors">' . esc_html( $link['text'] ) . '</a>';
+				} else {
+					echo '<span class="font-medium text-slate-600" aria-current="page">' . esc_html( $link['text'] ) . '</span>';
+				}
+			}
+			echo '</div>';
 		}
 	}
 endif;
