@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] — 2026-04-28
+
+### Fixed
+- **AI Model Compatibility** — Switched to `gemini-pro` on `v1beta` endpoint for broader API key and regional support.
+
+---
+
 ## [1.1.0] — 2026-04-28
 
 ### Fixed
@@ -190,5 +197,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.1.0
+- Version: 1.1.1
 - Refactor code structure for improved readability and maintainability
