@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.7] — 2026-04-28
+
+### Fixed
+- **AI Response Parsing** — Fixed "AI Error" by stripping Markdown code blocks from Gemini's JSON response.
+- **AJAX Stability** — Improved AJAX workflow to update SEO fields in real-time without page reloads.
+- **Performance** — Optimized API requests by trimming post content sent to Gemini (4000 char limit).
+- **Security** — Updated to a fresh Gemini API Key for improved reliability.
+
+---
+
 ## [1.0.6] — 2026-04-28
 
 ### Added
@@ -158,5 +168,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.6
+- Version: 1.0.7
 - Refactor code structure for improved readability and maintainability
