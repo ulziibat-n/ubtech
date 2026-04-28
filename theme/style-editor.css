@@ -1728,6 +1728,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .text-\[0\.65rem\] {
     font-size: 0.65rem;
   }
+  .text-\[0\.65rem\]\! {
+    font-size: 0.65rem !important;
+  }
   .text-\[0\.75rem\] {
     font-size: 0.75rem;
   }
@@ -1763,6 +1766,10 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
+  }
+  .font-bold\! {
+    --tw-font-weight: var(--font-weight-bold) !important;
+    font-weight: var(--font-weight-bold) !important;
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
