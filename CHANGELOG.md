@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.8] — 2026-04-28
+
+### Added
+- **Detailed API Debugging** — Improved SEO analysis to display exact error messages from Gemini API when connections fail.
+
+---
+
 ## [1.0.7] — 2026-04-28
 
 ### Fixed
@@ -168,5 +175,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.7
+- Version: 1.0.8
 - Refactor code structure for improved readability and maintainability
