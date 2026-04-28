@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.2] — 2026-04-28
+
+### Added
+- **Primary Category Selector** — Implemented a custom tool to designate a primary category for each post, similar to Yoast SEO.
+- **Dynamic Category Sync** — Added JavaScript to automatically synchronize the primary category dropdown with the WordPress category checklist.
+- **SEO Priority Logic** — Updated the auto-population engine to prioritize the primary category for focus keyphrases and metadata.
+
+---
+
 ## [1.2.1] — 2026-04-28
 
 ### Fixed
@@ -215,5 +224,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.2.1
+- Version: 1.2.2
 - Refactor code structure for improved readability and maintainability
