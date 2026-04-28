@@ -573,6 +573,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
       padding-inline: calc(var(--spacing) * 8);
     }
   }
+  .mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
+  }
   .my-0\! {
     margin-block: calc(var(--spacing) * 0) !important;
   }
@@ -1874,6 +1877,9 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   }
   .opacity-40 {
     opacity: 40%;
+  }
+  .opacity-50 {
+    opacity: 50%;
   }
   .opacity-70 {
     opacity: 70%;
