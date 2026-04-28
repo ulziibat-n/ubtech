@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-04-28
+
+### Added
+- **Native SEO Automation** — Implemented zero-dependency automatic SEO field population on post save.
+- **Auto-Populator Logic** — SEO titles, descriptions, focus keyphrases, and social images are now automatically set using WordPress core data.
+
+### Removed
+- **Gemini AI Integration** — Removed all AI-powered features and Gemini API dependencies for improved reliability and performance.
+
+---
+
 ## [1.1.1] — 2026-04-28
 
 ### Fixed
@@ -197,5 +208,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.1.1
+- Version: 1.2.0
 - Refactor code structure for improved readability and maintainability
