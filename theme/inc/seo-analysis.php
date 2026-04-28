@@ -2,7 +2,8 @@
 /**
  * Site SEO Analysis & Auto-Populate Engine.
  * 
- * Automatically populates SEO fields based on post content upon saving.
+ * Automatically populates SEO fields based on post content upon saving,
+ * but ONLY if the fields are currently empty.
  * 
  * @package ulziibat-tech
  */
@@ -50,13 +51,13 @@ class Site_SEO_Analysis {
 	 * Automatically populate SEO fields from post data.
 	 * 
 	 * Triggered on acf/save_post.
+	 * Only updates fields if they are empty or contain only whitespace.
 	 */
 	public static function auto_populate( $post_id ): void {
 		if ( ! is_numeric( $post_id ) ) {
 			return;
 		}
 
-		// Avoid infinite loops
 		if ( get_post_type( $post_id ) === 'revision' ) {
 			return;
 		}
@@ -66,47 +67,58 @@ class Site_SEO_Analysis {
 			return;
 		}
 
+		// Helper to check if a field is actually empty
+		$is_empty = function( $field_key, $pid ) {
+			$val = get_field( $field_key, $pid );
+			return empty( trim( (string) $val ) );
+		};
+
 		// 1. Focus Keyphrase (Use primary/first category)
-		$categories = get_the_category( $post_id );
-		if ( ! empty( $categories ) ) {
-			$focus = $categories[0]->name;
-			if ( ! get_field( '_site_focus_keyphrase', $post_id ) ) {
-				update_field( '_site_focus_keyphrase', $focus, $post_id );
+		if ( $is_empty( '_site_focus_keyphrase', $post_id ) ) {
+			$categories = get_the_category( $post_id );
+			if ( ! empty( $categories ) ) {
+				update_field( '_site_focus_keyphrase', $categories[0]->name, $post_id );
 			}
 		}
 
 		// 2. SEO Title & Social Title
-		if ( ! get_field( '_site_seo_title', $post_id ) ) {
+		if ( $is_empty( '_site_seo_title', $post_id ) ) {
 			update_field( '_site_seo_title', $post->post_title, $post_id );
 		}
-		if ( ! get_field( '_site_social_title', $post_id ) ) {
+		if ( $is_empty( '_site_social_title', $post_id ) ) {
 			update_field( '_site_social_title', $post->post_title, $post_id );
 		}
 
-		// 3. SEO Description & Social Description (Use excerpt or first 155 chars)
-		$excerpt = $post->post_excerpt ?: wp_trim_words( wp_strip_all_tags( strip_shortcodes( $post->post_content ) ), 25, '' );
-		if ( ! get_field( '_site_seo_description', $post_id ) ) {
-			update_field( '_site_seo_description', $excerpt, $post_id );
-		}
-		if ( ! get_field( '_site_social_description', $post_id ) ) {
-			update_field( '_site_social_description', $excerpt, $post_id );
-		}
-
-		// 4. SEO Keywords (Use tags and categories)
-		$tags       = get_the_tags( $post_id );
-		$keyword_list = array();
-		if ( $categories ) {
-			foreach ( $categories as $cat ) $keyword_list[] = $cat->name;
-		}
-		if ( $tags ) {
-			foreach ( $tags as $tag ) $keyword_list[] = $tag->name;
-		}
-		if ( ! empty( $keyword_list ) && ! get_field( '_site_seo_keywords', $post_id ) ) {
-			update_field( '_site_seo_keywords', implode( ', ', array_unique( $keyword_list ) ), $post_id );
+		// 3. SEO Description & Social Description
+		if ( $is_empty( '_site_seo_description', $post_id ) || $is_empty( '_site_social_description', $post_id ) ) {
+			$excerpt = $post->post_excerpt ?: wp_trim_words( wp_strip_all_tags( strip_shortcodes( $post->post_content ) ), 25, '' );
+			
+			if ( $is_empty( '_site_seo_description', $post_id ) ) {
+				update_field( '_site_seo_description', $excerpt, $post_id );
+			}
+			if ( $is_empty( '_site_social_description', $post_id ) ) {
+				update_field( '_site_social_description', $excerpt, $post_id );
+			}
 		}
 
-		// 5. Social Image (Use Featured Image)
-		if ( has_post_thumbnail( $post_id ) && ! get_field( '_site_social_image', $post_id ) ) {
+		// 4. SEO Keywords
+		if ( $is_empty( '_site_seo_keywords', $post_id ) ) {
+			$categories   = get_the_category( $post_id );
+			$tags         = get_the_tags( $post_id );
+			$keyword_list = array();
+			if ( $categories ) {
+				foreach ( $categories as $cat ) $keyword_list[] = $cat->name;
+			}
+			if ( $tags ) {
+				foreach ( $tags as $tag ) $keyword_list[] = $tag->name;
+			}
+			if ( ! empty( $keyword_list ) ) {
+				update_field( '_site_seo_keywords', implode( ', ', array_unique( $keyword_list ) ), $post_id );
+			}
+		}
+
+		// 5. Social Image
+		if ( $is_empty( '_site_social_image', $post_id ) && has_post_thumbnail( $post_id ) ) {
 			$thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
 			update_field( '_site_social_image', $thumb_url, $post_id );
 		}
@@ -130,8 +142,8 @@ class Site_SEO_Analysis {
 		?>
 		<div class="site-seo-analysis-results">
 			<div style="background: #f0f6ff; padding: 15px; border-radius: 8px; border: 1px solid #c2d1e9; margin-bottom: 20px;">
-				<h4 style="margin: 0 0 5px 0; font-size: 14px; color: #007cba;">⚙️ Автомат систем идэвхтэй</h4>
-				<p style="margin: 0; font-size: 12px; color: #646970;">Таныг нийтлэлээ хадгалах үед (Update/Save) систем автоматаар SEO талбаруудыг бөглөх болно.</p>
+				<h4 style="margin: 0 0 5px 0; font-size: 14px; color: #007cba;">⚙️ Ухаалаг систем идэвхтэй</h4>
+				<p style="margin: 0; font-size: 12px; color: #646970;">Систем зөвхөн <b>хоосон байгаа</b> талбаруудыг автоматаар бөглөх бөгөөд таны өөрөө гараар оруулсан мэдээллийг огт өөрчлөхгүй.</p>
 			</div>
 
 			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
