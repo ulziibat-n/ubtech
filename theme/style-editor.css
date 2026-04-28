@@ -3,7 +3,7 @@
 Theme Name: ulziibat.tech
 Theme URI: https://ulziibat.tech
 Description: Өөрийн вэб сайтад зориулсан Custom WordPress Theme
-Version: 1.0.5
+Version: 1.0.6
 Author: Ulziibat Nansaltsog
 Author URI: https://ulziibat.tech
 Text Domain: ub
@@ -1257,9 +1257,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .flex-col {
     flex-direction: column;
   }
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
   .items-center {
     align-items: center;
   }
@@ -1726,9 +1723,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .text-\[0\.75rem\] {
     font-size: 0.75rem;
   }
-  .text-\[10px\] {
-    font-size: 10px;
-  }
   .text-\[14px\] {
     font-size: 14px;
   }
@@ -1791,10 +1785,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .tracking-wide {
     --tw-tracking: var(--tracking-wide);
     letter-spacing: var(--tracking-wide);
-  }
-  .tracking-wider {
-    --tw-tracking: var(--tracking-wider);
-    letter-spacing: var(--tracking-wider);
   }
   .tracking-widest {
     --tw-tracking: var(--tracking-widest);
@@ -2133,14 +2123,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
     }
   }
   @media (hover: hover) {
-    .hover\:scale-105:hover {
-      --tw-scale-x: 105%;
-      --tw-scale-y: 105%;
-      --tw-scale-z: 105%;
-      scale: var(--tw-scale-x) var(--tw-scale-y);
-    }
-  }
-  @media (hover: hover) {
     .hover\:gap-2\.5:hover {
       gap: calc(var(--spacing) * 2.5);
     }
@@ -2161,11 +2143,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
     }
   }
   @media (hover: hover) {
-    .hover\:bg-slate-50:hover {
-      background-color: var(--color-slate-50);
-    }
-  }
-  @media (hover: hover) {
     .hover\:bg-slate-100:hover {
       background-color: var(--color-slate-100);
     }
@@ -2173,11 +2150,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   @media (hover: hover) {
     .hover\:bg-slate-800:hover {
       background-color: var(--color-slate-800);
-    }
-  }
-  @media (hover: hover) {
-    .hover\:bg-slate-950:hover {
-      background-color: var(--color-slate-950);
     }
   }
   @media (hover: hover) {
@@ -2256,12 +2228,6 @@ Underscores and Varia are distributed under the terms of the GNU GPL v2 or later
   .focus\:outline-none:focus {
     --tw-outline-style: none;
     outline-style: none;
-  }
-  .active\:scale-95:active {
-    --tw-scale-x: 95%;
-    --tw-scale-y: 95%;
-    --tw-scale-z: 95%;
-    scale: var(--tw-scale-x) var(--tw-scale-y);
   }
   @media (width < 64rem) {
     .max-lg\:gap-4 {

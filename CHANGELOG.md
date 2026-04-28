@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.6] — 2026-04-28
+
+### Added
+- **AI-Powered SEO System** — Integrated Google Gemini 1.5 Flash to automatically optimize SEO titles, descriptions, and keywords.
+- **Premium SEO Analysis** — Implemented a comprehensive content analysis engine checking keyword density, links, and structure.
+- **Advanced ACF SEO Fields** — Added dedicated fields for Focus Keyphrase, Related Keyphrases, and Social Media overrides.
+- **Auto-Optimizer** — One-click optimization button that fills all SEO metadata using AI.
+- **Block-Aware SEO** — Added recommendations for blocks like FAQ when content length warrants it.
+
+### Fixed
+- **Localhost Compatibility** — Disabled SSL verification for Gemini API calls in local development environments.
+
+---
+
 ## [1.0.5] — 2026-04-27
 
 ### Added
@@ -144,5 +158,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.5
+- Version: 1.0.6
 - Refactor code structure for improved readability and maintainability
