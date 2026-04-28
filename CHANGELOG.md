@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0] — 2026-04-28
+
+### Added
+- **SERP Preview** — Real-time Google and Facebook visual previews in the SEO Hub.
+- **Advanced Content Analysis** — Deep checks for Keyword Density, Image Alt tags, and Internal Linking.
+- **Smart 301 Redirects** — Automatic redirection for changed post slugs to prevent 404 errors.
+- **Redirect History** — Visible log of all previous slugs and active redirects for each post.
+- **Smart Link Suggestions** — Contextual keyword matching for internal link recommendations within the editor.
+- **JSON-LD Breadcrumbs** — Automated invisible schema for better search engine indexing.
+- **Custom XML Sitemap** — High-performance sitemap generator including posts, categories, and authors.
+
+---
+
 ## [1.2.2] — 2026-04-28
 
 ### Added
@@ -224,5 +237,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.2.2
+- Version: 1.3.0
 - Refactor code structure for improved readability and maintainability
