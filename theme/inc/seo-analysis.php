@@ -19,7 +19,7 @@ class Site_SEO_Analysis {
 	 * @return array Result containing text or error.
 	 */
 	private static function call_gemini( $prompt ) {
-		$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' . self::$api_key;
+		$url = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=' . self::$api_key;
 
 		$body = array(
 			'contents' => array(
