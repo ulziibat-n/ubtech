@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] — 2026-04-28
+
+### Fixed
+- **Gemini API Compatibility** — Removed `response_mime_type` from generation config to ensure compatibility with Gemini 1.5 Flash on stable `v1` endpoint.
+- **Stable Release** — Consolidated all AI-powered SEO features into a stable production-ready version.
+
+---
+
 ## [1.0.9] — 2026-04-28
 
 ### Fixed
@@ -182,5 +190,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.0.9
+- Version: 1.1.0
 - Refactor code structure for improved readability and maintainability
