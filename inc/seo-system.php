@@ -1,277 +1,150 @@
 <?php declare(strict_types=1);
 /**
- * Custom Unified SEO System for ULZIIBAT.TECH
- * Handles: Meta Tags, Open Graph, Twitter Cards, JSON-LD Schema, and Redirection.
- *
+ * Site SEO Core System: Schema, Redirects & Expanded Sitemap.
+ * 
  * @package ulziibat-tech
- * @since 1.0.0
  */
 
-/**
- * 1. AUTHOR ARCHIVE REDIRECT (301 to Home)
- * Since this is a single-author site, we redirect author archives to prevent duplicate content.
- */
-function site_seo_redirect_author_archive(): void {
-	if ( is_author() ) {
-		wp_safe_redirect( home_url( '/' ), 301 );
-		exit;
-	}
-}
-add_action( 'template_redirect', 'site_seo_redirect_author_archive' );
+class Site_SEO_System {
 
-/**
- * 2. TUTOR LMS "NOINDEX" FOR SUBPAGES
- */
-function site_seo_noindex_tutor_subpages(): void {
-	if ( is_singular( array( 'lesson', 'tutor_quiz', 'tutor_assignments' ) ) ) {
-		echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
-	}
-}
-add_action( 'wp_head', 'site_seo_noindex_tutor_subpages' );
-
-/**
- * HELPER: Get clean description for SEO
- */
-function site_get_seo_description(): string {
-	if ( is_front_page() || is_home() ) {
-		return esc_attr( 'Вэб хөгжүүлэлт, UI/UX дизайн болон технологийн зөвлөх үйлчилгээ.' );
+	public function __construct() {
+		add_action( 'wp_head', array( $this, 'render_meta_tags' ), 1 );
+		add_action( 'wp_head', array( $this, 'render_breadcrumb_json_ld' ), 2 );
+		add_action( 'template_redirect', array( $this, 'handle_slug_redirects' ) );
+		add_action( 'init', array( $this, 'add_sitemap_rewrites' ) );
+		add_filter( 'query_vars', array( $this, 'add_sitemap_query_vars' ) );
+		add_action( 'template_redirect', array( $this, 'render_xml_sitemap' ) );
+		
+		remove_action( 'wp_head', 'wp_generator' );
 	}
 
-	$description = '';
-	if ( is_singular() ) {
-		$post_id     = get_the_ID();
-		$custom_desc = get_field( '_site_seo_description', $post_id );
+	/**
+	 * 1. Render SEO Meta Tags (Expanded for Archives)
+	 */
+	public function render_meta_tags(): void {
+		if ( is_admin() ) return;
+		$post_id = get_queried_object_id();
+		$title   = '';
+		$desc    = '';
 
-		if ( $custom_desc ) {
-			$description = $custom_desc;
+		if ( is_singular() ) {
+			$title = get_field( '_site_seo_title', $post_id ) ?: wp_get_document_title();
+			$desc  = get_field( '_site_seo_description', $post_id );
+		} elseif ( is_category() || is_tag() ) {
+			$term  = get_queried_object();
+			$title = $term->name . ' - ' . get_bloginfo('name');
+			$desc  = term_description();
+		} elseif ( is_author() ) {
+			$author = get_queried_object();
+			$title  = $author->display_name . ' - Нийтлэлүүд';
+			$desc   = $author->description ?: $author->display_name . '-ийн бичсэн бүх нийтлэлүүд.';
 		} else {
-			$post        = get_post();
-			$description = has_excerpt() ? get_the_excerpt() : $post->post_content;
+			$title = wp_get_document_title();
 		}
-	} elseif ( is_archive() ) {
-		$description = get_the_archive_description();
+
+		$keywords = get_field( '_site_seo_keywords', $post_id );
+		$og_img   = get_field( '_site_social_image', $post_id ) ?: get_the_post_thumbnail_url( $post_id, 'full' );
+
+		echo "\n<!-- Site SEO System -->\n";
+		echo '<title>' . esc_html( $title ) . "</title>\n";
+		if ( $desc ) echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags($desc) ) . "\">\n";
+		if ( $keywords ) echo '<meta name="keywords" content="' . esc_attr( $keywords ) . "\">\n";
+
+		echo '<meta property="og:type" content="' . ( is_singular() ? 'article' : 'website' ) . "\">\n";
+		echo '<meta property="og:title" content="' . esc_attr( $title ) . "\">\n";
+		if ( $og_img ) echo '<meta property="og:image" content="' . esc_url( $og_img ) . "\">\n";
+		echo '<meta property="og:url" content="' . esc_url( get_permalink() ?: home_url($_SERVER['REQUEST_URI']) ) . "\">\n";
+		echo "<!-- / Site SEO System -->\n\n";
 	}
 
-	$description = wp_strip_all_tags( strip_shortcodes( $description ) );
-	return wp_trim_words( $description, 25, '' );
-}
+	/**
+	 * 2. Render JSON-LD Breadcrumbs
+	 */
+	public function render_breadcrumb_json_ld(): void {
+		if ( is_front_page() || is_admin() ) return;
 
-/**
- * 3. DYNAMIC BASIC META TAGS & CANONICAL URLs
- */
-function site_seo_basic_meta(): void {
-	if ( is_admin() ) {
-		return;
-	}
+		$items = array();
+		$items[] = array( 'id' => home_url(), 'name' => 'Home' );
 
-	$post_id   = get_the_ID();
-	$canonical = is_singular() ? get_permalink() : home_url( add_query_arg( array(), $GLOBALS['wp']->request ) . '/' );
-	$keywords  = is_singular() ? get_field( '_site_seo_keywords', $post_id ) : '';
-
-	echo '<!-- Site SEO -->' . "\n";
-	echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />' . "\n";
-	echo '<meta name="description" content="' . esc_attr( site_get_seo_description() ) . '" />' . "\n";
-
-	if ( $keywords ) {
-		echo '<meta name="keywords" content="' . esc_attr( $keywords ) . '" />' . "\n";
-	}
-}
-add_action( 'wp_head', 'site_seo_basic_meta', 1 );
-
-/**
- * 4. OPEN GRAPH & TWITTER CARDS
- */
-function site_seo_og_meta(): void {
-	if ( is_admin() ) {
-		return;
-	}
-
-	$site_name    = get_bloginfo( 'name' );
-	$post_id      = get_the_ID();
-	$custom_title = is_singular() ? get_field( '_site_seo_title', $post_id ) : '';
-	$custom_image = is_singular() ? get_field( '_site_og_image', $post_id ) : '';
-
-	$title       = $custom_title ? $custom_title : ( is_front_page() ? $site_name : get_the_title() );
-	$description = site_get_seo_description();
-	$url         = is_singular() ? get_permalink() : home_url( add_query_arg( array(), $GLOBALS['wp']->request ) );
-	$type        = is_singular( 'post' ) ? 'article' : 'website';
-	$image       = get_template_directory_uri() . '/assets/images/default-og.jpg'; // Fallback
-
-	if ( $custom_image ) {
-		$image = $custom_image;
-	} elseif ( is_singular() && has_post_thumbnail() ) {
-		$image = get_the_post_thumbnail_url( $post_id, 'full' );
-	}
-
-	// Conditional Overrides
-	if ( is_page( 'services' ) ) {
-		$title       = 'Үйлчилгээ | ' . $site_name;
-		$description = 'UI/UX Дизайн, Вэб болон Апп хөгжүүлэлтийн мэргэжлийн үйлчилгээ.';
-	} elseif ( is_post_type_archive( 'portfolio' ) || is_page( 'portfolio' ) ) {
-		$title       = 'Портфолио | ' . $site_name;
-		$description = 'Бидний гүйцэтгэсэн вэб болон гар утасны апп хөгжүүлэлтийн төслүүд.';
-	}
-
-	?>
-	<!-- Open Graph / Facebook -->
-	<meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>" />
-	<meta property="og:title" content="<?php echo esc_attr( $title ); ?>" />
-	<meta property="og:description" content="<?php echo esc_attr( $description ); ?>" />
-	<meta property="og:url" content="<?php echo esc_url( $url ); ?>" />
-	<meta property="og:type" content="<?php echo esc_attr( $type ); ?>" />
-	<meta property="og:image" content="<?php echo esc_url( $image ); ?>" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>" />
-	<meta name="twitter:description" content="<?php echo esc_attr( $description ); ?>" />
-	<meta name="twitter:image" content="<?php echo esc_url( $image ); ?>" />
-	<?php
-}
-add_action( 'wp_head', 'site_seo_og_meta', 5 );
-
-/**
- * 5. ADVANCED CONDITIONAL JSON-LD SCHEMA (Using Site_Schema_Manager)
- */
-function site_seo_json_ld(): void {
-	if ( is_admin() || ! class_exists( 'Site_Schema_Manager' ) ) {
-		return;
-	}
-
-	$site_url = home_url( '/' );
-
-	// WebSite Schema
-	if ( is_front_page() || is_home() ) {
-		Site_Schema_Manager::add_part(
-			'WebSite',
-			array(
-				'@type'           => 'WebSite',
-				'@id'             => $site_url . '#website',
-				'url'             => $site_url,
-				'name'            => get_bloginfo( 'name' ),
-				'potentialAction' => array(
-					'@type'       => 'SearchAction',
-					'target'      => $site_url . '?s={search_term_string}',
-					'query-input' => 'required name=search_term_string',
-				),
-			)
-		);
-
-		Site_Schema_Manager::add_part(
-			'ProfessionalService',
-			array(
-				'@type'  => 'ProfessionalService',
-				'name'   => 'Ulziibat Tech',
-				'image'  => get_template_directory_uri() . '/assets/images/logo.png',
-				'url'    => $site_url,
-				'sameAs' => array(
-					'https://facebook.com/ulziibat.tech',
-					'https://linkedin.com/in/ulziibat',
-					'https://github.com/ulziibat-n',
-				),
-			)
-		);
-	}
-
-	// Services Page
-	if ( is_page( 'services' ) ) {
-		Site_Schema_Manager::add_part(
-			'Service',
-			array(
-				'@type'       => 'Service',
-				'serviceType' => 'UI/UX Design & Web Development',
-				'provider'    => array(
-					'@type' => 'LocalBusiness',
-					'name'  => 'Ulziibat Tech',
-				),
-			)
-		);
-	}
-
-	// Portfolio Archive
-	if ( is_post_type_archive( 'portfolio' ) ) {
-		Site_Schema_Manager::add_part(
-			'CollectionPage',
-			array(
-				'@type' => 'CollectionPage',
-				'name'  => 'Портфолио',
-				'url'   => get_post_type_archive_link( 'portfolio' ),
-			)
-		);
-	}
-
-	// Single Portfolio Item
-	if ( is_singular( 'portfolio' ) ) {
-		Site_Schema_Manager::add_part(
-			'CreativeWork',
-			array(
-				'@type' => 'CreativeWork',
-				'name'  => get_the_title(),
-				'url'   => get_permalink(),
-			)
-		);
-	}
-
-	// Course (Tutor LMS)
-	if ( is_singular( 'courses' ) ) {
-		Site_Schema_Manager::add_part(
-			'Course',
-			array(
-				'@type'       => 'Course',
-				'name'        => get_the_title(),
-				'description' => site_get_seo_description(),
-				'provider'    => array(
-					'@type'  => 'Organization',
-					'name'   => 'Ulziibat Tech',
-					'sameAs' => $site_url,
-				),
-			)
-		);
-	}
-
-	// Singular Post (BlogPosting)
-	if ( is_singular( 'post' ) ) {
-		$post_id = get_the_ID();
-		Site_Schema_Manager::add_part(
-			'BlogPosting',
-			array(
-				'@type'         => 'BlogPosting',
-				'headline'      => get_the_title(),
-				'datePublished' => get_the_date( 'c' ),
-				'dateModified'  => get_the_modified_date( 'c' ),
-				'author'        => array(
-					'@type' => 'Person',
-					'name'  => get_the_author(),
-					'url'   => $site_url . 'about/',
-				),
-				'image'         => get_the_post_thumbnail_url( $post_id, 'full' ),
-			)
-		);
-
-		// FAQ Logic
-		$faqs = get_field( 'faq_items', $post_id );
-		if ( $faqs ) {
-			$faq_list = array();
-			foreach ( $faqs as $faq ) {
-				$faq_list[] = array(
-					'@type'          => 'Question',
-					'name'           => $faq['question'],
-					'acceptedAnswer' => array(
-						'@type' => 'Answer',
-						'text'  => wp_strip_all_tags( $faq['answer'] ),
-					),
-				);
+		if ( is_singular() ) {
+			if ( is_singular('post') ) {
+				$cats = get_the_category();
+				if ( ! empty( $cats ) ) $items[] = array( 'id' => get_category_link( $cats[0]->term_id ), 'name' => $cats[0]->name );
 			}
-			Site_Schema_Manager::add_part(
-				'FAQPage',
-				array(
-					'@type'      => 'FAQPage',
-					'mainEntity' => $faq_list,
-				)
+			$items[] = array( 'id' => get_permalink(), 'name' => get_the_title() );
+		} elseif ( is_category() || is_tag() ) {
+			$term = get_queried_object();
+			$items[] = array( 'id' => get_term_link( $term ), 'name' => $term->name );
+		} elseif ( is_author() ) {
+			$author = get_queried_object();
+			$items[] = array( 'id' => get_author_posts_url( $author->ID ), 'name' => $author->display_name );
+		}
+
+		if ( empty( $items ) ) return;
+
+		$json_ld = array(
+			'@context' => 'https://schema.org',
+			'@type'    => 'BreadcrumbList',
+			'itemListElement' => array(),
+		);
+
+		foreach ( $items as $index => $item ) {
+			$json_ld['itemListElement'][] = array(
+				'@type'    => 'ListItem',
+				'position' => $index + 1,
+				'item'     => array( '@id'  => $item['id'], 'name' => $item['name'] ),
 			);
 		}
+
+		echo "\n<script type=\"application/ld+json\">\n" . wp_json_encode( $json_ld, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "\n</script>\n";
+	}
+
+	/**
+	 * 3. Redirects & Sitemap
+	 */
+	public function handle_slug_redirects(): void {
+		if ( is_404() && isset( $_SERVER['REQUEST_URI'] ) ) {
+			global $wpdb;
+			$uri = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+			$slug = end( explode( '/', $uri ) );
+			if ( ! empty( $slug ) ) {
+				$pid = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_old_slug' AND meta_value = %s LIMIT 1", $slug ) );
+				if ( $pid ) { wp_redirect( get_permalink( $pid ), 301 ); exit; }
+			}
+		}
+	}
+
+	public function add_sitemap_rewrites() { add_rewrite_rule( '^sitemap\.xml$', 'index.php?site_sitemap=1', 'top' ); }
+	public function add_sitemap_query_vars( $vars ) { $vars[] = 'site_sitemap'; return $vars; }
+
+	public function render_xml_sitemap() {
+		if ( get_query_var( 'site_sitemap' ) ) {
+			header( 'Content-Type: application/xml; charset=utf-8' );
+			echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+			echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+			// Pages, Posts, CPTs
+			$posts = get_posts( array( 'post_type' => array( 'post', 'page', 'portfolio', 'courses' ), 'post_status' => 'publish', 'posts_per_page' => 1000 ) );
+			foreach ( $posts as $p ) {
+				echo "  <url>\n    <loc>" . get_permalink( $p->ID ) . "</loc>\n    <lastmod>" . get_the_modified_date( 'c', $p->ID ) . "</lastmod>\n    <priority>0.8</priority>\n  </url>\n";
+			}
+
+			// Categories
+			$cats = get_categories( array( 'hide_empty' => 1 ) );
+			foreach ( $cats as $c ) {
+				echo "  <url>\n    <loc>" . get_category_link( $c->term_id ) . "</loc>\n    <priority>0.5</priority>\n  </url>\n";
+			}
+
+			// Authors
+			$authors = get_users( array( 'has_published_posts' => array( 'post' ) ) );
+			foreach ( $authors as $a ) {
+				echo "  <url>\n    <loc>" . get_author_posts_url( $a->ID ) . "</loc>\n    <priority>0.4</priority>\n  </url>\n";
+			}
+
+			echo '</urlset>';
+			exit;
+		}
 	}
 }
-add_action( 'wp_head', 'site_seo_json_ld', 10 );
-add_action( 'wp_head', 'site_seo_json_ld', 10 );
+
+new Site_SEO_System();
