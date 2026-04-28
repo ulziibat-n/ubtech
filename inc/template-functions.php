@@ -311,21 +311,20 @@ add_filter( 'body_class', 'ub_body_classes' );
  * @return array|bool
  */
 function ub_allowed_block_types( $allowed_block_types, $block_editor_context ) {
-	// Restrict blocks for the 'post' post type.
-	if ( isset( $block_editor_context->post ) && 'post' === $block_editor_context->post->post_type ) {
-		return array(
-			'core/paragraph',
-			'core/heading',
-			'core/list',
-			'core/list-item',
-			'core/quote',
-			'core/table',
-			'core/image',
-			'core/separator',
-		);
-	}
-
-	return $allowed_block_types;
+	return array(
+		'core/paragraph',
+		'core/heading',
+		'core/list',
+		'core/list-item',
+		'core/quote',
+		'core/table',
+		'core/image',
+		'core/separator',
+		'core/code',
+		// UB Tech Blocks
+		'acf/faq',
+		'acf/code-block',
+	);
 }
 add_filter( 'allowed_block_types_all', 'ub_allowed_block_types', 10, 2 );
 
