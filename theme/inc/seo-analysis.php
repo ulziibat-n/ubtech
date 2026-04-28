@@ -19,6 +19,7 @@ class Site_SEO_Analysis {
 	 * @return array Result containing text or error.
 	 */
 	private static function call_gemini( $prompt ) {
+		// Use stable v1 endpoint
 		$url = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=' . self::$api_key;
 
 		$body = array(
@@ -29,8 +30,12 @@ class Site_SEO_Analysis {
 					),
 				),
 			),
+			// Removed response_mime_type as it might not be supported in v1 stable yet
 			'generationConfig' => array(
-				'response_mime_type' => 'application/json',
+				'temperature' => 0.7,
+				'topK'        => 40,
+				'topP'        => 0.95,
+				'maxOutputTokens' => 2048,
 			),
 		);
 
@@ -57,6 +62,7 @@ class Site_SEO_Analysis {
 		$text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
 		
 		if ( $text ) {
+			// Clean Markdown code blocks (```json ... ```)
 			$text = preg_replace('/^```json\s*|\s*```$/m', '', trim($text));
 		}
 
@@ -113,15 +119,23 @@ class Site_SEO_Analysis {
 		Language: Mongolian.
 		Content: '{$content}'
 		
-		Return ONLY a JSON object with these keys:
-		- focus: (Ideal focus keyphrase)
-		- related: (Related keyphrases)
-		- seo_title: (SEO title under 60 chars)
-		- seo_desc: (Meta description under 155 chars)
-		- keywords: (Comma separated keywords)
-		- social_title: (Facebook title)
-		- social_desc: (Facebook description)
-		- analysis: (An array of 3-4 professional SEO recommendations)";
+		Requirements:
+		1. Provide a professional Focus Keyphrase.
+		2. Create a compelling SEO Title (max 60 chars) and Meta Description (max 155 chars).
+		3. Suggest related keyphrases.
+		4. Ensure the output is a valid JSON object.
+		
+		Return ONLY a JSON object:
+		{
+			\"focus\": \"focus keyphrase\",
+			\"related\": \"related, phrases\",
+			\"seo_title\": \"SEO Title\",
+			\"seo_desc\": \"SEO Description\",
+			\"keywords\": \"keywords\",
+			\"social_title\": \"Social Title\",
+			\"social_desc\": \"Social Description\",
+			\"analysis\": [\"Recommendation 1\", \"Recommendation 2\"]
+		}";
 
 		$ai_res = self::call_gemini( $prompt );
 
@@ -134,7 +148,7 @@ class Site_SEO_Analysis {
 				'keywords'     => '',
 				'social_title' => $post->post_title,
 				'social_desc'  => '',
-				'analysis'     => array( '🔴 Алдаа: ' . $ai_res['error'], 'API Key эсвэл сүлжээгээ шалгана уу.' ),
+				'analysis'     => array( '🔴 Алдаа: ' . $ai_res['error'], 'Gemini API тохиргоонд алдаа гарлаа.' ),
 			);
 		}
 
@@ -149,7 +163,7 @@ class Site_SEO_Analysis {
 				'keywords'     => '',
 				'social_title' => $post->post_title,
 				'social_desc'  => '',
-				'analysis'     => array( 'AI-аас ирсэн хариултыг уншиж чадсангүй.', 'Агуулга хэт урт эсвэл тусгай тэмдэгтээс болсон байж магадгүй.' ),
+				'analysis'     => array( 'AI-аас ирсэн хариултыг уншиж чадсангүй.', 'Хариулт JSON форматтай биш байна.' ),
 			);
 		}
 
@@ -226,7 +240,7 @@ class Site_SEO_Analysis {
 
 			<script>
 			jQuery(document).ready(function($) {
-				$('#btn-auto-optimize').on('click', function() {
+				$('#btn-auto-optimize').off('click').on('click', function() {
 					var $btn = $(this);
 					if(!confirm('Gemini AI-аар SEO тохиргоог автоматаар бөглөх үү?')) return;
 					$btn.prop('disabled', true).html('AI Шинжилж байна...');
@@ -239,6 +253,7 @@ class Site_SEO_Analysis {
 						$btn.prop('disabled', false).html('AI-аар оновчлох');
 						if(r.success) {
 							var d = r.data;
+							// Flexible ACF selector
 							$('input[name^="acf["][name$="site_focus_keyphrase]"]').val(d.focus).trigger('change');
 							$('textarea[name^="acf["][name$="site_related_keyphrases]"]').val(d.related).trigger('change');
 							$('input[name^="acf["][name$="site_seo_title]"]').val(d.seo_title).trigger('change');
