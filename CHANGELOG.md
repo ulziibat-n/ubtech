@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.1] — 2026-04-28
+
+### Fixed
+- **SEO Auto-Populate Logic** — Improved "empty field" detection to strictly respect manually entered values and ignore fields that are not truly empty (whitespace trimmed).
+
+---
+
 ## [1.2.0] — 2026-04-28
 
 ### Added
@@ -208,5 +215,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.143] — earlier
 
 ### Changed
-- Version: 1.2.0
+- Version: 1.2.1
 - Refactor code structure for improved readability and maintainability
